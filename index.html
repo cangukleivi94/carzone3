@@ -23,6 +23,95 @@
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
   body { background: var(--bg-dark); color: var(--text-light); overflow-x: hidden; }
   
+  /* =========================================
+     ANIMACIONI I HYRJES (MAKINA E KUQE)
+     ========================================= */
+  #preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-dark); z-index: 99999;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    overflow: hidden;
+  }
+  #preloader.hide { opacity: 0; visibility: hidden; }
+  
+  .loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+
+  /* Kontejneri i makines qe ben animacionet */
+  .car-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Animacioni total zgjat 3 sekonda: qendron 2s, pastaj iken djathtas */
+    animation: driveAwayRight 3s cubic-bezier(0.4, 0, 1, 1) forwards;
+  }
+
+  /* Vete makina (SVG e kuqe) */
+  .car-svg {
+    width: 100%;
+    height: 100%;
+    color: var(--red);
+    filter: drop-shadow(0 0 15px rgba(230, 0, 0, 0.6));
+    /* Efekti i xhirimit (vibracionit) */
+    animation: revving 0.1s infinite alternate;
+  }
+
+  /* Efekti i shpejtesise (Gjurma e drites majtas pas makines) */
+  .speed-trail {
+    position: absolute;
+    top: 50%;
+    right: 100%; /* Fillimisht del nga e majta e makines */
+    width: 0;
+    height: 6px;
+    background: linear-gradient(270deg, var(--red), transparent);
+    border-radius: 5px;
+    box-shadow: -10px 0 20px var(--red);
+    transform: translateY(-50%);
+    opacity: 0;
+    z-index: 5;
+    /* Gjurma shfaqet vetem kur makina iken */
+    animation: trailEffect 3s ease-in forwards;
+  }
+
+  /* Animacionet Kryesore */
+  @keyframes revving {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-3px); }
+  }
+
+  /* 0-66% kohe (2 sekonda) qendron aty dhe xhiron, pastaj 66-100% (1 sekonde) iken majtas */
+  @keyframes driveAwayRight {
+    0%, 66% { transform: translateX(0); } 
+    100% { transform: translateX(150vw); } 
+  }
+
+  /* Gjurma e drites shfaqet vetem ne 1 sekonden e fundit */
+  @keyframes trailEffect {
+    0%, 66% { opacity: 0; width: 0; }
+    70% { opacity: 1; width: 50px; }
+    100% { opacity: 1; width: 150vw; }
+  }
+
+  .loading-text {
+    margin-top: 20px; font-size: 12px; font-weight: 800; letter-spacing: 4px;
+    color: var(--text-muted); text-transform: uppercase; animation: blink 1s infinite alternate;
+    z-index: 20;
+  }
+  @keyframes blink { 0% { opacity: 0.3; } 100% { opacity: 1; color: #fff;} }
+
+  #main-page { opacity: 0; transition: opacity 0.8s ease; }
+  #main-page.show { opacity: 1; }
+
+  /* STILET E TJERA (Të pandryshuara) */
   .top-bar { background: #000; text-align: center; padding: 12px; font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--text-muted); border-bottom: 1px solid var(--border); }
   header { padding: 25px 20px; background: linear-gradient(180deg, #0d0d0d 0%, var(--bg-dark) 100%); }
   .logo-area { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; }
@@ -40,7 +129,6 @@
   .search-input { background: #1a1a1a; color: #fff; padding: 15px 25px; border-radius: 30px; flex-grow: 1; border: 1px solid var(--border); outline: none; font-size: 14px; transition: 0.3s; font-family: 'Montserrat', sans-serif;}
   .search-input:focus { border-color: var(--red); box-shadow: 0 0 15px rgba(230, 0, 0, 0.2); }
   
-  nav { display: none; }
   .hero { background: radial-gradient(circle at top right, #2a0000, var(--bg-dark)); padding: 60px 20px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden;}
   .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 40%, rgba(230,0,0,0.05) 50%, transparent 60%); animation: shine 5s infinite linear; pointer-events: none;}
   @keyframes shine { 0% { transform: translateX(-50%) translateY(-50%); } 100% { transform: translateX(50%) translateY(50%); } }
@@ -139,23 +227,22 @@
   .site-footer .contact-info { color: #fff; font-weight: 700; margin-bottom: 12px; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;}
   .copyright { border-top: 1px solid var(--border); padding-top: 25px; color: #555; font-size: 11px; margin-top: 30px; font-weight: 600;}
 
-  .admin-btn { background: #151515; color: #fff; border: 1px solid var(--border); padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 12px; margin-top: 20px; font-weight: 700; transition: 0.3s;}
-  .admin-btn:hover { background: #222; border-color: #444;}
-  
   .admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); z-index: 2000; overflow-y: auto; padding: 20px; opacity: 0; transition: 0.3s;}
   .admin-modal.show { display: block; opacity: 1; }
   .admin-content { background: #0f0f0f; max-width: 600px; margin: 20px auto; padding: 30px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5);}
   .admin-content h2 { color: #fff; margin-bottom: 25px; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 15px;}
   .admin-form-group { margin-bottom: 15px; }
   .admin-form-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px;}
-  .admin-form-group input, .admin-form-group textarea, .admin-form-group select { width: 100%; padding: 12px; background: #0a0a0a; border: 1px solid var(--border); color: #fff; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 13px; transition: 0.3s;}
+  .admin-form-group input[type="text"], .admin-form-group input[type="number"], .admin-form-group input[type="email"], .admin-form-group textarea, .admin-form-group select { width: 100%; padding: 12px; background: #0a0a0a; border: 1px solid var(--border); color: #fff; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 13px; transition: 0.3s;}
   .admin-form-group input:focus, .admin-form-group textarea:focus, .admin-form-group select:focus { border-color: var(--red); outline: none; }
-  .admin-form-group small { font-size: 10px; color: #666; display: block; margin-top: 4px; }
+  
+  .admin-checkbox-group { display: flex; align-items: center; gap: 10px; background: #0a0a0a; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 15px;}
+  .admin-checkbox-group input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; accent-color: var(--red); }
+  .admin-checkbox-group label { margin-bottom: 0; font-size: 13px; color: #fff; cursor: pointer; text-transform: none;}
+
   .save-btn { background: var(--red); color: #fff; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: 800; cursor: pointer; margin-top: 15px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; font-size: 13px;}
   .save-btn:hover { background: var(--red-hover); box-shadow: 0 5px 20px rgba(230,0,0,0.4); }
   
-  .edit-card-btn { display: none; }
-
   .product-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 3000; overflow-y: auto; animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
   @keyframes slideUp { from { transform: translateY(100%); opacity: 0;} to { transform: translateY(0); opacity: 1;} }
   .product-header { position: sticky; top: 0; background: rgba(10,10,10,0.9); backdrop-filter: blur(10px); padding: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 10; border-bottom: 1px solid var(--border); }
@@ -202,147 +289,177 @@
 </head>
 <body>
 
-<div class="top-bar">🚚 Transport në të gjithë Shqipërinë • 💵 Pagesë në dorëzim</div>
+<!-- ANIMACIONI I HYRJES -->
+<div id="preloader">
+  <div class="loader-content">
+    <div class="car-container">
+      <!-- Gjurma e drites (shfaqet kur makina iken) -->
+      <div class="speed-trail"></div>
+      
+      <!-- Ikona e makines se kuqe (ajo qe te pelqeu ne fillim) -->
+      <svg class="car-svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+      </svg>
+    </div>
+    
+    <div class="loading-text">CARZONE KLEVI</div>
+  </div>
+</div>
 
-<header>
-  <div class="logo-area">
-    <div>
-      <div class="logo" id="siteLogo">CAR<span>ZONE</span></div>
-      <div class="subtitle" id="siteSubtitle">Aksesorë për makinën</div>
-      <div class="menu-toggle" onclick="toggleSideMenu()">
-        <span style="font-size: 20px;">☰</span> Menuja
+<!-- FAQJA KRYESORE -->
+<div id="main-page">
+  
+  <div class="top-bar">🚚 Transport në të gjithë Shqipërinë • 💵 Pagesë në dorëzim ose me Kartë</div>
+
+  <header>
+    <div class="logo-area">
+      <div>
+        <div class="logo" id="siteLogo">CAR<span>ZONE</span></div>
+        <div class="subtitle" id="siteSubtitle">Aksesorë për makinën</div>
+        <div class="menu-toggle" onclick="toggleSideMenu()">
+          <span style="font-size: 20px;">☰</span> Menuja
+        </div>
+      </div>
+      <div class="header-icons">
+        <span onclick="togglePanel('favPanel')">♡ Favoritet <span class="badge" id="favCount">0</span></span>
+        <span onclick="togglePanel('cartPanel')">🛒 Shporta <span class="badge" id="cartCount">0</span></span>
       </div>
     </div>
-    <div class="header-icons">
-      <span onclick="togglePanel('favPanel')">♡ Favoritet <span class="badge" id="favCount">0</span></span>
-      <span onclick="togglePanel('cartPanel')">🛒 Shporta <span class="badge" id="cartCount">0</span></span>
+    <div class="search-bar">
+      <input type="text" class="search-input" id="searchInput" placeholder="⌕ Kërko produktin që të duhet..." oninput="filterProducts()">
     </div>
-  </div>
-  <div class="search-bar">
-    <input type="text" class="search-input" id="searchInput" placeholder="⌕ Kërko produktin që të duhet..." oninput="filterProducts()">
-  </div>
-</header>
+  </header>
 
-<div class="side-menu" id="sideMenu">
-  <div class="side-menu-header">
+  <div class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+      <h2>CAR<span>ZONE</span></h2>
+      <button class="close-btn" onclick="toggleSideMenu()">×</button>
+    </div>
+    <a onclick="filterCategory('all'); toggleSideMenu();">Kreu</a>
+    <a onclick="filterCategory('aksesore'); toggleSideMenu();">Aksesorë</a>
+    <a onclick="filterCategory('elektronike'); toggleSideMenu();">Elektronikë</a>
+    <a onclick="filterCategory('ndricim'); toggleSideMenu();">Ndriçim</a>
+    <a href="#kontakt" onclick="toggleSideMenu();">Kontakt</a>
+    <a class="admin-link" onclick="toggleSideMenu(); openAdmin();">⚙️ Admin Panel</a>
+  </div>
+
+  <section class="hero">
+    <h3>AKSESORË PËR MAKINËN TËNDE</h3>
+    <h1>STIL, SIGURI<br><span>DHE KOMODITET</span></h1>
+    <p>Zgjidh aksesorë praktikë për ta bërë makinën tënde më rehatshme dhe më të organizuar.</p>
+    <a href="#products" class="hero-btn">Shiko produktet →</a>
+  </section>
+
+  <div class="features">
+    <div class="feature-item"><h4>🚚 Transporti</h4><p>Në të gjithë Shqipërinë</p></div>
+    <div class="feature-item"><h4>🛡️ Pagesë e Sigurt</h4><p>Në dorëzim ose me Kartë</p></div>
+    <div class="feature-item"><h4>✓ Produkte të zgjedhura</h4><p>Kontrollo produktin para shitjes</p></div>
+    <div class="feature-item"><h4>☎ Kontakt i lehtë</h4><p>Na shkruaj për pyetje</p></div>
+  </div>
+
+  <h2 class="section-title" id="products">🔥 Të Gjitha Produktet</h2>
+  <div class="products" id="productList">
+    <p style="grid-column: span 2; text-align: center; color: var(--text-muted); padding: 20px;">Duke u ngarkuar...</p>
+  </div>
+
+  <div class="product-modal" id="productModal">
+    <div class="product-header">
+      <h2>Detajet e Produktit</h2>
+      <button class="close-btn" onclick="closeProduct()">×</button>
+    </div>
+    <div class="product-content" id="productModalContent"></div>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closePanels()"></div>
+
+  <div class="panel" id="cartPanel">
+    <div class="panel-header">
+      <h2>🛒 Shporta</h2>
+      <button class="close-btn" onclick="closePanels()">×</button>
+    </div>
+    <div id="cartItemsList"></div>
+
+    <div class="coupon-box" id="couponBox">
+      <input type="text" id="couponInput" placeholder="Kod Zbritjeje...">
+      <button onclick="aplikoKupon()">Apliko</button>
+    </div>
+    <div id="couponAppliedBox" style="display:none;"></div>
+    
+    <div class="cart-summary">
+      <div class="summary-row"><span>Nëntotali:</span> <span id="cartSubtotal">0 L</span></div>
+      <div class="summary-row discount-row" id="cartDiscountRow" style="display:none;"><span>Zbritja:</span> <span id="cartDiscount">-0 L</span></div>
+      <div class="summary-row"><span>Transporti:</span> <span id="cartShipping">0 L</span></div>
+      <div class="summary-row total"><span>Totali Final:</span> <span id="cartGrandTotal">0 L</span></div>
+    </div>
+
+    <div id="checkoutForm" class="checkout-section">
+      <h3>📝 Të dhënat e dërgimit</h3>
+      <input type="text" id="cliEmri" placeholder="Emri dhe Mbiemri">
+      <input type="tel" id="cliTelefoni" placeholder="Numri i telefonit">
+      
+      <select id="cliQyteti" onchange="ndryshoPosten()">
+        <option value="Tiranë" data-posta="300">Tiranë (300 L)</option>
+        <option value="Durrës" data-posta="350">Durrës (350 L)</option>
+        <option value="Vlorë" data-posta="400">Vlorë (400 L)</option>
+        <option value="Shkodër" data-posta="400">Shkodër (400 L)</option>
+        <option value="Elbasan" data-posta="350">Elbasan (350 L)</option>
+        <option value="Fier" data-posta="400">Fier (400 L)</option>
+        <option value="Korçë" data-posta="450">Korçë (450 L)</option>
+        <option value="Berat" data-posta="400">Berat (400 L)</option>
+        <option value="Lushnjë" data-posta="350">Lushnjë (350 L)</option>
+        <option value="Pogradec" data-posta="450">Pogradec (450 L)</option>
+        <option value="Kavajë" data-posta="350">Kavajë (350 L)</option>
+        <option value="Gjirokastër" data-posta="450">Gjirokastër (450 L)</option>
+        <option value="Tjeter" data-posta="400">Qytet tjetër (400 L)</option>
+      </select>
+
+      <input type="text" id="cliAdresa" placeholder="Adresa e saktë (Rruga, Nr, Lagjja)">
+      
+      <button type="button" onclick="marrLokacionin()" style="width:100%; padding:12px; background:#1a1a1a; color:#fff; border:1px solid var(--border); border-radius:8px; font-weight:700; margin-bottom:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px;">
+        📍 Dërgo Lokacionin tënd (GPS)
+      </button>
+      <p id="statusLokacioni" style="font-size:11px; color:var(--green); margin-bottom:10px; display:none; text-align:center;">Lokacioni u kap me sukses!</p>
+
+      <div id="paymentSelectionArea" style="display: none;">
+        <h3 style="margin-top:15px;">💳 Zgjidh Mënyrën e Pagesës</h3>
+        <select id="cliPagesa" style="margin-bottom:15px; font-weight:bold; border-color: var(--red);">
+          <option value="Pagesë në Dorëzim (Cash)">💵 Pagesë në Dorëzim (Cash)</option>
+          <option value="Pagesë me Kartë (Kërkoj Link)">💳 Pagesë me Kartë (Kërkoj Link)</option>
+        </select>
+        <p id="infoPagesa" style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Ju do të paguani kur të merrni porosinë.</p>
+      </div>
+      
+      <input type="hidden" id="cliPagesaFshehur" value="Pagesë në Dorëzim (Cash)">
+
+      <textarea id="cliShenime" placeholder="Shënime shtesë (Opsionale)" rows="2"></textarea>
+      <button class="checkout-btn" onclick="dergoPorosine()">✅ Përfundo Porosinë</button>
+    </div>
+
+    <button id="btnShowCheckout" class="checkout-btn" onclick="shfaqCheckout()" style="display: block;">Vazhdo me Porosinë</button>
+  </div>
+
+  <div class="panel" id="favPanel">
+    <div class="panel-header">
+      <h2>♡ Favoritet</h2>
+      <button class="close-btn" onclick="closePanels()">×</button>
+    </div>
+    <div id="favItemsList"></div>
+  </div>
+
+  <div class="admin-modal" id="adminModal">
+    <div class="admin-content" id="adminContent"></div>
+  </div>
+
+  <footer class="site-footer" id="kontakt">
     <h2>CAR<span>ZONE</span></h2>
-    <button class="close-btn" onclick="toggleSideMenu()">×</button>
-  </div>
-  <a onclick="filterCategory('all'); toggleSideMenu();">Kreu</a>
-  <a onclick="filterCategory('aksesore'); toggleSideMenu();">Aksesorë</a>
-  <a onclick="filterCategory('elektronike'); toggleSideMenu();">Elektronikë</a>
-  <a onclick="filterCategory('ndricim'); toggleSideMenu();">Ndriçim</a>
-  <a href="#kontakt" onclick="toggleSideMenu();">Kontakt</a>
-  <a class="admin-link" onclick="toggleSideMenu(); openAdmin();">⚙️ Admin Panel</a>
+    <p>Aksesorë për makinën • Shqipëri</p>
+    <div class="contact-info" id="footerPhone">📞 0683736780</div>
+    <div class="contact-info" id="footerEmail">📧 info@carzone.al</div>
+    <p style="margin-top: 15px;">Transport në të gjithë Shqipërinë. Pagesë në dorëzim ose me Kartë.</p>
+    <div class="copyright">&copy; 2024 CARZONE KLEVI. Të gjitha të drejtat e rezervuara.</div>
+  </footer>
+
 </div>
-
-<section class="hero">
-  <h3>AKSESORË PËR MAKINËN TËNDE</h3>
-  <h1>STIL, SIGURI<br><span>DHE KOMODITET</span></h1>
-  <p>Zgjidh aksesorë praktikë për ta bërë makinën tënde më rehatshme dhe më të organizuar.</p>
-  <a href="#products" class="hero-btn">Shiko produktet →</a>
-</section>
-
-<div class="features">
-  <div class="feature-item"><h4>🚚 Transporti</h4><p>Në të gjithë Shqipërinë</p></div>
-  <div class="feature-item"><h4>🛡️ Pagesë në dorëzim</h4><p>Paguan kur merr porosinë</p></div>
-  <div class="feature-item"><h4>✓ Produkte të zgjedhura</h4><p>Kontrollo produktin para shitjes</p></div>
-  <div class="feature-item"><h4>☎ Kontakt i lehtë</h4><p>Na shkruaj për pyetje</p></div>
-</div>
-
-<h2 class="section-title" id="products">🔥 Të Gjitha Produktet</h2>
-<div class="products" id="productList">
-  <p style="grid-column: span 2; text-align: center; color: var(--text-muted); padding: 20px;">Duke u ngarkuar...</p>
-</div>
-
-<div class="product-modal" id="productModal">
-  <div class="product-header">
-    <h2>Detajet e Produktit</h2>
-    <button class="close-btn" onclick="closeProduct()">×</button>
-  </div>
-  <div class="product-content" id="productModalContent"></div>
-</div>
-
-<div class="overlay" id="overlay" onclick="closePanels()"></div>
-
-<div class="panel" id="cartPanel">
-  <div class="panel-header">
-    <h2>🛒 Shporta</h2>
-    <button class="close-btn" onclick="closePanels()">×</button>
-  </div>
-  <div id="cartItemsList"></div>
-
-  <div class="coupon-box" id="couponBox">
-    <input type="text" id="couponInput" placeholder="Kod Zbritjeje...">
-    <button onclick="aplikоKupon()">Apliko</button>
-  </div>
-  <div id="couponAppliedBox" style="display:none;"></div>
-  
-  <div class="cart-summary">
-    <div class="summary-row"><span>Nëntotali:</span> <span id="cartSubtotal">0 L</span></div>
-    <div class="summary-row discount-row" id="cartDiscountRow" style="display:none;"><span>Zbritja:</span> <span id="cartDiscount">-0 L</span></div>
-    <div class="summary-row"><span>Transporti:</span> <span id="cartShipping">0 L</span></div>
-    <div class="summary-row total"><span>Totali Final:</span> <span id="cartGrandTotal">0 L</span></div>
-  </div>
-
-  <div id="checkoutForm" class="checkout-section">
-    <h3>📝 Të dhënat e dërgimit</h3>
-    <input type="text" id="cliEmri" placeholder="Emri dhe Mbiemri">
-    <input type="tel" id="cliTelefoni" placeholder="Numri i telefonit">
-    
-    <select id="cliQyteti" onchange="ndryshoPosten()">
-      <option value="Tiranë" data-posta="300">Tiranë (300 L)</option>
-      <option value="Durrës" data-posta="350">Durrës (350 L)</option>
-      <option value="Vlorë" data-posta="400">Vlorë (400 L)</option>
-      <option value="Shkodër" data-posta="400">Shkodër (400 L)</option>
-      <option value="Elbasan" data-posta="350">Elbasan (350 L)</option>
-      <option value="Fier" data-posta="400">Fier (400 L)</option>
-      <option value="Korçë" data-posta="450">Korçë (450 L)</option>
-      <option value="Berat" data-posta="400">Berat (400 L)</option>
-      <option value="Lushnjë" data-posta="350">Lushnjë (350 L)</option>
-      <option value="Pogradec" data-posta="450">Pogradec (450 L)</option>
-      <option value="Kavajë" data-posta="350">Kavajë (350 L)</option>
-      <option value="Gjirokastër" data-posta="450">Gjirokastër (450 L)</option>
-      <option value="Tjeter" data-posta="400">Qytet tjetër (400 L)</option>
-    </select>
-
-    <input type="text" id="cliAdresa" placeholder="Adresa e saktë (Rruga, Nr, Lagjja)">
-    
-    <button type="button" onclick="marrLokacionin()" style="width:100%; padding:12px; background:#1a1a1a; color:#fff; border:1px solid var(--border); border-radius:8px; font-weight:700; margin-bottom:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px;">
-      📍 Dërgo Lokacionin tënd (GPS)
-    </button>
-    <p id="statusLokacioni" style="font-size:11px; color:var(--green); margin-bottom:10px; display:none; text-align:center;">Lokacioni u kap me sukses!</p>
-
-    <h3 style="margin-top:15px;">💵 Pagesa në Dorëzim</h3>
-    <p style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Ju do të paguani kur të merrni porosinë.</p>
-
-    <textarea id="cliShenime" placeholder="Shënime shtesë (Opsionale)" rows="2"></textarea>
-    <button class="checkout-btn" onclick="dergoPorosine()">✅ Përfundo Porosinë</button>
-  </div>
-
-  <button id="btnShowCheckout" class="checkout-btn" onclick="shfaqCheckout()" style="display: block;">Vazhdo me Porosinë</button>
-</div>
-
-<div class="panel" id="favPanel">
-  <div class="panel-header">
-    <h2>♡ Favoritet</h2>
-    <button class="close-btn" onclick="closePanels()">×</button>
-  </div>
-  <div id="favItemsList"></div>
-</div>
-
-<div class="admin-modal" id="adminModal">
-  <div class="admin-content" id="adminContent"></div>
-</div>
-
-<footer class="site-footer" id="kontakt">
-  <h2>CAR<span>ZONE</span></h2>
-  <p>Aksesorë për makinën • Shqipëri</p>
-  <div class="contact-info" id="footerPhone">📞 0683736780</div>
-  <div class="contact-info" id="footerEmail">📧 info@carzone.al</div>
-  <p style="margin-top: 15px;">Transport në të gjithë Shqipërinë. Pagesë në dorëzim.</p>
-  <div class="copyright">&copy; 2024 CARZONE KLEVI. Të gjitha të drejtat e rezervuara.</div>
-</footer>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -367,14 +484,22 @@
 </script>
 
 <script>
+  // ANIMACIONI ZGJAT 3 SEKONDA
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.getElementById('preloader').classList.add('hide');
+      document.getElementById('main-page').classList.add('show');
+      setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 800); 
+    }, 3000); 
+  });
+
   const IMGBB_API_KEY = "07386dda0574256ec0b326a5c4f365cf";
   let lokacioniGps = "";
   let activeCoupon = null;
 
   const defaultProducts = [
     { id: 1, emri: "LED Ambient Light", pershkrimi: "Set ndriçimi LED RGB për interierin e makinës.", cmimi: 2500, discount: 0, kategoria: "ndricim", stoku: 10, fotot: ["https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"] },
-    { id: 2, emri: "Logo Volkswagen për Dyer", pershkrimi: "Drita LED që projekton logon e Volkswagen në tokë.", cmimi: 1800, discount: 0, kategoria: "ndricim", stoku: 5, fotot: ["https://images.unsplash.com/photo-1542362567-b07e54358753?w=600&q=80"] },
-    { id: 3, emri: "Logo Mercedes Benz për Dyer", pershkrimi: "Projektor LED me logon e Mercedes Benz.", cmimi: 2200, discount: 0, kategoria: "ndricim", stoku: 0, fotot: ["https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=80"] }
+    { id: 2, emri: "Logo Volkswagen për Dyer", pershkrimi: "Drita LED që projekton logon e Volkswagen në tokë.", cmimi: 1800, discount: 0, kategoria: "ndricim", stoku: 5, fotot: ["https://images.unsplash.com/photo-1542362567-b07e54358753?w=600&q=80"] }
   ];
 
   let products = JSON.parse(localStorage.getItem('cz_products_cache')) || defaultProducts;
@@ -388,10 +513,12 @@
     emailFooter: "info@carzone.al",
     posta: 300,
     adminPass: "Klevi123",
-    kuponet: []
+    kuponet: [],
+    kartaAktiv: false 
   };
+  
   if(!siteSettings.kuponet) siteSettings.kuponet = [];
-  // Force new password
+  if(siteSettings.kartaAktiv === undefined) siteSettings.kartaAktiv = false; 
   siteSettings.adminPass = "Klevi123";
   
   let currentCategory = 'all';
@@ -399,9 +526,7 @@
   const fallbackImage = "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&q=80";
 
   function getFinalPrice(p) {
-    if (p.discount && p.discount > 0) {
-      return Math.round(p.cmimi - (p.cmimi * p.discount / 100));
-    }
+    if (p.discount && p.discount > 0) return Math.round(p.cmimi - (p.cmimi * p.discount / 100));
     return p.cmimi;
   }
 
@@ -434,8 +559,9 @@
         }
         if(data.cilesimet) {
           siteSettings = data.cilesimet;
-          siteSettings.adminPass = "Klevi123"; // Force new password
+          siteSettings.adminPass = "Klevi123";
           if(!siteSettings.kuponet) siteSettings.kuponet = [];
+          if(siteSettings.kartaAktiv === undefined) siteSettings.kartaAktiv = false;
           localStorage.setItem('cz_settings_cache', JSON.stringify(siteSettings));
         }
       } else {
@@ -459,7 +585,7 @@
   async function ruajNeFirebase() {
     if(!window.db) return;
     try {
-      siteSettings.adminPass = "Klevi123"; // Ensure saved
+      siteSettings.adminPass = "Klevi123"; 
       await window.setDoc(window.doc(window.db, "carzone", "te_dhenat"), {
         produktet: products,
         cilesimet: siteSettings
@@ -490,7 +616,7 @@
   window.addEventListener('firebaseReady', function() {
     setTimeout(() => { ngarkoProduktetNgaFirebase(); }, 500);
   });
-  setTimeout(() => { if(window.db && products.length <= 3) ngarkoProduktetNgaFirebase(); }, 2000);
+  setTimeout(() => { if(window.db && products.length <= 2) ngarkoProduktetNgaFirebase(); }, 2000);
 
   function toggleSideMenu() {
     const sideMenu = document.getElementById('sideMenu');
@@ -505,6 +631,17 @@
     siteSettings.posta = parseInt(cmimiPostes);
     renderCart(); 
   }
+
+  document.getElementById('cliPagesa').addEventListener('change', function() {
+    const info = document.getElementById('infoPagesa');
+    if(this.value === "Pagesë me Kartë (Kërkoj Link)") {
+      info.innerHTML = "Pas konfirmimit, do të kontaktoheni nga ne për t'ju dërguar linkun e sigurt të pagesës me kartë.";
+      info.style.color = "var(--red)";
+    } else {
+      info.innerHTML = "Ju do të paguani kur të merrni porosinë.";
+      info.style.color = "var(--text-muted)";
+    }
+  });
 
   function marrLokacionin() {
     const status = document.getElementById('statusLokacioni');
@@ -760,6 +897,12 @@
   function shfaqCheckout() {
     document.getElementById('btnShowCheckout').style.display = 'none';
     document.getElementById('checkoutForm').style.display = 'block';
+    
+    if(siteSettings.kartaAktiv) {
+      document.getElementById('paymentSelectionArea').style.display = 'block';
+    } else {
+      document.getElementById('paymentSelectionArea').style.display = 'none';
+    }
   }
 
   function dergoPorosine() {
@@ -768,6 +911,11 @@
     const qyteti = document.getElementById('cliQyteti').value;
     const adresa = document.getElementById('cliAdresa').value;
     const shenime = document.getElementById('cliShenime').value;
+    
+    let pagesa = "Pagesë në Dorëzim (Cash)";
+    if(siteSettings.kartaAktiv) {
+      pagesa = document.getElementById('cliPagesa').value;
+    }
 
     if(!emri || !telefoni || !adresa) {
       alert("⚠️ Plotëso Emrin, Telefonin dhe Adresën për të vazhduar!");
@@ -781,7 +929,7 @@
     msg += `📍 *Qyteti:* ${qyteti}\n`;
     msg += `🏠 *Adresa:* ${adresa}\n`;
     if(lokacioniGps) msg += `🗺️ *Lokacioni GPS:* ${lokacioniGps}\n`;
-    msg += `💵 *Pagesa:* Në dorëzim (Cash)\n`;
+    msg += `💳 *Pagesa:* ${pagesa}\n`; 
     if(shenime) msg += `📝 *Shënime:* ${shenime}\n`;
     msg += `\n🛒 *Produktet:*\n`;
 
@@ -845,6 +993,9 @@
 
   function renderAdminList() {
     const container = document.getElementById('adminContent');
+    
+    const isKartaChecked = siteSettings.kartaAktiv ? 'checked' : '';
+
     const kuponetHTML = (siteSettings.kuponet || []).map((k, i) => 
       `<div style="display:flex; justify-content:space-between; align-items:center; background:#0a0a0a; padding:8px 12px; border-radius:6px; margin-bottom:6px; border:1px solid var(--border);">
         <span style="font-size:12px; font-weight:700; color:var(--green);">${k.kodi} — ${k.perqindje}%</span>
@@ -854,8 +1005,19 @@
 
     container.innerHTML = `
       <h2>⚙️ Menaxho Faqen</h2>
+      
       <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
-        <h3 style="color:var(--green); margin-bottom:15px; font-size:14px; font-weight:700;">⚙️ Cilësimet e Faqes</h3>
+        <h3 style="color:var(--green); margin-bottom:15px; font-size:14px; font-weight:700;">💳 Opsionet e Pagesës</h3>
+        <div class="admin-checkbox-group">
+          <input type="checkbox" id="adminKartaAktiv" ${isKartaChecked}>
+          <label for="adminKartaAktiv">Aktivizo Pagesën me Kartë (Kërkoj Link)</label>
+        </div>
+        <p style="font-size:11px; color:#888; margin-top:-5px;">Nëse është e çaktivizuar, klientët do të shohin vetëm pagesën në dorëzim.</p>
+        <button class="save-btn" style="background:var(--green);" onclick="ruajCilesimet()">💾 Ruaj Cilësimet</button>
+      </div>
+
+      <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
+        <h3 style="color:var(--red); margin-bottom:15px; font-size:14px; font-weight:700;">⚙️ Cilësimet e Tjera</h3>
         <div class="admin-form-group"><label>Emri i Dyqanit</label><input type="text" id="adminEmri" value="${siteSettings.emri}"></div>
         <div class="admin-form-group"><label>Numri WhatsApp (për porosi)</label><input type="text" id="adminNumri" value="${siteSettings.numri}"></div>
         <div class="admin-form-group"><label>Numri i Telefonit (Fundi i faqes)</label><input type="text" id="adminTelFooter" value="${siteSettings.telFooter}"></div>
@@ -1003,6 +1165,8 @@
     const t = document.getElementById('adminTelFooter').value;
     const em = document.getElementById('adminEmailFooter').value;
     const p = parseInt(document.getElementById('adminPosta').value);
+    
+    const kartaStatus = document.getElementById('adminKartaAktiv').checked;
 
     if(e && n && t && em && !isNaN(p)) {
       siteSettings.emri = e; 
@@ -1010,6 +1174,7 @@
       siteSettings.telFooter = t;
       siteSettings.emailFooter = em;
       siteSettings.posta = p;
+      siteSettings.kartaAktiv = kartaStatus; 
       
       await ruajNeFirebase();
       applySettings(); 
