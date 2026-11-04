@@ -223,8 +223,322 @@
     .main-image-container { height: 450px; }
     .hero h1 { font-size: 48px; }
   }
+
+  /* =====================================================
+     🎄 OPSIONI A: TOPA ULUJSH ME GJATËSI TË NDRYSHME
+     ===================================================== */
+  .festive-balls {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+  }
+  /* Çdo top ka një "fije" (thread) me gjatësi të ndryshme */
+  .ball-wrapper {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: swing 3s ease-in-out infinite alternate;
+    transform-origin: top center;
+  }
+  .ball-thread {
+    width: 2px;
+    background: linear-gradient(180deg, #ffd700, rgba(255,215,0,0.4));
+    box-shadow: 0 0 4px rgba(255,215,0,0.6);
+  }
+  .ball-cap {
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle at 30% 30%, #ffe066, #b38600);
+    border-radius: 2px;
+    box-shadow: 0 0 8px #ffd700;
+    margin-bottom: -2px;
+    z-index: 2;
+  }
+  .ball {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    position: relative;
+  }
+  .ball.red    { background: radial-gradient(circle at 30% 30%, #ff4d4d, #b30000); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 18px rgba(230,0,0,0.5); }
+  .ball.green  { background: radial-gradient(circle at 30% 30%, #4dff88, #006622); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 18px rgba(37,211,102,0.5); }
+  .ball.gold   { background: radial-gradient(circle at 30% 30%, #ffe066, #b38600); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 18px rgba(255,180,0,0.5); }
+  .ball.blue   { background: radial-gradient(circle at 30% 30%, #66b3ff, #003d80); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 18px rgba(100,180,255,0.5); }
+  .ball.silver { background: radial-gradient(circle at 30% 30%, #f0f0f0, #888); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 18px rgba(200,200,200,0.5); }
+
+  /* Pozicionet horizontale */
+  .ball-wrapper:nth-child(1) { left: 4%;  animation-delay: 0s;   animation-duration: 3.2s; }
+  .ball-wrapper:nth-child(2) { left: 19%; animation-delay: 0.4s; animation-duration: 2.8s; }
+  .ball-wrapper:nth-child(3) { left: 36%; animation-delay: 0.2s; animation-duration: 3.5s; }
+  .ball-wrapper:nth-child(4) { left: 53%; animation-delay: 0.7s; animation-duration: 3.0s; }
+  .ball-wrapper:nth-child(5) { left: 70%; animation-delay: 0.3s; animation-duration: 3.3s; }
+  .ball-wrapper:nth-child(6) { left: 86%; animation-delay: 0.9s; animation-duration: 2.9s; }
+  .ball-wrapper:nth-child(7) { left: 95%; animation-delay: 0.5s; animation-duration: 3.1s; }
+
+  /* Gjatësi të ndryshme fijesh — disa të shkurtra, disa të gjata */
+  .ball-wrapper:nth-child(1) .ball-thread { height: 20px; }
+  .ball-wrapper:nth-child(2) .ball-thread { height: 120px; }
+  .ball-wrapper:nth-child(3) .ball-thread { height: 55px; }
+  .ball-wrapper:nth-child(4) .ball-thread { height: 180px; }
+  .ball-wrapper:nth-child(5) .ball-thread { height: 35px; }
+  .ball-wrapper:nth-child(6) .ball-thread { height: 90px; }
+  .ball-wrapper:nth-child(7) .ball-thread { height: 10px; }
+
+  @keyframes swing {
+    0%   { transform: rotate(-8deg); }
+    100% { transform: rotate(8deg); }
+  }
+
+  /* =====================================================
+     ❄️ OPSIONI B: TOPA + BORË (topa pak më të mëdhenj)
+     ===================================================== */
+  .snowflakes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+    overflow: hidden;
+  }
+  .snowflake {
+    position: absolute;
+    top: -20px;
+    color: #ffffff;
+    font-size: 14px;
+    opacity: 0.85;
+    text-shadow: 0 0 6px rgba(255,255,255,0.8);
+    animation: fall linear infinite;
+    user-select: none;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0.3; }
+  }
+  .festive-balls.option-b .ball { width: 50px; height: 50px; }
+  .festive-balls.option-b .ball-cap { width: 12px; height: 12px; }
+
+  /* =====================================================
+     🎆 OPSIONI C: VITI I RI (fishekzjarrë + yje + konfeti + 2026)
+     ===================================================== */
+  .newyear-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+  }
+  /* Yje që shkëlqejnë */
+  .star {
+    position: absolute;
+    color: #fff;
+    font-size: 14px;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ffd700, 0 0 30px #ffd700;
+    animation: twinkle 2s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50%      { opacity: 1;   transform: scale(1.3); }
+  }
+
+  /* Fishekzjarrë — shpërthime periodike */
+  .firework {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    animation: explode 3s ease-out infinite;
+  }
+  .firework::before,
+  .firework::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow:
+      0 -40px 0 2px currentColor,
+      0 40px 0 2px currentColor,
+      40px 0 0 2px currentColor,
+      -40px 0 0 2px currentColor,
+      28px -28px 0 2px currentColor,
+      -28px -28px 0 2px currentColor,
+      28px 28px 0 2px currentColor,
+      -28px 28px 0 2px currentColor;
+  }
+  .firework::after {
+    box-shadow:
+      20px -35px 0 1px currentColor,
+      -20px -35px 0 1px currentColor,
+      20px 35px 0 1px currentColor,
+      -20px 35px 0 1px currentColor,
+      35px -20px 0 1px currentColor,
+      -35px -20px 0 1px currentColor,
+      35px 20px 0 1px currentColor,
+      -35px 20px 0 1px currentColor;
+  }
+  @keyframes explode {
+    0%   { transform: scale(0);   opacity: 1; }
+    40%  { transform: scale(1.4); opacity: 1; }
+    100% { transform: scale(0.8); opacity: 0; }
+  }
+  .firework:nth-child(1) { top: 15%; left: 15%; color: #ff4d4d; animation-delay: 0s;   }
+  .firework:nth-child(2) { top: 25%; left: 75%; color: #ffd700; animation-delay: 0.6s; }
+  .firework:nth-child(3) { top: 60%; left: 30%; color: #4dff88; animation-delay: 1.2s; }
+  .firework:nth-child(4) { top: 70%; left: 85%; color: #66b3ff; animation-delay: 1.8s; }
+  .firework:nth-child(5) { top: 40%; left: 55%; color: #ff66ff; animation-delay: 2.4s; }
+
+  /* Konfeti që bien */
+  .confetti {
+    position: absolute;
+    top: -20px;
+    width: 8px;
+    height: 14px;
+    opacity: 0.9;
+    animation: confettiFall linear infinite;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0.4; }
+  }
+
+  /* Teksti "2026" që shkëlqen në qendër */
+  .newyear-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 90px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, #ffd700, #ff4d4d, #ffd700, #ff4d4d);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shimmer 3s ease-in-out infinite, floatY 4s ease-in-out infinite;
+    text-align: center;
+    line-height: 1;
+    pointer-events: none;
+    filter: drop-shadow(0 0 20px rgba(255,215,0,0.6));
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap;
+  }
+  .newyear-text small {
+    display: block;
+    font-size: 16px;
+    letter-spacing: 8px;
+    margin-top: 8px;
+    -webkit-text-fill-color: #fff;
+    color: #fff;
+    text-shadow: 0 0 15px #ffd700;
+  }
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+  @keyframes floatY {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+    50%      { transform: translate(-50%, -50%) translateY(-15px); }
+  }
+
+  /* Butoni për të ndërruar opsionin */
+  .festive-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 5000;
+    background: linear-gradient(135deg, #e60000, #b30000);
+    color: #fff;
+    border: 2px solid #ffd700;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(230,0,0,0.5), 0 0 15px rgba(255,215,0,0.4);
+    transition: 0.3s;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .festive-toggle:hover { transform: scale(1.1) rotate(15deg); }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 5px 20px rgba(230,0,0,0.5), 0 0 15px rgba(255,215,0,0.4); }
+    50%      { box-shadow: 0 5px 30px rgba(230,0,0,0.8), 0 0 25px rgba(255,215,0,0.7); }
+  }
+
+  @media (max-width: 600px) {
+    .ball { width: 30px; height: 30px; }
+    .festive-balls.option-b .ball { width: 34px; height: 34px; }
+    .ball-thread { max-height: 100px !important; }
+    .newyear-text { font-size: 50px; letter-spacing: 3px; }
+    .newyear-text small { font-size: 11px; letter-spacing: 4px; }
+    .firework::before { box-shadow:
+      0 -22px 0 1px currentColor, 0 22px 0 1px currentColor,
+      22px 0 0 1px currentColor, -22px 0 0 1px currentColor,
+      15px -15px 0 1px currentColor, -15px -15px 0 1px currentColor,
+      15px 15px 0 1px currentColor, -15px 15px 0 1px currentColor;
+    }
+    .firework::after { display: none; }
+    .festive-toggle { width: 45px; height: 45px; font-size: 20px; bottom: 15px; right: 15px; }
+  }
 </style>
 </head><body>
+
+<!-- =====================================================
+     🎄 DEKORIMET E FESTAVE
+     ===================================================== -->
+
+<!-- OPSIONI A & B: Topa me gjatësi të ndryshme fijesh -->
+<div class="festive-balls" id="festiveBalls">
+  <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball red"></div></div>
+  <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball green"></div></div>
+  <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball gold"></div></div>
+  <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball blue"></div></div>
+  <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball red"></div></div>
+  <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball silver"></div></div>
+  <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball green"></div></div>
+</div>
+
+<!-- OPSIONI B: Flokë bore -->
+<div class="snowflakes" id="snowflakesContainer"></div>
+
+<!-- OPSIONI C: Viti i Ri -->
+<div class="newyear-container" id="newyearContainer">
+  <div class="star" style="top: 8%;  left: 12%; animation-delay: 0s;">★</div>
+  <div class="star" style="top: 15%; left: 45%; animation-delay: 0.3s; font-size: 10px;">✦</div>
+  <div class="star" style="top: 22%; left: 78%; animation-delay: 0.6s;">★</div>
+  <div class="star" style="top: 40%; left: 8%;  animation-delay: 0.9s; font-size: 10px;">✧</div>
+  <div class="star" style="top: 55%; left: 92%; animation-delay: 1.2s;">✦</div>
+  <div class="star" style="top: 75%; left: 20%; animation-delay: 0.4s; font-size: 12px;">★</div>
+  <div class="star" style="top: 85%; left: 65%; animation-delay: 0.7s;">✧</div>
+  <div class="star" style="top: 5%;  left: 88%; animation-delay: 1s;   font-size: 10px;">✦</div>
+
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+  <div class="firework"></div>
+
+  <div class="newyear-text">2026<small>GËZUAR VITIN E RI</small></div>
+</div>
+
+<button class="festive-toggle" id="festiveToggle" onclick="toggleFestiveMode()" title="Ndërro dekorimin festiv">🎄</button>
 
 <div id="preloader">
   <div class="loader-content">
@@ -326,9 +640,7 @@
       <input type="text" id="cliEmri" placeholder="Emri dhe Mbiemri">
       <input type="tel" id="cliTelefoni" placeholder="Numri i telefonit">
       
-      <select id="cliQyteti" onchange="ndryshoPosten()">
-        <!-- Opsionet e qyteteve mbushen dinamikisht nga Admin Panel -->
-      </select>
+      <select id="cliQyteti" onchange="ndryshoPosten()"></select>
 
       <input type="text" id="cliAdresa" placeholder="Adresa e saktë (Rruga, Nr, Lagjja)">
       
@@ -408,12 +720,114 @@
   let lokacioniGps = "";
   let activeCoupon = null;
 
+  /* =====================================================
+     🎄 KONTROLLI I DEKORIMIT FESTIV
+     0 = fikur, 1 = Opcioni A (topa), 2 = Opcioni B (topa+borë), 3 = Opcioni C (Vit i Ri)
+     ===================================================== */
+  let festiveMode = parseInt(localStorage.getItem('cz_festive_mode'));
+  if (isNaN(festiveMode)) festiveMode = 1;
+
+  function applyFestiveMode() {
+    const balls = document.getElementById('festiveBalls');
+    const snowContainer = document.getElementById('snowflakesContainer');
+    const newyearContainer = document.getElementById('newyearContainer');
+    const toggleBtn = document.getElementById('festiveToggle');
+
+    // Reset
+    balls.classList.remove('option-b');
+    snowContainer.innerHTML = '';
+    // Pastro konfetin e vjetër
+    document.querySelectorAll('.confetti').forEach(c => c.remove());
+
+    // Fshih të gjitha
+    balls.style.display = 'none';
+    snowContainer.style.display = 'none';
+    newyearContainer.style.display = 'none';
+
+    if (festiveMode === 0) {
+      toggleBtn.innerText = '🎄';
+      toggleBtn.title = 'Aktivizo dekorimin festiv';
+    } else if (festiveMode === 1) {
+      balls.style.display = 'block';
+      toggleBtn.innerText = '❄️';
+      toggleBtn.title = 'Opcioni A → Kalo te Opcioni B (topa + borë)';
+    } else if (festiveMode === 2) {
+      balls.style.display = 'block';
+      balls.classList.add('option-b');
+      snowContainer.style.display = 'block';
+      krijoBoren();
+      toggleBtn.innerText = '🎆';
+      toggleBtn.title = 'Opcioni B → Kalo te Opcioni C (Vit i Ri)';
+    } else if (festiveMode === 3) {
+      newyearContainer.style.display = 'block';
+      krijoKonfetin();
+      toggleBtn.innerText = '✖️';
+      toggleBtn.title = 'Opcioni C → Fike dekorimin';
+    }
+  }
+
+  function krijoBoren() {
+    const container = document.getElementById('snowflakesContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const symbols = ['❄', '❅', '❆', '•', '✻'];
+    const total = 40;
+    for (let i = 0; i < total; i++) {
+      const flake = document.createElement('div');
+      flake.className = 'snowflake';
+      flake.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      flake.style.left = Math.random() * 100 + '%';
+      flake.style.fontSize = (8 + Math.random() * 16) + 'px';
+      flake.style.animationDuration = (5 + Math.random() * 8) + 's';
+      flake.style.animationDelay = (Math.random() * 8) + 's';
+      flake.style.opacity = 0.4 + Math.random() * 0.6;
+      container.appendChild(flake);
+    }
+  }
+
+  function krijoKonfetin() {
+    const container = document.getElementById('newyearContainer');
+    if (!container) return;
+    // Fshi konfetin e vjetër
+    container.querySelectorAll('.confetti').forEach(c => c.remove());
+    const colors = ['#ff4d4d', '#ffd700', '#4dff88', '#66b3ff', '#ff66ff', '#ffffff'];
+    for (let i = 0; i < 30; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      c.style.left = Math.random() * 100 + '%';
+      c.style.background = colors[Math.floor(Math.random() * colors.length)];
+      c.style.animationDuration = (4 + Math.random() * 6) + 's';
+      c.style.animationDelay = (Math.random() * 6) + 's';
+      c.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      container.appendChild(c);
+    }
+  }
+
+  function toggleFestiveMode() {
+    // Cikli: 1 -> 2 -> 3 -> 0 -> 1
+    if (festiveMode === 1) festiveMode = 2;
+    else if (festiveMode === 2) festiveMode = 3;
+    else if (festiveMode === 3) festiveMode = 0;
+    else festiveMode = 1;
+    localStorage.setItem('cz_festive_mode', festiveMode);
+    applyFestiveMode();
+    const emrat = { 0: 'Dekorimi u fik', 1: 'Opcioni A: Topa Ulujsh', 2: 'Opcioni B: Topa + Borë', 3: 'Opcioni C: Vit i Ri 🎆' };
+    const t = document.createElement('div');
+    t.innerText = emrat[festiveMode];
+    t.style.cssText = 'position:fixed; bottom:90px; right:20px; background:#111; color:#fff; padding:10px 18px; border-radius:8px; border:1px solid var(--gold); font-size:12px; font-weight:700; z-index:99999; box-shadow:0 5px 15px rgba(0,0,0,0.5);';
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 1800);
+  }
+
+  applyFestiveMode();
+  /* ===================================================== */
+
   const defaultProducts = [
     { id: 1, emri: "LED Ambient Light", pershkrimi: "Set ndriçimi LED RGB për interierin e makinës.", cmimi: 2500, discount: 0, kategoria: "ndricim", stoku: 10, fotot: ["https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"] },
     { id: 2, emri: "Logo Volkswagen për Dyer", pershkrimi: "Drita LED që projekton logon e Volkswagen në tokë.", cmimi: 1800, discount: 0, kategoria: "ndricim", stoku: 5, fotot: ["https://images.unsplash.com/photo-1542362567-b07e54358753?w=600&q=80"] }
   ];
 
-  // Qytetet default - mund te ndryshohen nga Admin Panel
   const defaultQytetet = [
     { emri: "Tiranë", cmimi: 300 },
     { emri: "Durrës", cmimi: 350 },
@@ -452,13 +866,11 @@
   let currentSearch = '';
   const fallbackImage = "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&q=80";
 
-  // MARRE CMIMIN E TRANSPORTIT PER QYTETIN E ZGJEDHUR
   function getShippingCostForCity(cityName) {
     const c = siteSettings.qytetet.find(q => q.emri === cityName);
     return c ? parseInt(c.cmimi) : 0;
   }
 
-  // MBUSH SELECTIN E QYTETEVE
   function renderCityOptions() {
     const sel = document.getElementById('cliQyteti');
     if(!sel) return;
@@ -561,7 +973,6 @@
     else document.getElementById('overlay').classList.remove('show');
   }
 
-  // NDRYSHO POSTEN - tani merr cmimin direkt nga qyteti i zgjedhur
   function ndryshoPosten() {
     const select = document.getElementById('cliQyteti');
     const qytetiZgjedhur = select.value;
@@ -812,7 +1223,7 @@
   function shfaqCheckout() {
     document.getElementById('btnShowCheckout').style.display = 'none';
     document.getElementById('checkoutForm').style.display = 'block';
-    renderCityOptions(); // Rifresko qytetet sa here hapet checkout
+    renderCityOptions();
     if(siteSettings.kartaAktiv) document.getElementById('paymentSelectionArea').style.display = 'block';
     else document.getElementById('paymentSelectionArea').style.display = 'none';
   }
@@ -844,7 +1255,7 @@
     });
 
     const couponDiscount = calcCouponDiscount(subtotal);
-    const shippingCost = getShippingCostForCity(qyteti); // Ndryshim: merr nga qyteti
+    const shippingCost = getShippingCostForCity(qyteti);
     const grandTotal = subtotal - couponDiscount + shippingCost;
 
     msg += `\n📦 *Nëntotali:* ${subtotal.toLocaleString()} L`;
@@ -878,7 +1289,6 @@
 
   function closeAdmin() { document.getElementById('adminModal').classList.remove('show'); }
 
-  // STRUKTURA E ADMIN PANELIT - shtuar tab i ri per qytetet
   function renderAdminList() {
     const container = document.getElementById('adminContent');
     const isKartaChecked = siteSettings.kartaAktiv ? 'checked' : '';
@@ -890,7 +1300,6 @@
         <button onclick="fshiKuponin(${i})" style="background:var(--red); color:#fff; border:none; padding:4px 10px; border-radius:5px; cursor:pointer; font-size:10px; font-weight:700;">Fshi</button>
       </div>`).join('') || '<p style="font-size:11px; color:#666;">Nuk ka kuponë.</p>';
 
-    // Lista e qyteteve me butona edit/fshi
     const qytetetHTML = (siteSettings.qytetet || []).map((q, i) => 
       `<div style="display:flex; justify-content:space-between; align-items:center; background:#0a0a0a; padding:8px 12px; border-radius:6px; margin-bottom:6px; border:1px solid var(--border);">
         <span style="font-size:12px; font-weight:700; color:#fff;">${q.emri} — <span style="color:var(--green);">${parseInt(q.cmimi).toLocaleString()} L</span></span>
@@ -911,7 +1320,6 @@
         <button onclick="switchAdminTab('tab-pagesat', this)">💳 Pagesat</button>
       </div>
 
-      <!-- TAB 1: PRODUKTET -->
       <div id="tab-produktet" class="admin-tab-content active">
         <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
           <h3 style="color:var(--red); margin-bottom:15px; font-size:14px; font-weight:700;">➕ Shto Produkt të Ri</h3>
@@ -935,7 +1343,6 @@
         <div id="adminProductList"></div>
       </div>
 
-      <!-- TAB 2: CILESIMET -->
       <div id="tab-cilesimet" class="admin-tab-content">
         <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
           <h3 style="color:var(--red); margin-bottom:15px; font-size:14px; font-weight:700;">⚙️ Cilësimet e Përgjithshme</h3>
@@ -966,22 +1373,33 @@
           </div>
 
           <button class="save-btn" style="background:var(--gold); color:#000;" onclick="ruajBackground()">🎨 Ruaj Background-in</button>
+          <button class="save-btn" style="background:var(--red); margin-top:10px;" onclick="fshiBackgroundin()">🗑️ Fshi Foton e Background-it</button>
+        </div>
+
+        <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
+          <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">🎄 Dekorimi Festiv (Krishtlindje & Vit i Ri)</h3>
+          <p style="font-size:11px; color:#888; margin-bottom:15px;">Zgjidh cilin opsion dekorimi të shfaqet në faqe:</p>
+          <div class="admin-form-group">
+            <select id="adminFestiveSelect" style="width:100%; padding:12px; background:#0a0a0a; border:1px solid var(--border); color:#fff; border-radius:8px; font-family:'Montserrat',sans-serif; font-size:13px;">
+              <option value="0" ${festiveMode===0?'selected':''}>❌ Fikur (asnjë dekorim)</option>
+              <option value="1" ${festiveMode===1?'selected':''}>🎄 Opcioni A: Vetëm Topa Ulujsh</option>
+              <option value="2" ${festiveMode===2?'selected':''}>❄️ Opcioni B: Topa + Borë</option>
+              <option value="3" ${festiveMode===3?'selected':''}>🎆 Opcioni C: Vit i Ri (fishekzjarrë + 2026)</option>
+            </select>
+          </div>
+          <button class="save-btn" style="background:var(--gold); color:#000;" onclick="ruajFestiveMode()">💾 Ruaj Dekorimin Festiv</button>
         </div>
 
         <button class="save-btn" style="background:var(--green);" onclick="ruajCilesimet()">💾 Ruaj të Gjitha Cilësimet</button>
       </div>
 
-      <!-- TAB 3: QYTETET (I RI) -->
       <div id="tab-qytetet" class="admin-tab-content">
         <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
           <h3 style="color:var(--green); margin-bottom:15px; font-size:14px; font-weight:700;">🚚 Qytetet & Çmimet e Transportit</h3>
-          <p style="font-size:11px; color:#888; margin-bottom:15px;">Vendos vetë qytetet dhe çmimin e transportit për secilin. Këto shfaqen tek klienti në checkout.</p>
-          
+          <p style="font-size:11px; color:#888; margin-bottom:15px;">Vendos vetë qytetet dhe çmimin e transportit për secilin.</p>
           <h4 style="font-size:12px; color:#fff; margin-bottom:10px;">Qytetet aktuale:</h4>
           <div style="margin-bottom:15px;">${qytetetHTML}</div>
-
           <hr style="border-color:var(--border); margin:15px 0;">
-          
           <h4 style="font-size:12px; color:var(--gold); margin-bottom:10px;">➕ Shto Qytet të Ri</h4>
           <div class="admin-form-group"><label>Emri i Qytetit</label><input type="text" id="newQytetEmri" placeholder="p.sh. Tiranë"></div>
           <div class="admin-form-group"><label>Çmimi i Transportit (Lek)</label><input type="number" id="newQytetCmimi" placeholder="300"></div>
@@ -989,7 +1407,6 @@
         </div>
       </div>
 
-      <!-- TAB 4: KUPONET -->
       <div id="tab-kuponet" class="admin-tab-content">
         <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
           <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">🎟️ Kuponët e Zbritjes</h3>
@@ -1000,7 +1417,6 @@
         </div>
       </div>
 
-      <!-- TAB 5: PAGESAT -->
       <div id="tab-pagesat" class="admin-tab-content">
         <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
           <h3 style="color:var(--green); margin-bottom:15px; font-size:14px; font-weight:700;">💳 Opsionet e Pagesës</h3>
@@ -1040,7 +1456,24 @@
     btn.classList.add('active');
   }
 
-  // ============ FUNKSIONET E QYTETEVE ============
+  async function fshiBackgroundin() {
+    if (!confirm("A jeni i sigurt që doni të fshini foton e background-it?")) return;
+    siteSettings.bgImage = "";
+    await ruajNeFirebase();
+    applySettings();
+    alert("✅ Fotoja e background-it u fshi!");
+    renderAdminList();
+    switchAdminTab('tab-cilesimet', document.querySelector('.admin-nav button:nth-child(2)'));
+  }
+
+  function ruajFestiveMode() {
+    const val = parseInt(document.getElementById('adminFestiveSelect').value);
+    festiveMode = val;
+    localStorage.setItem('cz_festive_mode', festiveMode);
+    applyFestiveMode();
+    alert("✅ Dekorimi festiv u ruajt!");
+  }
+
   async function shtoQytet() {
     const emri = document.getElementById('newQytetEmri').value.trim();
     const cmimi = parseInt(document.getElementById('newQytetCmimi').value);
@@ -1078,7 +1511,6 @@
     });
   }
 
-  // ============ FUNKSIONET E BACKGROUND ============
   async function ruajBackground() {
     const ngjyra = document.getElementById('adminBgColor').value;
     const file = document.getElementById('adminBgImageFile').files[0];
