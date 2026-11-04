@@ -237,7 +237,6 @@
     z-index: 5;
     overflow: hidden;
   }
-  /* Çdo top ka një "fije" (thread) me gjatësi të ndryshme */
   .ball-wrapper {
     position: absolute;
     top: 0;
@@ -266,14 +265,19 @@
     height: 42px;
     border-radius: 50%;
     position: relative;
+    animation: ballGlow 3s ease-in-out infinite alternate;
   }
-  .ball.red    { background: radial-gradient(circle at 30% 30%, #ff4d4d, #b30000); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 18px rgba(230,0,0,0.5); }
-  .ball.green  { background: radial-gradient(circle at 30% 30%, #4dff88, #006622); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 18px rgba(37,211,102,0.5); }
-  .ball.gold   { background: radial-gradient(circle at 30% 30%, #ffe066, #b38600); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 18px rgba(255,180,0,0.5); }
-  .ball.blue   { background: radial-gradient(circle at 30% 30%, #66b3ff, #003d80); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 18px rgba(100,180,255,0.5); }
-  .ball.silver { background: radial-gradient(circle at 30% 30%, #f0f0f0, #888); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 18px rgba(200,200,200,0.5); }
+  @keyframes ballGlow {
+    0%   { filter: brightness(1); }
+    100% { filter: brightness(1.25); }
+  }
+  .ball.red    { background: radial-gradient(circle at 30% 30%, #ff4d4d, #b30000); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 20px rgba(230,0,0,0.6); }
+  .ball.green  { background: radial-gradient(circle at 30% 30%, #4dff88, #006622); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 20px rgba(37,211,102,0.6); }
+  .ball.gold   { background: radial-gradient(circle at 30% 30%, #ffe066, #b38600); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 20px rgba(255,180,0,0.6); }
+  .ball.blue   { background: radial-gradient(circle at 30% 30%, #66b3ff, #003d80); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 20px rgba(100,180,255,0.6); }
+  .ball.silver { background: radial-gradient(circle at 30% 30%, #f0f0f0, #888); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 20px rgba(200,200,200,0.6); }
+  .ball.purple { background: radial-gradient(circle at 30% 30%, #c44dff, #4d0066); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 20px rgba(180,80,255,0.6); }
 
-  /* Pozicionet horizontale */
   .ball-wrapper:nth-child(1) { left: 4%;  animation-delay: 0s;   animation-duration: 3.2s; }
   .ball-wrapper:nth-child(2) { left: 19%; animation-delay: 0.4s; animation-duration: 2.8s; }
   .ball-wrapper:nth-child(3) { left: 36%; animation-delay: 0.2s; animation-duration: 3.5s; }
@@ -282,7 +286,6 @@
   .ball-wrapper:nth-child(6) { left: 86%; animation-delay: 0.9s; animation-duration: 2.9s; }
   .ball-wrapper:nth-child(7) { left: 95%; animation-delay: 0.5s; animation-duration: 3.1s; }
 
-  /* Gjatësi të ndryshme fijesh — disa të shkurtra, disa të gjata */
   .ball-wrapper:nth-child(1) .ball-thread { height: 20px; }
   .ball-wrapper:nth-child(2) .ball-thread { height: 120px; }
   .ball-wrapper:nth-child(3) .ball-thread { height: 55px; }
@@ -297,7 +300,7 @@
   }
 
   /* =====================================================
-     ❄️ OPSIONI B: TOPA + BORË (topa pak më të mëdhenj)
+     ❄️ OPSIONI B: TOPA + BORË
      ===================================================== */
   .snowflakes {
     position: fixed;
@@ -327,7 +330,7 @@
   .festive-balls.option-b .ball-cap { width: 12px; height: 12px; }
 
   /* =====================================================
-     🎆 OPSIONI C: VITI I RI (fishekzjarrë + yje + konfeti + 2026)
+     🎆 OPSIONI C: VITI I RI (fishekzjarrë + yje + konfeti + 2027)
      ===================================================== */
   .newyear-container {
     position: fixed;
@@ -339,7 +342,6 @@
     z-index: 5;
     overflow: hidden;
   }
-  /* Yje që shkëlqejnë */
   .star {
     position: absolute;
     color: #fff;
@@ -352,7 +354,6 @@
     50%      { opacity: 1;   transform: scale(1.3); }
   }
 
-  /* Fishekzjarrë — shpërthime periodike */
   .firework {
     position: absolute;
     width: 4px;
@@ -400,7 +401,6 @@
   .firework:nth-child(4) { top: 70%; left: 85%; color: #66b3ff; animation-delay: 1.8s; }
   .firework:nth-child(5) { top: 40%; left: 55%; color: #ff66ff; animation-delay: 2.4s; }
 
-  /* Konfeti që bien */
   .confetti {
     position: absolute;
     top: -20px;
@@ -414,7 +414,61 @@
     100% { transform: translateY(110vh) rotate(720deg); opacity: 0.4; }
   }
 
-  /* Teksti "2026" që shkëlqen në qendër */
+  /* ===== 🎆 FISHEKZJARR I MADH (shpërthen 1 herë kur hapet faqja) ===== */
+  .mega-firework {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    z-index: 9998;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: megaExplode 3.5s ease-out forwards;
+  }
+  .mega-firework::before,
+  .mega-firework::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow:
+      0 -120px 0 5px currentColor,
+      0 120px 0 5px currentColor,
+      120px 0 0 5px currentColor,
+      -120px 0 0 5px currentColor,
+      85px -85px 0 5px currentColor,
+      -85px -85px 0 5px currentColor,
+      85px 85px 0 5px currentColor,
+      -85px 85px 0 5px currentColor;
+  }
+  .mega-firework::after {
+    box-shadow:
+      60px -105px 0 3px currentColor,
+      -60px -105px 0 3px currentColor,
+      60px 105px 0 3px currentColor,
+      -60px 105px 0 3px currentColor,
+      105px -60px 0 3px currentColor,
+      -105px -60px 0 3px currentColor,
+      105px 60px 0 3px currentColor,
+      -105px 60px 0 3px currentColor,
+      0 -65px 0 2px #fff,
+      0 65px 0 2px #fff,
+      65px 0 0 2px #fff,
+      -65px 0 0 2px #fff;
+  }
+  @keyframes megaExplode {
+    0%   { transform: translate(-50%, -50%) scale(0);   opacity: 1; }
+    15%  { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+    40%  { transform: translate(-50%, -50%) scale(3);   opacity: 1; }
+    70%  { transform: translate(-50%, -50%) scale(5);   opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(6);   opacity: 0; }
+  }
+
+  /* ===== TEKSTI "GËZUAR VITIN E RI 2027" (5 sekonda) ===== */
   .newyear-text {
     position: absolute;
     top: 50%;
@@ -436,7 +490,10 @@
     filter: drop-shadow(0 0 20px rgba(255,215,0,0.6));
     font-family: 'Montserrat', sans-serif;
     white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.6s ease;
   }
+  .newyear-text.show { opacity: 1; }
   .newyear-text small {
     display: block;
     font-size: 16px;
@@ -455,7 +512,6 @@
     50%      { transform: translate(-50%, -50%) translateY(-15px); }
   }
 
-  /* Butoni për të ndërruar opsionin */
   .festive-toggle {
     position: fixed;
     bottom: 20px;
@@ -495,16 +551,23 @@
       15px 15px 0 1px currentColor, -15px 15px 0 1px currentColor;
     }
     .firework::after { display: none; }
+    .mega-firework::before {
+      box-shadow:
+        0 -60px 0 3px currentColor, 0 60px 0 3px currentColor,
+        60px 0 0 3px currentColor, -60px 0 0 3px currentColor,
+        42px -42px 0 3px currentColor, -42px -42px 0 3px currentColor,
+        42px 42px 0 3px currentColor, -42px 42px 0 3px currentColor;
+    }
+    .mega-firework::after { display: none; }
     .festive-toggle { width: 45px; height: 45px; font-size: 20px; bottom: 15px; right: 15px; }
   }
 </style>
 </head><body>
 
-<!-- =====================================================
-     🎄 DEKORIMET E FESTAVE
-     ===================================================== -->
+<!-- 🎆 FISHEKZJARR I MADH — shfaqet 1 herë kur hapet faqja -->
+<div class="mega-firework" id="megaFirework" style="display:none; color:#ffd700;"></div>
 
-<!-- OPSIONI A & B: Topa me gjatësi të ndryshme fijesh -->
+<!-- 🎄 OPSIONI A & B: Topa me gjatësi të ndryshme -->
 <div class="festive-balls" id="festiveBalls">
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball red"></div></div>
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball green"></div></div>
@@ -512,13 +575,13 @@
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball blue"></div></div>
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball red"></div></div>
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball silver"></div></div>
-  <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball green"></div></div>
+  <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball purple"></div></div>
 </div>
 
-<!-- OPSIONI B: Flokë bore -->
+<!-- ❄️ OPSIONI B: Flokë bore -->
 <div class="snowflakes" id="snowflakesContainer"></div>
 
-<!-- OPSIONI C: Viti i Ri -->
+<!-- 🎆 OPSIONI C: Viti i Ri -->
 <div class="newyear-container" id="newyearContainer">
   <div class="star" style="top: 8%;  left: 12%; animation-delay: 0s;">★</div>
   <div class="star" style="top: 15%; left: 45%; animation-delay: 0.3s; font-size: 10px;">✦</div>
@@ -528,6 +591,8 @@
   <div class="star" style="top: 75%; left: 20%; animation-delay: 0.4s; font-size: 12px;">★</div>
   <div class="star" style="top: 85%; left: 65%; animation-delay: 0.7s;">✧</div>
   <div class="star" style="top: 5%;  left: 88%; animation-delay: 1s;   font-size: 10px;">✦</div>
+  <div class="star" style="top: 32%; left: 55%; animation-delay: 1.5s; font-size: 10px;">✦</div>
+  <div class="star" style="top: 65%; left: 5%;  animation-delay: 0.8s;">★</div>
 
   <div class="firework"></div>
   <div class="firework"></div>
@@ -535,7 +600,7 @@
   <div class="firework"></div>
   <div class="firework"></div>
 
-  <div class="newyear-text">2026<small>GËZUAR VITIN E RI</small></div>
+  <div class="newyear-text" id="newyearText">2027<small>GËZUAR VITIN E RI</small></div>
 </div>
 
 <button class="festive-toggle" id="festiveToggle" onclick="toggleFestiveMode()" title="Ndërro dekorimin festiv">🎄</button>
@@ -713,6 +778,9 @@
       document.getElementById('preloader').classList.add('hide');
       document.getElementById('main-page').classList.add('show');
       setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 800); 
+      
+      // 🎆 FISHEKZJARR I MADH — shfaqet SAPO mbaron preloader-i (kur makina kalon)
+      shfaqMegaFishekzjarr();
     }, 3000); 
   });
 
@@ -721,23 +789,53 @@
   let activeCoupon = null;
 
   /* =====================================================
+     🎆 FISHEKZJARR I MADH (1 herë kur hapet faqja)
+     ===================================================== */
+  function shfaqMegaFishekzjarr() {
+    const mega = document.getElementById('megaFirework');
+    if (!mega) return;
+    const colors = ['#ffd700', '#ff4d4d', '#4dff88', '#66b3ff', '#ff66ff'];
+    let idx = 0;
+    function shpërthe() {
+      mega.style.color = colors[idx % colors.length];
+      idx++;
+      mega.style.display = 'block';
+      mega.style.animation = 'none';
+      void mega.offsetWidth; // reflow
+      mega.style.animation = 'megaExplode 3.5s ease-out forwards';
+      setTimeout(() => {
+        mega.style.display = 'none';
+      }, 3600);
+    }
+    // Shpërthim i parë i madh
+    shpërthe();
+    // 2 shpërthime më të vogla pas 1.2s dhe 2.4s
+    setTimeout(shpërthe, 1200);
+    setTimeout(shpërthe, 2400);
+  }
+
+  /* =====================================================
      🎄 KONTROLLI I DEKORIMIT FESTIV
      0 = fikur, 1 = Opcioni A (topa), 2 = Opcioni B (topa+borë), 3 = Opcioni C (Vit i Ri)
      ===================================================== */
   let festiveMode = parseInt(localStorage.getItem('cz_festive_mode'));
   if (isNaN(festiveMode)) festiveMode = 1;
 
+  let newyearTextTimer = null;
+
   function applyFestiveMode() {
     const balls = document.getElementById('festiveBalls');
     const snowContainer = document.getElementById('snowflakesContainer');
     const newyearContainer = document.getElementById('newyearContainer');
+    const newyearText = document.getElementById('newyearText');
     const toggleBtn = document.getElementById('festiveToggle');
 
     // Reset
     balls.classList.remove('option-b');
     snowContainer.innerHTML = '';
-    // Pastro konfetin e vjetër
     document.querySelectorAll('.confetti').forEach(c => c.remove());
+    if (newyearTextTimer) { clearTimeout(newyearTextTimer); newyearTextTimer = null; }
+    if (newyearText) newyearText.classList.remove('show');
 
     // Fshih të gjitha
     balls.style.display = 'none';
@@ -763,6 +861,16 @@
       krijoKonfetin();
       toggleBtn.innerText = '✖️';
       toggleBtn.title = 'Opcioni C → Fike dekorimin';
+      
+      // 🎆 Shfaq tekstin "GËZUAR VITIN E RI 2027" për vetëm 5 sekonda
+      if (newyearText) {
+        setTimeout(() => {
+          newyearText.classList.add('show');
+          newyearTextTimer = setTimeout(() => {
+            newyearText.classList.remove('show');
+          }, 5000); // 5 sekonda
+        }, 300);
+      }
     }
   }
 
@@ -770,15 +878,15 @@
     const container = document.getElementById('snowflakesContainer');
     if (!container) return;
     container.innerHTML = '';
-    const symbols = ['❄', '❅', '❆', '•', '✻'];
-    const total = 40;
+    const symbols = ['❄', '❅', '❆', '•', '✻', '✺'];
+    const total = 60;
     for (let i = 0; i < total; i++) {
       const flake = document.createElement('div');
       flake.className = 'snowflake';
       flake.innerText = symbols[Math.floor(Math.random() * symbols.length)];
       flake.style.left = Math.random() * 100 + '%';
-      flake.style.fontSize = (8 + Math.random() * 16) + 'px';
-      flake.style.animationDuration = (5 + Math.random() * 8) + 's';
+      flake.style.fontSize = (8 + Math.random() * 18) + 'px';
+      flake.style.animationDuration = (4 + Math.random() * 8) + 's';
       flake.style.animationDelay = (Math.random() * 8) + 's';
       flake.style.opacity = 0.4 + Math.random() * 0.6;
       container.appendChild(flake);
@@ -788,10 +896,9 @@
   function krijoKonfetin() {
     const container = document.getElementById('newyearContainer');
     if (!container) return;
-    // Fshi konfetin e vjetër
     container.querySelectorAll('.confetti').forEach(c => c.remove());
-    const colors = ['#ff4d4d', '#ffd700', '#4dff88', '#66b3ff', '#ff66ff', '#ffffff'];
-    for (let i = 0; i < 30; i++) {
+    const colors = ['#ff4d4d', '#ffd700', '#4dff88', '#66b3ff', '#ff66ff', '#ffffff', '#ffb400'];
+    for (let i = 0; i < 45; i++) {
       const c = document.createElement('div');
       c.className = 'confetti';
       c.style.left = Math.random() * 100 + '%';
@@ -805,14 +912,13 @@
   }
 
   function toggleFestiveMode() {
-    // Cikli: 1 -> 2 -> 3 -> 0 -> 1
     if (festiveMode === 1) festiveMode = 2;
     else if (festiveMode === 2) festiveMode = 3;
     else if (festiveMode === 3) festiveMode = 0;
     else festiveMode = 1;
     localStorage.setItem('cz_festive_mode', festiveMode);
     applyFestiveMode();
-    const emrat = { 0: 'Dekorimi u fik', 1: 'Opcioni A: Topa Ulujsh', 2: 'Opcioni B: Topa + Borë', 3: 'Opcioni C: Vit i Ri 🎆' };
+    const emrat = { 0: 'Dekorimi u fik', 1: 'Opcioni A: Topa Ulujsh', 2: 'Opcioni B: Topa + Borë', 3: 'Opcioni C: Vit i Ri 2027 🎆' };
     const t = document.createElement('div');
     t.innerText = emrat[festiveMode];
     t.style.cssText = 'position:fixed; bottom:90px; right:20px; background:#111; color:#fff; padding:10px 18px; border-radius:8px; border:1px solid var(--gold); font-size:12px; font-weight:700; z-index:99999; box-shadow:0 5px 15px rgba(0,0,0,0.5);';
@@ -1384,7 +1490,7 @@
               <option value="0" ${festiveMode===0?'selected':''}>❌ Fikur (asnjë dekorim)</option>
               <option value="1" ${festiveMode===1?'selected':''}>🎄 Opcioni A: Vetëm Topa Ulujsh</option>
               <option value="2" ${festiveMode===2?'selected':''}>❄️ Opcioni B: Topa + Borë</option>
-              <option value="3" ${festiveMode===3?'selected':''}>🎆 Opcioni C: Vit i Ri (fishekzjarrë + 2026)</option>
+              <option value="3" ${festiveMode===3?'selected':''}>🎆 Opcioni C: Vit i Ri 2027 (fishekzjarrë + 2027)</option>
             </select>
           </div>
           <button class="save-btn" style="background:var(--gold); color:#000;" onclick="ruajFestiveMode()">💾 Ruaj Dekorimin Festiv</button>
