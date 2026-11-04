@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CARZONE KLEVI - Dyqan Online</title>
+<meta name="description" content="Aksesorë cilësorë për makinën tuaj në Shqipëri. Dërgesa në të gjithë vendin, pagesë në dorëzim. CARZONE KLEVI.">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap');
 
@@ -62,6 +63,46 @@
   @keyframes blink { 0% { opacity: 0.3; } 100% { opacity: 1; color: #fff;} }
   #main-page { opacity: 0; transition: opacity 0.8s ease; }
   #main-page.show { opacity: 1; }
+
+  /* ====== OFERTA SPECIALE BANNER ====== */
+  .special-offer-banner {
+    display: none;
+    background: linear-gradient(90deg, #b30000, #e60000, #ff4d4d, #e60000, #b30000);
+    background-size: 200% 100%;
+    animation: bannerSlide 3s linear infinite;
+    padding: 14px 20px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #fff;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--gold);
+    position: relative;
+    z-index: 999;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+  @keyframes bannerSlide {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  .special-offer-banner .offer-emoji { font-size: 18px; margin: 0 5px; }
+  .special-offer-banner .offer-close {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    border: none;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 900;
+  }
+  .special-offer-banner .offer-close:hover { background: rgba(0,0,0,0.7); }
 
   .top-bar { background: #000; text-align: center; padding: 12px; font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--text-muted); border-bottom: 1px solid var(--border); }
   header { padding: 25px 20px; background: linear-gradient(180deg, rgba(13,13,13,0.9) 0%, rgba(8,8,8,0.5) 100%); backdrop-filter: blur(5px); border-bottom: 1px solid var(--border);}
@@ -224,53 +265,37 @@
     .hero h1 { font-size: 48px; }
   }
 
+  /* ===== REVIEWS ===== */
+  .reviews-section { margin-top: 40px; background: #111; padding: 25px; border-radius: 15px; border: 1px solid var(--border); }
+  .reviews-section h3 { font-size: 18px; color: #fff; margin-bottom: 20px; font-weight: 800; text-transform: uppercase; }
+  .reviews-average { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .reviews-average .avg-number { font-size: 42px; font-weight: 900; color: var(--gold); }
+  .reviews-average .avg-stars { font-size: 20px; letter-spacing: 2px; }
+  .reviews-average .avg-count { font-size: 12px; color: var(--text-muted); }
+  .review-card { background: #0a0a0a; padding: 15px; border-radius: 10px; margin-bottom: 12px; border: 1px solid var(--border); }
+  .review-card-header { display: flex; justify-content: space-between; margin-bottom: 8px; align-items: center; }
+  .review-card-header .name { font-weight: 700; font-size: 13px; color: #fff; }
+  .review-card-header .date { font-size: 11px; color: #666; }
+  .review-stars { color: var(--gold); font-size: 14px; margin-bottom: 8px; letter-spacing: 2px; }
+  .review-comment { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .add-review-form { background: #151515; padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid var(--border); }
+  .add-review-form h4 { font-size: 14px; color: var(--gold); margin-bottom: 12px; font-weight: 700; }
+  .add-review-form input, .add-review-form textarea { width: 100%; padding: 12px; background: #0a0a0a; border: 1px solid var(--border); color: #fff; border-radius: 8px; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; font-size: 13px; }
+  .star-picker { display: flex; gap: 5px; margin-bottom: 12px; font-size: 26px; cursor: pointer; }
+  .star-picker .star { color: #444; transition: 0.2s; }
+  .star-picker .star.active { color: var(--gold); text-shadow: 0 0 10px rgba(255,180,0,0.5); }
+  .submit-review-btn { background: var(--gold); color: #000; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; transition: 0.3s; width: 100%; }
+  .submit-review-btn:hover { background: #ffc94d; transform: translateY(-1px); }
+
   /* =====================================================
-     🎄 OPSIONI A: TOPA ULUJSH ME GJATËSI TË NDRYSHME
+     🎄 OPSIONI A: TOPA ULUJSH
      ===================================================== */
-  .festive-balls {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 5;
-    overflow: hidden;
-  }
-  .ball-wrapper {
-    position: absolute;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation: swing 3s ease-in-out infinite alternate;
-    transform-origin: top center;
-  }
-  .ball-thread {
-    width: 2px;
-    background: linear-gradient(180deg, #ffd700, rgba(255,215,0,0.4));
-    box-shadow: 0 0 4px rgba(255,215,0,0.6);
-  }
-  .ball-cap {
-    width: 10px;
-    height: 10px;
-    background: radial-gradient(circle at 30% 30%, #ffe066, #b38600);
-    border-radius: 2px;
-    box-shadow: 0 0 8px #ffd700;
-    margin-bottom: -2px;
-    z-index: 2;
-  }
-  .ball {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    position: relative;
-    animation: ballGlow 3s ease-in-out infinite alternate;
-  }
-  @keyframes ballGlow {
-    0%   { filter: brightness(1); }
-    100% { filter: brightness(1.25); }
-  }
+  .festive-balls { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: hidden; }
+  .ball-wrapper { position: absolute; top: 0; display: flex; flex-direction: column; align-items: center; animation: swing 3s ease-in-out infinite alternate; transform-origin: top center; }
+  .ball-thread { width: 2px; background: linear-gradient(180deg, #ffd700, rgba(255,215,0,0.4)); box-shadow: 0 0 4px rgba(255,215,0,0.6); }
+  .ball-cap { width: 10px; height: 10px; background: radial-gradient(circle at 30% 30%, #ffe066, #b38600); border-radius: 2px; box-shadow: 0 0 8px #ffd700; margin-bottom: -2px; z-index: 2; }
+  .ball { width: 42px; height: 42px; border-radius: 50%; position: relative; animation: ballGlow 3s ease-in-out infinite alternate; }
+  @keyframes ballGlow { 0% { filter: brightness(1); } 100% { filter: brightness(1.25); } }
   .ball.red    { background: radial-gradient(circle at 30% 30%, #ff4d4d, #b30000); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 20px rgba(230,0,0,0.6); }
   .ball.green  { background: radial-gradient(circle at 30% 30%, #4dff88, #006622); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 20px rgba(37,211,102,0.6); }
   .ball.gold   { background: radial-gradient(circle at 30% 30%, #ffe066, #b38600); box-shadow: inset -6px -6px 12px rgba(0,0,0,0.6), 0 0 20px rgba(255,180,0,0.6); }
@@ -294,248 +319,161 @@
   .ball-wrapper:nth-child(6) .ball-thread { height: 90px; }
   .ball-wrapper:nth-child(7) .ball-thread { height: 10px; }
 
-  @keyframes swing {
-    0%   { transform: rotate(-8deg); }
-    100% { transform: rotate(8deg); }
-  }
+  @keyframes swing { 0% { transform: rotate(-8deg); } 100% { transform: rotate(8deg); } }
 
   /* =====================================================
      ❄️ OPSIONI B: TOPA + BORË
      ===================================================== */
-  .snowflakes {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 4;
-    overflow: hidden;
-  }
-  .snowflake {
-    position: absolute;
-    top: -20px;
-    color: #ffffff;
-    font-size: 14px;
-    opacity: 0.85;
-    text-shadow: 0 0 6px rgba(255,255,255,0.8);
-    animation: fall linear infinite;
-    user-select: none;
-  }
-  @keyframes fall {
-    0%   { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0.3; }
-  }
+  .snowflakes { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: hidden; }
+  .snowflake { position: absolute; top: -20px; color: #ffffff; font-size: 14px; opacity: 0.85; text-shadow: 0 0 6px rgba(255,255,255,0.8); animation: fall linear infinite; user-select: none; }
+  @keyframes fall { 0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0.3; } }
   .festive-balls.option-b .ball { width: 50px; height: 50px; }
   .festive-balls.option-b .ball-cap { width: 12px; height: 12px; }
 
   /* =====================================================
-     🎆 OPSIONI C: VITI I RI (fishekzjarrë + yje + konfeti + 2027)
+     🎆 OPSIONI C: VITI I RI 2027
      ===================================================== */
-  .newyear-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 5;
-    overflow: hidden;
-  }
-  .star {
-    position: absolute;
-    color: #fff;
-    font-size: 14px;
-    text-shadow: 0 0 10px #fff, 0 0 20px #ffd700, 0 0 30px #ffd700;
-    animation: twinkle 2s ease-in-out infinite;
-  }
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.3; transform: scale(0.8); }
-    50%      { opacity: 1;   transform: scale(1.3); }
-  }
-
-  .firework {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    animation: explode 3s ease-out infinite;
-  }
-  .firework::before,
-  .firework::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow:
-      0 -40px 0 2px currentColor,
-      0 40px 0 2px currentColor,
-      40px 0 0 2px currentColor,
-      -40px 0 0 2px currentColor,
-      28px -28px 0 2px currentColor,
-      -28px -28px 0 2px currentColor,
-      28px 28px 0 2px currentColor,
-      -28px 28px 0 2px currentColor;
-  }
-  .firework::after {
-    box-shadow:
-      20px -35px 0 1px currentColor,
-      -20px -35px 0 1px currentColor,
-      20px 35px 0 1px currentColor,
-      -20px 35px 0 1px currentColor,
-      35px -20px 0 1px currentColor,
-      -35px -20px 0 1px currentColor,
-      35px 20px 0 1px currentColor,
-      -35px 20px 0 1px currentColor;
-  }
-  @keyframes explode {
-    0%   { transform: scale(0);   opacity: 1; }
-    40%  { transform: scale(1.4); opacity: 1; }
-    100% { transform: scale(0.8); opacity: 0; }
-  }
-  .firework:nth-child(1) { top: 15%; left: 15%; color: #ff4d4d; animation-delay: 0s;   }
+  .newyear-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: hidden; }
+  .star { position: absolute; color: #fff; font-size: 14px; text-shadow: 0 0 10px #fff, 0 0 20px #ffd700, 0 0 30px #ffd700; animation: twinkle 2s ease-in-out infinite; }
+  @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.3); } }
+  .firework { position: absolute; width: 4px; height: 4px; border-radius: 50%; animation: explode 3s ease-out infinite; }
+  .firework::before, .firework::after { content: ''; position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 -40px 0 2px currentColor, 0 40px 0 2px currentColor, 40px 0 0 2px currentColor, -40px 0 0 2px currentColor, 28px -28px 0 2px currentColor, -28px -28px 0 2px currentColor, 28px 28px 0 2px currentColor, -28px 28px 0 2px currentColor; }
+  .firework::after { box-shadow: 20px -35px 0 1px currentColor, -20px -35px 0 1px currentColor, 20px 35px 0 1px currentColor, -20px 35px 0 1px currentColor, 35px -20px 0 1px currentColor, -35px -20px 0 1px currentColor, 35px 20px 0 1px currentColor, -35px 20px 0 1px currentColor; }
+  @keyframes explode { 0% { transform: scale(0); opacity: 1; } 40% { transform: scale(1.4); opacity: 1; } 100% { transform: scale(0.8); opacity: 0; } }
+  .firework:nth-child(1) { top: 15%; left: 15%; color: #ff4d4d; animation-delay: 0s; }
   .firework:nth-child(2) { top: 25%; left: 75%; color: #ffd700; animation-delay: 0.6s; }
   .firework:nth-child(3) { top: 60%; left: 30%; color: #4dff88; animation-delay: 1.2s; }
   .firework:nth-child(4) { top: 70%; left: 85%; color: #66b3ff; animation-delay: 1.8s; }
   .firework:nth-child(5) { top: 40%; left: 55%; color: #ff66ff; animation-delay: 2.4s; }
 
-  .confetti {
-    position: absolute;
-    top: -20px;
-    width: 8px;
-    height: 14px;
-    opacity: 0.9;
-    animation: confettiFall linear infinite;
-  }
-  @keyframes confettiFall {
-    0%   { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0.4; }
-  }
+  .confetti { position: absolute; top: -20px; width: 8px; height: 14px; opacity: 0.9; animation: confettiFall linear infinite; }
+  @keyframes confettiFall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0.4; } }
 
-  /* ===== 🎆 FISHEKZJARR I MADH (shpërthen 1 herë kur hapet faqja) ===== */
-  .mega-firework {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    z-index: 9998;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    animation: megaExplode 3.5s ease-out forwards;
-  }
-  .mega-firework::before,
-  .mega-firework::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow:
-      0 -120px 0 5px currentColor,
-      0 120px 0 5px currentColor,
-      120px 0 0 5px currentColor,
-      -120px 0 0 5px currentColor,
-      85px -85px 0 5px currentColor,
-      -85px -85px 0 5px currentColor,
-      85px 85px 0 5px currentColor,
-      -85px 85px 0 5px currentColor;
-  }
-  .mega-firework::after {
-    box-shadow:
-      60px -105px 0 3px currentColor,
-      -60px -105px 0 3px currentColor,
-      60px 105px 0 3px currentColor,
-      -60px 105px 0 3px currentColor,
-      105px -60px 0 3px currentColor,
-      -105px -60px 0 3px currentColor,
-      105px 60px 0 3px currentColor,
-      -105px 60px 0 3px currentColor,
-      0 -65px 0 2px #fff,
-      0 65px 0 2px #fff,
-      65px 0 0 2px #fff,
-      -65px 0 0 2px #fff;
-  }
-  @keyframes megaExplode {
-    0%   { transform: translate(-50%, -50%) scale(0);   opacity: 1; }
-    15%  { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-    40%  { transform: translate(-50%, -50%) scale(3);   opacity: 1; }
-    70%  { transform: translate(-50%, -50%) scale(5);   opacity: 0.7; }
-    100% { transform: translate(-50%, -50%) scale(6);   opacity: 0; }
-  }
+  .mega-firework { position: fixed; top: 50%; left: 50%; width: 10px; height: 10px; border-radius: 50%; z-index: 9998; pointer-events: none; transform: translate(-50%, -50%); animation: megaExplode 3.5s ease-out forwards; }
+  .mega-firework::before, .mega-firework::after { content: ''; position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 -120px 0 5px currentColor, 0 120px 0 5px currentColor, 120px 0 0 5px currentColor, -120px 0 0 5px currentColor, 85px -85px 0 5px currentColor, -85px -85px 0 5px currentColor, 85px 85px 0 5px currentColor, -85px 85px 0 5px currentColor; }
+  .mega-firework::after { box-shadow: 60px -105px 0 3px currentColor, -60px -105px 0 3px currentColor, 60px 105px 0 3px currentColor, -60px 105px 0 3px currentColor, 105px -60px 0 3px currentColor, -105px -60px 0 3px currentColor, 105px 60px 0 3px currentColor, -105px 60px 0 3px currentColor, 0 -65px 0 2px #fff, 0 65px 0 2px #fff, 65px 0 0 2px #fff, -65px 0 0 2px #fff; }
+  @keyframes megaExplode { 0% { transform: translate(-50%, -50%) scale(0); opacity: 1; } 15% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 40% { transform: translate(-50%, -50%) scale(3); opacity: 1; } 70% { transform: translate(-50%, -50%) scale(5); opacity: 0.7; } 100% { transform: translate(-50%, -50%) scale(6); opacity: 0; } }
 
-  /* ===== TEKSTI "GËZUAR VITIN E RI 2027" (5 sekonda) ===== */
-  .newyear-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 90px;
-    font-weight: 900;
-    letter-spacing: 6px;
-    background: linear-gradient(135deg, #ffd700, #ff4d4d, #ffd700, #ff4d4d);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    animation: shimmer 3s ease-in-out infinite, floatY 4s ease-in-out infinite;
-    text-align: center;
-    line-height: 1;
-    pointer-events: none;
-    filter: drop-shadow(0 0 20px rgba(255,215,0,0.6));
-    font-family: 'Montserrat', sans-serif;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
+  .newyear-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 90px; font-weight: 900; letter-spacing: 6px; background: linear-gradient(135deg, #ffd700, #ff4d4d, #ffd700, #ff4d4d); background-size: 300% 300%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: shimmer 3s ease-in-out infinite, floatY 4s ease-in-out infinite; text-align: center; line-height: 1; pointer-events: none; filter: drop-shadow(0 0 20px rgba(255,215,0,0.6)); font-family: 'Montserrat', sans-serif; white-space: nowrap; opacity: 0; transition: opacity 0.6s ease; }
   .newyear-text.show { opacity: 1; }
-  .newyear-text small {
-    display: block;
-    font-size: 16px;
-    letter-spacing: 8px;
-    margin-top: 8px;
-    -webkit-text-fill-color: #fff;
-    color: #fff;
-    text-shadow: 0 0 15px #ffd700;
+  .newyear-text small { display: block; font-size: 16px; letter-spacing: 8px; margin-top: 8px; -webkit-text-fill-color: #fff; color: #fff; text-shadow: 0 0 15px #ffd700; }
+  @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  @keyframes floatY { 0%, 100% { transform: translate(-50%, -50%) translateY(0); } 50% { transform: translate(-50%, -50%) translateY(-15px); } }
+
+  /* =====================================================
+     🇦🇱 OPSIONI D: 28-29 NËNTOR (Festa e Flamurit)
+     ===================================================== */
+  .november-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: hidden; }
+  
+  /* Shqiponja qendrore që pulson */
+  .eagle-symbol {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 200px;
+    color: #e60000;
+    opacity: 0.05;
+    font-weight: 900;
+    animation: eaglePulse 4s ease-in-out infinite;
+    pointer-events: none;
+    filter: drop-shadow(0 0 40px rgba(230,0,0,0.5));
+    user-select: none;
   }
-  @keyframes shimmer {
-    0%, 100% { background-position: 0% 50%; }
-    50%      { background-position: 100% 50%; }
-  }
-  @keyframes floatY {
-    0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-    50%      { transform: translate(-50%, -50%) translateY(-15px); }
+  @keyframes eaglePulse {
+    0%, 100% { opacity: 0.04; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.08; transform: translate(-50%, -50%) scale(1.05); }
   }
 
-  .festive-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 5000;
-    background: linear-gradient(135deg, #e60000, #b30000);
-    color: #fff;
-    border: 2px solid #ffd700;
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 5px 20px rgba(230,0,0,0.5), 0 0 15px rgba(255,215,0,0.4);
-    transition: 0.3s;
-    animation: pulse 2s ease-in-out infinite;
+  /* Flamuj të vegjël kuq e zi që bien */
+  .mini-flag {
+    position: absolute;
+    top: -30px;
+    width: 32px;
+    height: 22px;
+    background: #e60000;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(230,0,0,0.5), inset 0 0 0 1px rgba(0,0,0,0.2);
+    animation: flagFall linear infinite;
+    overflow: hidden;
+    opacity: 0.9;
   }
-  .festive-toggle:hover { transform: scale(1.1) rotate(15deg); }
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 5px 20px rgba(230,0,0,0.5), 0 0 15px rgba(255,215,0,0.4); }
-    50%      { box-shadow: 0 5px 30px rgba(230,0,0,0.8), 0 0 25px rgba(255,215,0,0.7); }
+  .mini-flag::before {
+    content: '🦅';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: #000;
+    text-shadow: 0 0 4px rgba(0,0,0,0.5);
+  }
+  @keyframes flagFall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0.2; }
+  }
+
+  /* Yje kuq që shkëlqejnë */
+  .al-star {
+    position: absolute;
+    color: #ff1a1a;
+    font-size: 16px;
+    text-shadow: 0 0 10px #ff1a1a, 0 0 20px #e60000;
+    animation: alTwinkle 2.5s ease-in-out infinite;
+  }
+  @keyframes alTwinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.4) rotate(180deg); }
+  }
+
+  /* Drita kuq e zi që kalon horizontalisht (si valë flamuri) */
+  .flag-wave {
+    position: absolute;
+    height: 3px;
+    width: 200px;
+    background: linear-gradient(90deg, transparent, #e60000, #000000, #e60000, transparent);
+    box-shadow: 0 0 15px #e60000;
+    animation: waveMove 6s linear infinite;
+  }
+  @keyframes waveMove {
+    0% { transform: translateX(-250px); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateX(calc(100vw + 50px)); opacity: 0; }
+  }
+  .flag-wave:nth-child(1) { top: 15%; animation-delay: 0s; }
+  .flag-wave:nth-child(2) { top: 45%; animation-delay: 1.5s; }
+  .flag-wave:nth-child(3) { top: 75%; animation-delay: 3s; }
+
+  /* Teksti shqip poshtë */
+  .november-text {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    font-weight: 900;
+    color: #e60000;
+    letter-spacing: 8px;
+    text-shadow: 0 0 20px rgba(230,0,0,0.8), 0 2px 4px rgba(0,0,0,0.9);
+    white-space: nowrap;
+    animation: textGlow 3s ease-in-out infinite;
+    pointer-events: none;
+    opacity: 0.85;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .november-text small {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: #fff;
+    text-shadow: 0 0 10px #e60000;
+    text-align: center;
+    margin-top: 5px;
+  }
+  @keyframes textGlow {
+    0%, 100% { text-shadow: 0 0 20px rgba(230,0,0,0.8), 0 2px 4px rgba(0,0,0,0.9); }
+    50% { text-shadow: 0 0 40px rgba(230,0,0,1), 0 0 60px rgba(255,50,50,0.6), 0 2px 4px rgba(0,0,0,0.9); }
   }
 
   @media (max-width: 600px) {
@@ -544,31 +482,24 @@
     .ball-thread { max-height: 100px !important; }
     .newyear-text { font-size: 50px; letter-spacing: 3px; }
     .newyear-text small { font-size: 11px; letter-spacing: 4px; }
-    .firework::before { box-shadow:
-      0 -22px 0 1px currentColor, 0 22px 0 1px currentColor,
-      22px 0 0 1px currentColor, -22px 0 0 1px currentColor,
-      15px -15px 0 1px currentColor, -15px -15px 0 1px currentColor,
-      15px 15px 0 1px currentColor, -15px 15px 0 1px currentColor;
-    }
+    .firework::before { box-shadow: 0 -22px 0 1px currentColor, 0 22px 0 1px currentColor, 22px 0 0 1px currentColor, -22px 0 0 1px currentColor, 15px -15px 0 1px currentColor, -15px -15px 0 1px currentColor, 15px 15px 0 1px currentColor, -15px 15px 0 1px currentColor; }
     .firework::after { display: none; }
-    .mega-firework::before {
-      box-shadow:
-        0 -60px 0 3px currentColor, 0 60px 0 3px currentColor,
-        60px 0 0 3px currentColor, -60px 0 0 3px currentColor,
-        42px -42px 0 3px currentColor, -42px -42px 0 3px currentColor,
-        42px 42px 0 3px currentColor, -42px 42px 0 3px currentColor;
-    }
+    .mega-firework::before { box-shadow: 0 -60px 0 3px currentColor, 0 60px 0 3px currentColor, 60px 0 0 3px currentColor, -60px 0 0 3px currentColor, 42px -42px 0 3px currentColor, -42px -42px 0 3px currentColor, 42px 42px 0 3px currentColor, -42px 42px 0 3px currentColor; }
     .mega-firework::after { display: none; }
-    .festive-toggle { width: 45px; height: 45px; font-size: 20px; bottom: 15px; right: 15px; }
+    .eagle-symbol { font-size: 120px; }
+    .november-text { font-size: 16px; letter-spacing: 4px; bottom: 30px; }
+    .november-text small { font-size: 9px; letter-spacing: 3px; }
+    .mini-flag { width: 24px; height: 16px; }
+    .flag-wave { width: 120px; }
   }
 </style>
 </head><body>
 
-<!-- 🎆 FISHEKZJARR I MADH — shfaqet 1 herë kur hapet faqja -->
+<!-- 🎆 FISHEKZJARR I MADH -->
 <div class="mega-firework" id="megaFirework" style="display:none; color:#ffd700;"></div>
 
-<!-- 🎄 OPSIONI A & B: Topa me gjatësi të ndryshme -->
-<div class="festive-balls" id="festiveBalls">
+<!-- 🎄 OPSIONI A & B -->
+<div class="festive-balls" id="festiveBalls" style="display: none;">
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball red"></div></div>
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball green"></div></div>
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball gold"></div></div>
@@ -578,11 +509,11 @@
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball purple"></div></div>
 </div>
 
-<!-- ❄️ OPSIONI B: Flokë bore -->
-<div class="snowflakes" id="snowflakesContainer"></div>
+<!-- ❄️ OPSIONI B -->
+<div class="snowflakes" id="snowflakesContainer" style="display: none;"></div>
 
-<!-- 🎆 OPSIONI C: Viti i Ri -->
-<div class="newyear-container" id="newyearContainer">
+<!-- 🎆 OPSIONI C -->
+<div class="newyear-container" id="newyearContainer" style="display: none;">
   <div class="star" style="top: 8%;  left: 12%; animation-delay: 0s;">★</div>
   <div class="star" style="top: 15%; left: 45%; animation-delay: 0.3s; font-size: 10px;">✦</div>
   <div class="star" style="top: 22%; left: 78%; animation-delay: 0.6s;">★</div>
@@ -593,17 +524,29 @@
   <div class="star" style="top: 5%;  left: 88%; animation-delay: 1s;   font-size: 10px;">✦</div>
   <div class="star" style="top: 32%; left: 55%; animation-delay: 1.5s; font-size: 10px;">✦</div>
   <div class="star" style="top: 65%; left: 5%;  animation-delay: 0.8s;">★</div>
-
   <div class="firework"></div>
   <div class="firework"></div>
   <div class="firework"></div>
   <div class="firework"></div>
   <div class="firework"></div>
-
   <div class="newyear-text" id="newyearText">2027<small>GËZUAR VITIN E RI</small></div>
 </div>
 
-<button class="festive-toggle" id="festiveToggle" onclick="toggleFestiveMode()" title="Ndërro dekorimin festiv">🎄</button>
+<!-- 🇦🇱 OPSIONI D: 28-29 NËNTOR -->
+<div class="november-container" id="novemberContainer" style="display: none;">
+  <div class="eagle-symbol">🦅</div>
+  <div class="flag-wave"></div>
+  <div class="flag-wave"></div>
+  <div class="flag-wave"></div>
+  <div class="al-star" style="top: 10%; left: 8%;  animation-delay: 0s;">★</div>
+  <div class="al-star" style="top: 20%; left: 85%; animation-delay: 0.5s; font-size: 12px;">✦</div>
+  <div class="al-star" style="top: 35%; left: 15%; animation-delay: 1s;   font-size: 10px;">★</div>
+  <div class="al-star" style="top: 50%; left: 90%; animation-delay: 0.3s;">✧</div>
+  <div class="al-star" style="top: 65%; left: 5%;  animation-delay: 0.8s; font-size: 12px;">✦</div>
+  <div class="al-star" style="top: 80%; left: 75%; animation-delay: 1.2s;">★</div>
+  <div class="al-star" style="top: 90%; left: 30%; animation-delay: 0.6s; font-size: 10px;">✧</div>
+  <div class="november-text">28 NËNTORI<small>FESTA E FLAMURIT</small></div>
+</div>
 
 <div id="preloader">
   <div class="loader-content">
@@ -618,6 +561,14 @@
 </div>
 
 <div id="main-page">
+  <!-- OFERTA SPECIALE BANNER -->
+  <div class="special-offer-banner" id="specialOfferBanner" style="display: none;">
+    <span class="offer-emoji">🔥</span>
+    <span id="offerText">OFERTA SPECIALE - ZBRITJE DERI 40%!</span>
+    <span class="offer-emoji">🔥</span>
+    <button class="offer-close" onclick="document.getElementById('specialOfferBanner').style.display='none'">×</button>
+  </div>
+
   <div class="top-bar">🚚 Transport në të gjithë Shqipërinë • 💵 Pagesë në dorëzim ose me Kartë</div>
   <header>
     <div class="logo-area">
@@ -686,34 +637,27 @@
       <button class="close-btn" onclick="closePanels()">×</button>
     </div>
     <div id="cartItemsList"></div>
-
     <div class="coupon-box" id="couponBox">
       <input type="text" id="couponInput" placeholder="Kod Zbritjeje...">
       <button onclick="aplikoKupon()">Apliko</button>
     </div>
     <div id="couponAppliedBox" style="display:none;"></div>
-    
     <div class="cart-summary">
       <div class="summary-row"><span>Nëntotali:</span> <span id="cartSubtotal">0 L</span></div>
       <div class="summary-row discount-row" id="cartDiscountRow" style="display:none;"><span>Zbritja:</span> <span id="cartDiscount">-0 L</span></div>
       <div class="summary-row"><span>Transporti:</span> <span id="cartShipping">0 L</span></div>
       <div class="summary-row total"><span>Totali Final:</span> <span id="cartGrandTotal">0 L</span></div>
     </div>
-
     <div id="checkoutForm" class="checkout-section">
       <h3>📝 Të dhënat e dërgimit</h3>
       <input type="text" id="cliEmri" placeholder="Emri dhe Mbiemri">
       <input type="tel" id="cliTelefoni" placeholder="Numri i telefonit">
-      
       <select id="cliQyteti" onchange="ndryshoPosten()"></select>
-
       <input type="text" id="cliAdresa" placeholder="Adresa e saktë (Rruga, Nr, Lagjja)">
-      
       <button type="button" onclick="marrLokacionin()" style="width:100%; padding:12px; background:#1a1a1a; color:#fff; border:1px solid var(--border); border-radius:8px; font-weight:700; margin-bottom:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px;">
         📍 Dërgo Lokacionin tënd (GPS)
       </button>
       <p id="statusLokacioni" style="font-size:11px; color:var(--green); margin-bottom:10px; display:none; text-align:center;">Lokacioni u kap me sukses!</p>
-
       <div id="paymentSelectionArea" style="display: none;">
         <h3 style="margin-top:15px;">💳 Zgjidh Mënyrën e Pagesës</h3>
         <select id="cliPagesa" style="margin-bottom:15px; font-weight:bold; border-color: var(--red);">
@@ -722,12 +666,10 @@
         </select>
         <p id="infoPagesa" style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Ju do të paguani kur të merrni porosinë.</p>
       </div>
-      
       <input type="hidden" id="cliPagesaFshehur" value="Pagesë në Dorëzim (Cash)">
       <textarea id="cliShenime" placeholder="Shënime shtesë (Opsionale)" rows="2"></textarea>
       <button class="checkout-btn" onclick="dergoPorosine()">✅ Përfundo Porosinë</button>
     </div>
-
     <button id="btnShowCheckout" class="checkout-btn" onclick="shfaqCheckout()" style="display: block;">Vazhdo me Porosinë</button>
   </div>
 
@@ -773,53 +715,21 @@
   window.setDoc = setDoc;
   window.dispatchEvent(new Event('firebaseReady'));
 </script><script>
-  window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      document.getElementById('preloader').classList.add('hide');
-      document.getElementById('main-page').classList.add('show');
-      setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 800); 
-      
-      // 🎆 FISHEKZJARR I MADH — shfaqet SAPO mbaron preloader-i (kur makina kalon)
-      shfaqMegaFishekzjarr();
-    }, 3000); 
-  });
-
   const IMGBB_API_KEY = "07386dda0574256ec0b326a5c4f365cf";
   let lokacioniGps = "";
   let activeCoupon = null;
+  let selectedRating = 0;
+  let currentProductForReview = null;
 
   /* =====================================================
-     🎆 FISHEKZJARR I MADH (1 herë kur hapet faqja)
-     ===================================================== */
-  function shfaqMegaFishekzjarr() {
-    const mega = document.getElementById('megaFirework');
-    if (!mega) return;
-    const colors = ['#ffd700', '#ff4d4d', '#4dff88', '#66b3ff', '#ff66ff'];
-    let idx = 0;
-    function shpërthe() {
-      mega.style.color = colors[idx % colors.length];
-      idx++;
-      mega.style.display = 'block';
-      mega.style.animation = 'none';
-      void mega.offsetWidth; // reflow
-      mega.style.animation = 'megaExplode 3.5s ease-out forwards';
-      setTimeout(() => {
-        mega.style.display = 'none';
-      }, 3600);
-    }
-    // Shpërthim i parë i madh
-    shpërthe();
-    // 2 shpërthime më të vogla pas 1.2s dhe 2.4s
-    setTimeout(shpërthe, 1200);
-    setTimeout(shpërthe, 2400);
-  }
-
-  /* =====================================================
-     🎄 KONTROLLI I DEKORIMIT FESTIV
-     0 = fikur, 1 = Opcioni A (topa), 2 = Opcioni B (topa+borë), 3 = Opcioni C (Vit i Ri)
+     KONTROLLI I DEKORIMIT
+     0=fikur, 1=topa, 2=topa+borë, 3=Vit i Ri, 4=28-29 Nëntor
      ===================================================== */
   let festiveMode = parseInt(localStorage.getItem('cz_festive_mode'));
-  if (isNaN(festiveMode)) festiveMode = 1;
+  if (isNaN(festiveMode)) {
+    festiveMode = 3; 
+    localStorage.setItem('cz_festive_mode', 3);
+  }
 
   let newyearTextTimer = null;
 
@@ -827,50 +737,40 @@
     const balls = document.getElementById('festiveBalls');
     const snowContainer = document.getElementById('snowflakesContainer');
     const newyearContainer = document.getElementById('newyearContainer');
+    const novemberContainer = document.getElementById('novemberContainer');
     const newyearText = document.getElementById('newyearText');
-    const toggleBtn = document.getElementById('festiveToggle');
 
-    // Reset
     balls.classList.remove('option-b');
     snowContainer.innerHTML = '';
     document.querySelectorAll('.confetti').forEach(c => c.remove());
+    document.querySelectorAll('.mini-flag').forEach(f => f.remove());
     if (newyearTextTimer) { clearTimeout(newyearTextTimer); newyearTextTimer = null; }
     if (newyearText) newyearText.classList.remove('show');
 
-    // Fshih të gjitha
     balls.style.display = 'none';
     snowContainer.style.display = 'none';
     newyearContainer.style.display = 'none';
+    novemberContainer.style.display = 'none';
 
-    if (festiveMode === 0) {
-      toggleBtn.innerText = '🎄';
-      toggleBtn.title = 'Aktivizo dekorimin festiv';
-    } else if (festiveMode === 1) {
+    if (festiveMode === 1) {
       balls.style.display = 'block';
-      toggleBtn.innerText = '❄️';
-      toggleBtn.title = 'Opcioni A → Kalo te Opcioni B (topa + borë)';
     } else if (festiveMode === 2) {
       balls.style.display = 'block';
       balls.classList.add('option-b');
       snowContainer.style.display = 'block';
       krijoBoren();
-      toggleBtn.innerText = '🎆';
-      toggleBtn.title = 'Opcioni B → Kalo te Opcioni C (Vit i Ri)';
     } else if (festiveMode === 3) {
       newyearContainer.style.display = 'block';
       krijoKonfetin();
-      toggleBtn.innerText = '✖️';
-      toggleBtn.title = 'Opcioni C → Fike dekorimin';
-      
-      // 🎆 Shfaq tekstin "GËZUAR VITIN E RI 2027" për vetëm 5 sekonda
       if (newyearText) {
         setTimeout(() => {
           newyearText.classList.add('show');
-          newyearTextTimer = setTimeout(() => {
-            newyearText.classList.remove('show');
-          }, 5000); // 5 sekonda
+          newyearTextTimer = setTimeout(() => { newyearText.classList.remove('show'); }, 5000);
         }, 300);
       }
+    } else if (festiveMode === 4) {
+      novemberContainer.style.display = 'block';
+      krijoFlamujt();
     }
   }
 
@@ -911,22 +811,66 @@
     }
   }
 
-  function toggleFestiveMode() {
-    if (festiveMode === 1) festiveMode = 2;
-    else if (festiveMode === 2) festiveMode = 3;
-    else if (festiveMode === 3) festiveMode = 0;
-    else festiveMode = 1;
-    localStorage.setItem('cz_festive_mode', festiveMode);
-    applyFestiveMode();
-    const emrat = { 0: 'Dekorimi u fik', 1: 'Opcioni A: Topa Ulujsh', 2: 'Opcioni B: Topa + Borë', 3: 'Opcioni C: Vit i Ri 2027 🎆' };
-    const t = document.createElement('div');
-    t.innerText = emrat[festiveMode];
-    t.style.cssText = 'position:fixed; bottom:90px; right:20px; background:#111; color:#fff; padding:10px 18px; border-radius:8px; border:1px solid var(--gold); font-size:12px; font-weight:700; z-index:99999; box-shadow:0 5px 15px rgba(0,0,0,0.5);';
-    document.body.appendChild(t);
-    setTimeout(() => t.remove(), 1800);
+  function krijoFlamujt() {
+    const container = document.getElementById('novemberContainer');
+    if (!container) return;
+    container.querySelectorAll('.mini-flag').forEach(f => f.remove());
+    const total = 30;
+    for (let i = 0; i < total; i++) {
+      const flag = document.createElement('div');
+      flag.className = 'mini-flag';
+      flag.style.left = Math.random() * 100 + '%';
+      flag.style.animationDuration = (5 + Math.random() * 7) + 's';
+      flag.style.animationDelay = (Math.random() * 8) + 's';
+      flag.style.transform = 'rotate(' + (Math.random() * 30 - 15) + 'deg)';
+      container.appendChild(flag);
+    }
+  }
+
+  function shfaqMegaFishekzjarr() {
+    const mega = document.getElementById('megaFirework');
+    if (!mega) return;
+    const colors = ['#ffd700', '#ff4d4d', '#4dff88', '#66b3ff', '#ff66ff'];
+    let idx = 0;
+    function shpërthe() {
+      mega.style.color = colors[idx % colors.length];
+      idx++;
+      mega.style.display = 'block';
+      mega.style.animation = 'none';
+      void mega.offsetWidth;
+      mega.style.animation = 'megaExplode 3.5s ease-out forwards';
+      setTimeout(() => { mega.style.display = 'none'; }, 3600);
+    }
+    shpërthe();
+    setTimeout(shpërthe, 1200);
+    setTimeout(shpërthe, 2400);
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.getElementById('preloader').classList.add('hide');
+      document.getElementById('main-page').classList.add('show');
+      setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 800);
+      if (festiveMode === 3) shfaqMegaFishekzjarr();
+    }, 3000);
+    
+    setTimeout(() => { checkSpecialOffer(); }, 3500);
+  });
+
+  // Kontrollon nëse ka produkte me zbritje për banner
+  function checkSpecialOffer() {
+    const discounted = products.filter(p => p.discount && p.discount > 0);
+    if (discounted.length > 0) {
+      const maxDisc = Math.max(...discounted.map(p => p.discount));
+      document.getElementById('offerText').innerText = `OFERTA SPECIALE - ZBRITJE DERI ${maxDisc}%!`;
+      document.getElementById('specialOfferBanner').style.display = 'block';
+    } else {
+      document.getElementById('specialOfferBanner').style.display = 'none';
+    }
   }
 
   applyFestiveMode();
+
   /* ===================================================== */
 
   const defaultProducts = [
@@ -935,29 +879,22 @@
   ];
 
   const defaultQytetet = [
-    { emri: "Tiranë", cmimi: 300 },
-    { emri: "Durrës", cmimi: 350 },
-    { emri: "Vlorë", cmimi: 400 },
-    { emri: "Shkodër", cmimi: 400 },
-    { emri: "Elbasan", cmimi: 350 },
-    { emri: "Fier", cmimi: 400 },
-    { emri: "Korçë", cmimi: 450 },
-    { emri: "Berat", cmimi: 400 },
-    { emri: "Lushnjë", cmimi: 350 },
-    { emri: "Pogradec", cmimi: 450 },
-    { emri: "Kavajë", cmimi: 350 },
-    { emri: "Gjirokastër", cmimi: 450 },
+    { emri: "Tiranë", cmimi: 300 }, { emri: "Durrës", cmimi: 350 }, { emri: "Vlorë", cmimi: 400 },
+    { emri: "Shkodër", cmimi: 400 }, { emri: "Elbasan", cmimi: 350 }, { emri: "Fier", cmimi: 400 },
+    { emri: "Korçë", cmimi: 450 }, { emri: "Berat", cmimi: 400 }, { emri: "Lushnjë", cmimi: 350 },
+    { emri: "Pogradec", cmimi: 450 }, { emri: "Kavajë", cmimi: 350 }, { emri: "Gjirokastër", cmimi: 450 },
     { emri: "Tjeter", cmimi: 400 }
   ];
 
   let products = JSON.parse(localStorage.getItem('cz_products_cache')) || defaultProducts;
   let cart = JSON.parse(localStorage.getItem('cz_cart')) || [];
   let favorites = JSON.parse(localStorage.getItem('cz_favs')) || [];
+  // Reviews: { productId: [ {name, comment, stars, date} ] }
+  let reviews = JSON.parse(localStorage.getItem('cz_reviews')) || {};
   
   let siteSettings = JSON.parse(localStorage.getItem('cz_settings_cache')) || { 
     emri: "CARZONE", numri: "0683736780", telFooter: "0683736780", emailFooter: "info@carzone.al", posta: 300, adminPass: "Klevi123", kuponet: [], kartaAktiv: false,
-    bgImage: "", bgColor: "#080808",
-    qytetet: defaultQytetet
+    bgImage: "", bgColor: "#080808", qytetet: defaultQytetet
   };
   
   if(!siteSettings.kuponet) siteSettings.kuponet = [];
@@ -984,7 +921,6 @@
     siteSettings.qytetet.forEach(q => {
       const opt = document.createElement('option');
       opt.value = q.emri;
-      opt.setAttribute('data-posta', q.cmimi);
       opt.textContent = `${q.emri} (${parseInt(q.cmimi).toLocaleString()} L)`;
       sel.appendChild(opt);
     });
@@ -1032,13 +968,17 @@
           if(!siteSettings.qytetet || siteSettings.qytetet.length === 0) siteSettings.qytetet = defaultQytetet;
           localStorage.setItem('cz_settings_cache', JSON.stringify(siteSettings));
         }
+        if(data.reviews) {
+          reviews = data.reviews;
+          localStorage.setItem('cz_reviews', JSON.stringify(reviews));
+        }
       } else {
         await ruajNeFirebase();
       }
-      applySettings(); renderProducts(); renderCart(); renderFavs(); updateBadges(); renderCityOptions();
+      applySettings(); renderProducts(); renderCart(); renderFavs(); updateBadges(); renderCityOptions(); checkSpecialOffer();
     } catch (e) {
       console.error("Gabim ne Firebase:", e);
-      applySettings(); renderProducts(); renderCart(); renderFavs(); updateBadges(); renderCityOptions();
+      applySettings(); renderProducts(); renderCart(); renderFavs(); updateBadges(); renderCityOptions(); checkSpecialOffer();
     }
   }
 
@@ -1048,10 +988,12 @@
       siteSettings.adminPass = "Klevi123"; 
       await window.setDoc(window.doc(window.db, "carzone", "te_dhenat"), {
         produktet: products,
-        cilesimet: siteSettings
+        cilesimet: siteSettings,
+        reviews: reviews
       });
       localStorage.setItem('cz_products_cache', JSON.stringify(products));
       localStorage.setItem('cz_settings_cache', JSON.stringify(siteSettings));
+      localStorage.setItem('cz_reviews', JSON.stringify(reviews));
     } catch (e) {
       console.error("Gabim gjatë ruajtjes:", e);
       alert("⚠️ Nuk u ruajt në server! Kontrollo internetin.");
@@ -1118,6 +1060,7 @@
   function saveCartLocally() {
     localStorage.setItem('cz_cart', JSON.stringify(cart));
     localStorage.setItem('cz_favs', JSON.stringify(favorites));
+    localStorage.setItem('cz_reviews', JSON.stringify(reviews));
   }
 
   function renderProducts() {
@@ -1148,6 +1091,11 @@
         ? `<div class="price-wrap"><div class="price price-discounted">${finalPrice.toLocaleString()} <span>L</span></div><div class="old-price">${p.cmimi.toLocaleString()} L</div></div>`
         : `<div class="price-wrap"><div class="price">${finalPrice.toLocaleString()} <span>L</span></div></div>`;
 
+      // Shfaq yjet mesatarisht në kartë
+      const productReviews = reviews[p.id] || [];
+      const avgRating = productReviews.length > 0 ? (productReviews.reduce((s, r) => s + r.stars, 0) / productReviews.length).toFixed(1) : 0;
+      const starsHTML = avgRating > 0 ? `<div style="font-size:11px; color:var(--gold); margin-bottom:6px;">${'★'.repeat(Math.round(avgRating))}${'☆'.repeat(5-Math.round(avgRating))} <span style="color:#888;">(${productReviews.length})</span></div>` : '';
+
       card.innerHTML = `
         <div class="img-container">
           <img src="${p.fotot[0]}" onerror="this.src='${fallbackImage}'">
@@ -1156,6 +1104,7 @@
         <button class="fav-btn ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleFav(${p.id}, this)">♥</button>
         <div class="card-body">
           <h3>${p.emri}</h3>
+          ${starsHTML}
           <div class="desc">${p.pershkrimi}</div>
           ${priceHTML}
           ${stockHTML}
@@ -1172,6 +1121,7 @@
   function openProduct(id) {
     const p = products.find(prod => prod.id === id);
     if (!p) return;
+    currentProductForReview = p;
     const container = document.getElementById('productModalContent');
     
     let fototHTML = p.fotot.map((f, i) => 
@@ -1203,10 +1153,92 @@
           <button class="btn-add-large" onclick="addToCart(${p.id}); closeProduct(); togglePanel('cartPanel');" ${btnDisabled}>🛒 Shto në Shportë</button>
           <a href="https://wa.me/355${siteSettings.numri.substring(1)}?text=Pershendetje,%20dua%20te%20porosit%20${encodeURIComponent(p.emri)}" class="btn-wa-large" target="_blank">Porosit direkt</a>
         </div>
+        ${buildReviewsSection(p.id)}
       </div>
     `;
     document.getElementById('productModal').style.display = 'block';
     document.body.style.overflow = 'hidden'; 
+
+    // Setup star picker
+    setTimeout(() => {
+      const starPicker = document.getElementById('starPicker');
+      if (starPicker) {
+        starPicker.querySelectorAll('.star').forEach(star => {
+          star.addEventListener('click', () => {
+            const val = parseInt(star.dataset.value);
+            selectedRating = val;
+            starPicker.querySelectorAll('.star').forEach(s => {
+              if (parseInt(s.dataset.value) <= val) s.classList.add('active');
+              else s.classList.remove('active');
+            });
+          });
+        });
+      }
+    }, 50);
+  }
+
+  function buildReviewsSection(productId) {
+    const productReviews = reviews[productId] || [];
+    const avg = productReviews.length > 0 ? (productReviews.reduce((s, r) => s + r.stars, 0) / productReviews.length).toFixed(1) : 0;
+    
+    let reviewsHTML = productReviews.map(r => `
+      <div class="review-card">
+        <div class="review-card-header">
+          <span class="name">${r.name}</span>
+          <span class="date">${r.date}</span>
+        </div>
+        <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+        <div class="review-comment">${r.comment}</div>
+      </div>
+    `).join('') || '<p style="color:#666; font-size:13px;">Nuk ka vlerësime ende. Bëhu i pari që vlerëson!</p>';
+
+    return `
+      <div class="reviews-section">
+        <h3>⭐ Vlerësimet (${productReviews.length})</h3>
+        ${productReviews.length > 0 ? `
+        <div class="reviews-average">
+          <div class="avg-number">${avg}</div>
+          <div>
+            <div class="avg-stars" style="color:var(--gold);">${'★'.repeat(Math.round(avg))}${'☆'.repeat(5-Math.round(avg))}</div>
+            <div class="avg-count">${productReviews.length} vlerësime</div>
+          </div>
+        </div>` : ''}
+        <div>${reviewsHTML}</div>
+        <div class="add-review-form">
+          <h4>✍️ Lër vlerësimin tënd</h4>
+          <input type="text" id="reviewName" placeholder="Emri juaj" maxlength="30">
+          <div class="star-picker" id="starPicker">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+          </div>
+          <textarea id="reviewComment" rows="3" placeholder="Komenti juaj..." maxlength="300"></textarea>
+          <button class="submit-review-btn" onclick="submitReview(${productId})">Dërgo Vlerësimin</button>
+        </div>
+      </div>
+    `;
+  }
+
+  async function submitReview(productId) {
+    const name = document.getElementById('reviewName').value.trim();
+    const comment = document.getElementById('reviewComment').value.trim();
+    if (!name) { alert("⚠️ Shkruaj emrin tënd!"); return; }
+    if (!comment) { alert("⚠️ Shkruaj një koment!"); return; }
+    if (selectedRating === 0) { alert("⚠️ Zgjidh sa yje i jep produktit!"); return; }
+
+    const today = new Date();
+    const dateStr = today.toLocaleDateString('sq-AL', { day: '2-digit', month: 'short', year: 'numeric' });
+
+    if (!reviews[productId]) reviews[productId] = [];
+    reviews[productId].push({ name, comment, stars: selectedRating, date: dateStr });
+    
+    saveCartLocally();
+    await ruajNeFirebase();
+    alert("✅ Faleminderit për vlerësimin tënd!");
+    selectedRating = 0;
+    openProduct(productId); // rifresko modal
   }
 
   function ndryshoFotonMadhe(thumb, src) {
@@ -1415,6 +1447,29 @@
         </div>
       </div>`).join('') || '<p style="font-size:11px; color:#666;">Nuk ka qytete.</p>';
 
+    // Lista e reviews
+    let allReviewsHTML = '';
+    let totalReviewsCount = 0;
+    for (const pid in reviews) {
+      const product = products.find(p => p.id == pid);
+      const productName = product ? product.emri : 'Produkt i fshirë';
+      reviews[pid].forEach((r, idx) => {
+        totalReviewsCount++;
+        allReviewsHTML += `
+          <div style="background:#0a0a0a; padding:12px; border-radius:8px; margin-bottom:8px; border:1px solid var(--border);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+              <span style="font-size:11px; color:var(--gold); font-weight:700;">${productName}</span>
+              <button onclick="fshiReviewAdmin('${pid}', ${idx})" style="background:var(--red); color:#fff; border:none; padding:3px 8px; border-radius:4px; cursor:pointer; font-size:10px; font-weight:700;">Fshi</button>
+            </div>
+            <div style="font-size:12px; color:#fff; margin-bottom:3px;"><strong>${r.name}</strong> — <span style="color:var(--gold);">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span></div>
+            <div style="font-size:11px; color:var(--text-muted);">${r.comment}</div>
+            <div style="font-size:10px; color:#555; margin-top:4px;">${r.date}</div>
+          </div>
+        `;
+      });
+    }
+    if (!allReviewsHTML) allReviewsHTML = '<p style="font-size:11px; color:#666; padding:15px; text-align:center;">Nuk ka vlerësime ende.</p>';
+
     container.innerHTML = `
       <h2>⚙️ Admin Panel</h2>
       
@@ -1424,6 +1479,7 @@
         <button onclick="switchAdminTab('tab-qytetet', this)">🚚 Qytetet</button>
         <button onclick="switchAdminTab('tab-kuponet', this)">🎟️ Kuponët</button>
         <button onclick="switchAdminTab('tab-pagesat', this)">💳 Pagesat</button>
+        <button onclick="switchAdminTab('tab-reviews', this)">⭐ Vlerësimet (${totalReviewsCount})</button>
       </div>
 
       <div id="tab-produktet" class="admin-tab-content active">
@@ -1434,14 +1490,12 @@
           <div class="admin-form-group"><label>Çmimi (Lek)</label><input type="number" id="newCmimi" placeholder="1500"></div>
           <div class="admin-form-group"><label>Discount (%) <small style="color:var(--gold);">0 = pa zbritje</small></label><input type="number" id="newDiscount" placeholder="0" min="0" max="90" value="0"></div>
           <div class="admin-form-group"><label>Sasia në Gjendje</label><input type="number" id="newStoku" placeholder="10"></div>
-          
-          <div class="admin-form-group"><label>Foto 1 (Zgjidh nga Galeria)</label><input type="file" id="newFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+          <div class="admin-form-group"><label>Foto 1</label><input type="file" id="newFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Foto 2 (Opsionale)</label><input type="file" id="newFotoFile2" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Foto 3 (Opsionale)</label><input type="file" id="newFotoFile3" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Foto 4 (Opsionale)</label><input type="file" id="newFotoFile4" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Foto 5 (Opsionale)</label><input type="file" id="newFotoFile5" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-          
-          <div class="admin-form-group"><label>Kategoria (aksesore / elektronike / ndricim)</label><input type="text" id="newKategoria" placeholder="aksesore"></div>
+          <div class="admin-form-group"><label>Kategoria</label><input type="text" id="newKategoria" placeholder="aksesore"></div>
           <button class="save-btn" onclick="shtoProdukt()">➕ Shto Produktin</button>
         </div>
 
@@ -1453,44 +1507,41 @@
         <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
           <h3 style="color:var(--red); margin-bottom:15px; font-size:14px; font-weight:700;">⚙️ Cilësimet e Përgjithshme</h3>
           <div class="admin-form-group"><label>Emri i Dyqanit</label><input type="text" id="adminEmri" value="${siteSettings.emri}"></div>
-          <div class="admin-form-group"><label>Numri WhatsApp (për porosi)</label><input type="text" id="adminNumri" value="${siteSettings.numri}"></div>
-          <div class="admin-form-group"><label>Numri i Telefonit (Fundi i faqes)</label><input type="text" id="adminTelFooter" value="${siteSettings.telFooter}"></div>
-          <div class="admin-form-group"><label>Email (Fundi i faqes)</label><input type="text" id="adminEmailFooter" value="${siteSettings.emailFooter}"></div>
+          <div class="admin-form-group"><label>Numri WhatsApp</label><input type="text" id="adminNumri" value="${siteSettings.numri}"></div>
+          <div class="admin-form-group"><label>Telefoni Footer</label><input type="text" id="adminTelFooter" value="${siteSettings.telFooter}"></div>
+          <div class="admin-form-group"><label>Email Footer</label><input type="text" id="adminEmailFooter" value="${siteSettings.emailFooter}"></div>
         </div>
 
         <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
-          <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">🎨 Background-i i Faqes</h3>
-          
+          <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">🎨 Background-i</h3>
           <div class="admin-form-group">
-            <label>Ngjyra e Background-it</label>
+            <label>Ngjyra</label>
             <input type="color" id="adminBgColor" value="${siteSettings.bgColor || '#080808'}" style="width:100%; height:40px; padding:2px; background:#111; border:1px solid #333; border-radius:5px; cursor:pointer;">
           </div>
-
           <div class="admin-form-group">
-            <label>Foto për Background (Opsionale)</label>
+            <label>Foto Background</label>
             <input type="file" id="adminBgImageFile" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;">
             ${bgImagePreview}
             <div id="bgImageStatus" style="font-size:11px; color:var(--green); margin-top:5px; display:none;">✅ Foto u ngarkua!</div>
           </div>
-
           <div class="admin-checkbox-group">
             <input type="checkbox" id="adminBgOverlay" ${siteSettings.bgImage ? 'checked' : ''}>
             <label for="adminBgOverlay">Aktivizo errësimin mbi background</label>
           </div>
-
           <button class="save-btn" style="background:var(--gold); color:#000;" onclick="ruajBackground()">🎨 Ruaj Background-in</button>
           <button class="save-btn" style="background:var(--red); margin-top:10px;" onclick="fshiBackgroundin()">🗑️ Fshi Foton e Background-it</button>
         </div>
 
         <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
-          <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">🎄 Dekorimi Festiv (Krishtlindje & Vit i Ri)</h3>
-          <p style="font-size:11px; color:#888; margin-bottom:15px;">Zgjidh cilin opsion dekorimi të shfaqet në faqe:</p>
+          <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">🎄 Dekorimi Festiv</h3>
+          <p style="font-size:11px; color:#888; margin-bottom:15px;">Zgjidh cilin opsion dekorimi të shfaqet:</p>
           <div class="admin-form-group">
             <select id="adminFestiveSelect" style="width:100%; padding:12px; background:#0a0a0a; border:1px solid var(--border); color:#fff; border-radius:8px; font-family:'Montserrat',sans-serif; font-size:13px;">
-              <option value="0" ${festiveMode===0?'selected':''}>❌ Fikur (asnjë dekorim)</option>
-              <option value="1" ${festiveMode===1?'selected':''}>🎄 Opcioni A: Vetëm Topa Ulujsh</option>
+              <option value="0" ${festiveMode===0?'selected':''}>❌ Fikur</option>
+              <option value="1" ${festiveMode===1?'selected':''}>🎄 Opcioni A: Topa Ulujsh</option>
               <option value="2" ${festiveMode===2?'selected':''}>❄️ Opcioni B: Topa + Borë</option>
-              <option value="3" ${festiveMode===3?'selected':''}>🎆 Opcioni C: Vit i Ri 2027 (fishekzjarrë + 2027)</option>
+              <option value="3" ${festiveMode===3?'selected':''}>🎆 Opcioni C: Vit i Ri 2027</option>
+              <option value="4" ${festiveMode===4?'selected':''}>🇦🇱 Opcioni D: 28-29 Nëntor (Festa e Flamurit)</option>
             </select>
           </div>
           <button class="save-btn" style="background:var(--gold); color:#000;" onclick="ruajFestiveMode()">💾 Ruaj Dekorimin Festiv</button>
@@ -1501,37 +1552,41 @@
 
       <div id="tab-qytetet" class="admin-tab-content">
         <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
-          <h3 style="color:var(--green); margin-bottom:15px; font-size:14px; font-weight:700;">🚚 Qytetet & Çmimet e Transportit</h3>
-          <p style="font-size:11px; color:#888; margin-bottom:15px;">Vendos vetë qytetet dhe çmimin e transportit për secilin.</p>
-          <h4 style="font-size:12px; color:#fff; margin-bottom:10px;">Qytetet aktuale:</h4>
+          <h3 style="color:var(--green); margin-bottom:15px; font-size:14px; font-weight:700;">🚚 Qytetet & Transporti</h3>
           <div style="margin-bottom:15px;">${qytetetHTML}</div>
           <hr style="border-color:var(--border); margin:15px 0;">
-          <h4 style="font-size:12px; color:var(--gold); margin-bottom:10px;">➕ Shto Qytet të Ri</h4>
-          <div class="admin-form-group"><label>Emri i Qytetit</label><input type="text" id="newQytetEmri" placeholder="p.sh. Tiranë"></div>
-          <div class="admin-form-group"><label>Çmimi i Transportit (Lek)</label><input type="number" id="newQytetCmimi" placeholder="300"></div>
+          <div class="admin-form-group"><label>Emri Qytetit</label><input type="text" id="newQytetEmri" placeholder="Tiranë"></div>
+          <div class="admin-form-group"><label>Çmimi Transportit</label><input type="number" id="newQytetCmimi" placeholder="300"></div>
           <button class="save-btn" style="background:var(--green);" onclick="shtoQytet()">➕ Shto Qytetin</button>
         </div>
       </div>
 
       <div id="tab-kuponet" class="admin-tab-content">
         <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
-          <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">🎟️ Kuponët e Zbritjes</h3>
+          <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">🎟️ Kuponët</h3>
           <div style="margin-bottom:15px;">${kuponetHTML}</div>
-          <div class="admin-form-group"><label>Kodi i ri (p.sh. ZBRITJE10)</label><input type="text" id="newKuponKodi" placeholder="ZBRITJE10" style="text-transform:uppercase;"></div>
-          <div class="admin-form-group"><label>Përqindja e zbritjes (%)</label><input type="number" id="newKuponPerqindje" placeholder="10" min="1" max="90"></div>
+          <div class="admin-form-group"><label>Kodi</label><input type="text" id="newKuponKodi" placeholder="ZBRITJE10" style="text-transform:uppercase;"></div>
+          <div class="admin-form-group"><label>Zbritja (%)</label><input type="number" id="newKuponPerqindje" placeholder="10" min="1" max="90"></div>
           <button class="save-btn" style="background:var(--gold); color:#000;" onclick="shtoKupon()">➕ Shto Kuponin</button>
         </div>
       </div>
 
       <div id="tab-pagesat" class="admin-tab-content">
         <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
-          <h3 style="color:var(--green); margin-bottom:15px; font-size:14px; font-weight:700;">💳 Opsionet e Pagesës</h3>
+          <h3 style="color:var(--green); margin-bottom:15px; font-size:14px; font-weight:700;">💳 Pagesat</h3>
           <div class="admin-checkbox-group">
             <input type="checkbox" id="adminKartaAktiv" ${isKartaChecked}>
-            <label for="adminKartaAktiv">Aktivizo Pagesën me Kartë (Kërkoj Link)</label>
+            <label for="adminKartaAktiv">Aktivizo Pagesën me Kartë</label>
           </div>
-          <p style="font-size:11px; color:#888; margin-top:-5px; margin-bottom:15px;">Nëse është e çaktivizuar, klientët do të shohin vetëm pagesën në dorëzim.</p>
-          <button class="save-btn" style="background:var(--green);" onclick="ruajCilesimet()">💾 Ruaj Cilësimet</button>
+          <button class="save-btn" style="background:var(--green);" onclick="ruajCilesimet()">💾 Ruaj</button>
+        </div>
+      </div>
+
+      <div id="tab-reviews" class="admin-tab-content">
+        <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
+          <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">⭐ Të Gjitha Vlerësimet (${totalReviewsCount})</h3>
+          <p style="font-size:11px; color:#888; margin-bottom:15px;">Këtu mund të fshish vlerësimet e klientëve.</p>
+          <div style="max-height: 400px; overflow-y: auto;">${allReviewsHTML}</div>
         </div>
       </div>
 
@@ -1555,6 +1610,18 @@
     }
   }
 
+  async function fshiReviewAdmin(productId, index) {
+    if (!confirm("Fshi këtë vlerësim?")) return;
+    if (reviews[productId] && reviews[productId][index]) {
+      reviews[productId].splice(index, 1);
+      if (reviews[productId].length === 0) delete reviews[productId];
+      saveCartLocally();
+      await ruajNeFirebase();
+      alert("✅ Vlerësimi u fshi!");
+      renderAdminList();
+    }
+  }
+
   function switchAdminTab(tabId, btn) {
     document.querySelectorAll('.admin-tab-content').forEach(tab => tab.classList.remove('active'));
     document.querySelectorAll('.admin-nav button').forEach(b => b.classList.remove('active'));
@@ -1563,11 +1630,11 @@
   }
 
   async function fshiBackgroundin() {
-    if (!confirm("A jeni i sigurt që doni të fshini foton e background-it?")) return;
+    if (!confirm("Fshi foton e background-it?")) return;
     siteSettings.bgImage = "";
     await ruajNeFirebase();
     applySettings();
-    alert("✅ Fotoja e background-it u fshi!");
+    alert("✅ Fotoja u fshi!");
     renderAdminList();
     switchAdminTab('tab-cilesimet', document.querySelector('.admin-nav button:nth-child(2)'));
   }
@@ -1577,17 +1644,17 @@
     festiveMode = val;
     localStorage.setItem('cz_festive_mode', festiveMode);
     applyFestiveMode();
-    alert("✅ Dekorimi festiv u ruajt!");
+    alert("✅ Dekorimi u ruajt!");
   }
 
   async function shtoQytet() {
     const emri = document.getElementById('newQytetEmri').value.trim();
     const cmimi = parseInt(document.getElementById('newQytetCmimi').value);
-    if(!emri || isNaN(cmimi) || cmimi < 0) { alert("⚠️ Plotëso emrin dhe çmimin valid!"); return; }
-    if(siteSettings.qytetet.find(q => q.emri.toLowerCase() === emri.toLowerCase())) { alert("⚠️ Ky qytet ekziston!"); return; }
+    if(!emri || isNaN(cmimi) || cmimi < 0) { alert("⚠️ Plotëso!"); return; }
+    if(siteSettings.qytetet.find(q => q.emri.toLowerCase() === emri.toLowerCase())) { alert("⚠️ Ekziston!"); return; }
     siteSettings.qytetet.push({ emri, cmimi });
     await ruajNeFirebase();
-    alert("✅ Qyteti u shtua!");
+    alert("✅ U shtua!");
     renderAdminList();
     switchAdminTab('tab-qytetet', document.querySelector('.admin-nav button:nth-child(3)'));
   }
@@ -1603,15 +1670,15 @@
   function openEditQytet(index) {
     const q = siteSettings.qytetet[index];
     if(!q) return;
-    const newEmri = prompt("Emri i qytetit:", q.emri);
+    const newEmri = prompt("Emri:", q.emri);
     if(newEmri === null) return;
-    const newCmimi = prompt("Çmimi i transportit (Lek):", q.cmimi);
+    const newCmimi = prompt("Çmimi:", q.cmimi);
     if(newCmimi === null) return;
     const cmimiNum = parseInt(newCmimi);
-    if(!newEmri.trim() || isNaN(cmimiNum) || cmimiNum < 0) { alert("⚠️ Të dhëna të pavlefshme!"); return; }
+    if(!newEmri.trim() || isNaN(cmimiNum)) { alert("⚠️ Të pavlefshme!"); return; }
     siteSettings.qytetet[index] = { emri: newEmri.trim(), cmimi: cmimiNum };
     ruajNeFirebase().then(() => {
-      alert("✅ Qyteti u përditësua!");
+      alert("✅ U përditësua!");
       renderAdminList();
       switchAdminTab('tab-qytetet', document.querySelector('.admin-nav button:nth-child(3)'));
     });
@@ -1626,14 +1693,13 @@
     
     if(file) {
       document.getElementById('bgImageStatus').style.display = 'block';
-      document.getElementById('bgImageStatus').innerText = 'Duke ngarkuar foton...';
+      document.getElementById('bgImageStatus').innerText = 'Duke u ngarkuar...';
       const url = await ngarkoFoton(file);
       if(url) {
         siteSettings.bgImage = url;
-        document.getElementById('bgImageStatus').innerText = '✅ Foto u ngarkua me sukses!';
+        document.getElementById('bgImageStatus').innerText = '✅ U ngarkua!';
       } else {
-        document.getElementById('bgImageStatus').innerText = '⚠️ Foto nuk u ngarkua!';
-        document.getElementById('bgImageStatus').style.color = 'var(--red)';
+        document.getElementById('bgImageStatus').innerText = '⚠️ Nuk u ngarkua!';
         return;
       }
     }
@@ -1652,26 +1718,26 @@
   async function shtoKupon() {
     const kodi = document.getElementById('newKuponKodi').value.trim().toUpperCase();
     const perqindje = parseInt(document.getElementById('newKuponPerqindje').value);
-    if (!kodi || !perqindje || perqindje < 1 || perqindje > 90) { alert("⚠️ Plotëso kodin dhe një përqindje valide (1-90)!"); return; }
-    if (siteSettings.kuponet.find(k => k.kodi.toUpperCase() === kodi)) { alert("⚠️ Ky kod ekziston!"); return; }
+    if (!kodi || !perqindje || perqindje < 1 || perqindje > 90) { alert("⚠️ Plotëso saktë!"); return; }
+    if (siteSettings.kuponet.find(k => k.kodi.toUpperCase() === kodi)) { alert("⚠️ Ekziston!"); return; }
     siteSettings.kuponet.push({ kodi, perqindje });
-    await ruajNeFirebase(); alert("✅ Kuponi u shtua!"); renderAdminList();
+    await ruajNeFirebase(); alert("✅ U shtua!"); renderAdminList();
     switchAdminTab('tab-kuponet', document.querySelector('.admin-nav button:nth-child(4)'));
   }
 
   async function fshiKuponin(index) {
-    if (!confirm("Fshi këtë kupon?")) return;
+    if (!confirm("Fshi?")) return;
     siteSettings.kuponet.splice(index, 1); await ruajNeFirebase(); renderAdminList();
     switchAdminTab('tab-kuponet', document.querySelector('.admin-nav button:nth-child(4)'));
   }
 
   async function fshiProduktin(id) {
-    if(confirm("A jeni i sigurt që doni ta fshini këtë produkt përgjithmonë?")) {
+    if(confirm("A jeni i sigurt?")) {
       products = products.filter(p => p.id !== id);
       cart = cart.filter(item => item.id !== id);
       favorites = favorites.filter(fid => fid !== id);
       saveCartLocally(); await ruajNeFirebase();
-      alert("✅ Produkti u fshi!"); renderProducts(); renderAdminList(); renderCart(); renderFavs(); updateBadges();
+      alert("✅ U fshi!"); renderProducts(); renderAdminList(); renderCart(); renderFavs(); updateBadges(); checkSpecialOffer();
     }
   }
 
@@ -1684,10 +1750,9 @@
     const kategoria = document.getElementById('newKategoria').value || 'aksesore';
 
     if(!emri || !cmimi) { alert("⚠️ Plotëso emrin dhe çmimin!"); return; }
-    if(discount < 0 || discount > 90) { alert("⚠️ Discount duhet 0-90!"); return; }
 
     const file1 = document.getElementById('newFotoFile1').files[0];
-    if(!file1) { alert("⚠️ Zgjidh të paktën foton e parë!"); return; }
+    if(!file1) { alert("⚠️ Zgjidh foton e parë!"); return; }
 
     let fototArray = [];
     for (let i = 1; i <= 5; i++) {
@@ -1695,17 +1760,17 @@
         if(f) { let url = await ngarkoFoton(f); if(url) fototArray.push(url); }
     }
 
-    if(fototArray.length === 0) { alert("⚠️ Fotot nuk u ngarkuan dot!"); return; }
+    if(fototArray.length === 0) { alert("⚠️ Fotot nuk u ngarkuan!"); return; }
 
     const idRi = Date.now();
-    products.push({ id: idRi, emri: emri, pershkrimi: pershkrimi, cmimi: cmimi, discount: discount, kategoria: kategoria, stoku: stoku, fotot: fototArray });
+    products.push({ id: idRi, emri, pershkrimi, cmimi, discount, kategoria, stoku, fotot: fototArray });
     
-    await ruajNeFirebase(); alert("✅ Produkti u shtua dhe u ruajt në server!");
+    await ruajNeFirebase(); alert("✅ U shtua!");
     
     document.getElementById('newEmri').value = ''; document.getElementById('newPershkrimi').value = ''; document.getElementById('newCmimi').value = ''; document.getElementById('newDiscount').value = '0'; document.getElementById('newStoku').value = ''; document.getElementById('newKategoria').value = '';
     for (let i = 1; i <= 5; i++) document.getElementById('newFotoFile' + i).value = '';
     
-    renderProducts(); renderAdminList();
+    renderProducts(); renderAdminList(); checkSpecialOffer();
     switchAdminTab('tab-produktet', document.querySelector('.admin-nav button:nth-child(1)'));
   }
 
@@ -1721,15 +1786,15 @@
 
     if(e && n && t && em) {
       siteSettings.emri = e; siteSettings.numri = n; siteSettings.telFooter = t; siteSettings.emailFooter = em; siteSettings.kartaAktiv = kartaStatus; 
-      await ruajNeFirebase(); applySettings(); alert("✅ Cilësimet u ruajtën në server!"); renderProducts(); renderCart();
+      await ruajNeFirebase(); applySettings(); alert("✅ U ruajtën!"); renderProducts(); renderCart();
     } else { 
       if(kartaCheckbox) {
           siteSettings.kartaAktiv = kartaStatus;
           await ruajNeFirebase();
-          alert("✅ Cilësimet e pagesës u ruajtën!");
+          alert("✅ U ruajt!");
           applySettings();
       } else {
-          alert("⚠️ Plotëso të gjitha kutitë saktë!"); 
+          alert("⚠️ Plotëso saktë!"); 
       }
     }
   }
@@ -1743,7 +1808,7 @@
     let fototFshirjeHTML = p.fotot.map((f, i) => `
       <div style="display:flex; justify-content:space-between; background:#111; padding:10px; border-radius:5px; margin-bottom:5px; border:1px solid #333; align-items:center;">
         <img src="${f}" style="height:40px; width:40px; object-fit:cover; border-radius:3px;" onerror="this.style.display='none'">
-        <button onclick="fshiFotonProduktit(${p.id}, ${i})" style="background:var(--red); color:#fff; border:none; padding:5px 10px; border-radius:5px; font-size:11px; font-weight:bold; cursor:pointer;">Fshi Foton ${i+1}</button>
+        <button onclick="fshiFotonProduktit(${p.id}, ${i})" style="background:var(--red); color:#fff; border:none; padding:5px 10px; border-radius:5px; font-size:11px; font-weight:bold; cursor:pointer;">Fshi ${i+1}</button>
       </div>
     `).join('');
 
@@ -1751,34 +1816,28 @@
       <h2>✏️ Edito Produktin</h2>
       <div class="admin-form-group"><label>Emri</label><input type="text" id="editEmri" value="${p.emri}"></div>
       <div class="admin-form-group"><label>Përshkrimi</label><textarea id="editPershkrimi" rows="3">${p.pershkrimi}</textarea></div>
-      <div class="admin-form-group"><label>Çmimi (Lek)</label><input type="number" id="editCmimi" value="${p.cmimi}"></div>
+      <div class="admin-form-group"><label>Çmimi</label><input type="number" id="editCmimi" value="${p.cmimi}"></div>
       <div class="admin-form-group"><label>Discount (%)</label><input type="number" id="editDiscount" value="${p.discount || 0}" min="0" max="90"></div>
-      <div class="admin-form-group"><label>Sasia në Gjendje</label><input type="number" id="editStoku" value="${p.stoku !== undefined ? p.stoku : 10}"></div>
+      <div class="admin-form-group"><label>Sasia</label><input type="number" id="editStoku" value="${p.stoku !== undefined ? p.stoku : 10}"></div>
       <div class="admin-form-group"><label>Kategoria</label><input type="text" id="editKategoria" value="${p.kategoria}"></div>
-
-      <h3 style="color:var(--red); margin-top:20px; margin-bottom:10px; font-size:14px;">Fotot aktuale</h3>
-      <div style="margin-bottom:15px;">${fototFshirjeHTML || '<p style="color:#666; font-size:12px;">Nuk ka foto.</p>'}</div>
-      
-      <h3 style="color:var(--green); margin-top:20px; margin-bottom:10px; font-size:14px;">Shto Foto te reja</h3>
-      <div class="admin-form-group"><label>Foto e re 1</label><input type="file" id="editFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-      <div class="admin-form-group"><label>Foto e re 2</label><input type="file" id="editFotoFile2" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-      <div class="admin-form-group"><label>Foto e re 3</label><input type="file" id="editFotoFile3" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-      <div class="admin-form-group"><label>Foto e re 4</label><input type="file" id="editFotoFile4" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-      <div class="admin-form-group"><label>Foto e re 5</label><input type="file" id="editFotoFile5" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-      
-      <button class="save-btn" onclick="saveProductEdit(${p.id})">💾 Ruaj Ndryshimet</button>
-      <button class="save-btn" style="background:#333;" onclick="renderAdminList()">Kthehu prapa</button>
+      <h3 style="color:var(--red); margin:20px 0 10px; font-size:14px;">Fotot aktuale</h3>
+      <div>${fototFshirjeHTML || '<p style="color:#666; font-size:12px;">Nuk ka foto.</p>'}</div>
+      <h3 style="color:var(--green); margin:20px 0 10px; font-size:14px;">Shto Foto</h3>
+      <div class="admin-form-group"><input type="file" id="editFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+      <div class="admin-form-group"><input type="file" id="editFotoFile2" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+      <button class="save-btn" onclick="saveProductEdit(${p.id})">💾 Ruaj</button>
+      <button class="save-btn" style="background:#333;" onclick="renderAdminList()">Kthehu</button>
     `;
     window.scrollTo(0,0);
   }
 
   async function fshiFotonProduktit(id, index) {
-    if(!confirm("A jeni i sigurt qe doni ta fshini kete foto?")) return;
+    if(!confirm("Fshi këtë foto?")) return;
     const p = products.find(prod => prod.id === id);
     if(!p) return;
     p.fotot.splice(index, 1);
     await ruajNeFirebase();
-    alert("✅ Fotoja u fshi!");
+    alert("✅ U fshi!");
     openEditProduct(id);
   }
 
@@ -1792,8 +1851,6 @@
     p.discount = parseInt(document.getElementById('editDiscount').value) || 0;
     p.stoku = parseInt(document.getElementById('editStoku').value) || 0;
     p.kategoria = document.getElementById('editKategoria').value;
-
-    if(p.discount < 0 || p.discount > 90) { alert("⚠️ Discount duhet 0-90!"); return; }
 
     let fototArray = [...p.fotot];
     for (let i = 1; i <= 5; i++) {
@@ -1809,8 +1866,8 @@
 
     p.fotot = fototArray.filter(f => f);
     
-    await ruajNeFirebase(); alert("Produkti u përditësua!"); 
-    renderProducts(); renderAdminList();
+    await ruajNeFirebase(); alert("✅ U përditësua!"); 
+    renderProducts(); renderAdminList(); checkSpecialOffer();
   }
 
   function applySettings() {
