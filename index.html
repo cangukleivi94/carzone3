@@ -18,12 +18,32 @@
     --green-hover: #1eb356;
     --gold: #ffb400;
     --border: #2a2a2a;
+    --site-bg-image: none;
+    --site-bg-color: #080808;
   }
   
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-  body { background: var(--bg-dark); color: var(--text-light); overflow-x: hidden; }
   
-  /* ANIMACIONI I HYRJES (MAKINA E KUQE) */
+  body { 
+    background-color: var(--site-bg-color);
+    background-image: var(--site-bg-image);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--text-light); 
+    overflow-x: hidden; 
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(8, 8, 8, 0.85); 
+    z-index: -1;
+    pointer-events: none;
+    display: var(--bg-overlay-display, block);
+  }
+  
   #preloader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: var(--bg-dark); z-index: 99999;
@@ -43,9 +63,8 @@
   #main-page { opacity: 0; transition: opacity 0.8s ease; }
   #main-page.show { opacity: 1; }
 
-  /* STILET E TJERA */
   .top-bar { background: #000; text-align: center; padding: 12px; font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--text-muted); border-bottom: 1px solid var(--border); }
-  header { padding: 25px 20px; background: linear-gradient(180deg, #0d0d0d 0%, var(--bg-dark) 100%); }
+  header { padding: 25px 20px; background: linear-gradient(180deg, rgba(13,13,13,0.9) 0%, rgba(8,8,8,0.5) 100%); backdrop-filter: blur(5px); border-bottom: 1px solid var(--border);}
   .logo-area { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; }
   .logo { font-size: 32px; font-weight: 900; letter-spacing: -1px; text-shadow: 0 0 20px rgba(230, 0, 0, 0.3); }
   .logo span { color: var(--red); }
@@ -57,9 +76,9 @@
   .header-icons span:hover { background: rgba(230, 0, 0, 0.2); color: var(--red); }
   .badge { background: var(--red); color: #fff; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 10px; position: absolute; top: -5px; right: -5px; box-shadow: 0 0 10px var(--red); }
   .search-bar { display: flex; align-items: center; gap: 10px; }
-  .search-input { background: #1a1a1a; color: #fff; padding: 15px 25px; border-radius: 30px; flex-grow: 1; border: 1px solid var(--border); outline: none; font-size: 14px; transition: 0.3s; font-family: 'Montserrat', sans-serif;}
-  .search-input:focus { border-color: var(--red); box-shadow: 0 0 15px rgba(230, 0, 0, 0.2); }
-  .hero { background: radial-gradient(circle at top right, #2a0000, var(--bg-dark)); padding: 60px 20px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden;}
+  .search-input { background: rgba(26,26,26,0.8); color: #fff; padding: 15px 25px; border-radius: 30px; flex-grow: 1; border: 1px solid var(--border); outline: none; font-size: 14px; transition: 0.3s; font-family: 'Montserrat', sans-serif;}
+  .search-input:focus { border-color: var(--red); box-shadow: 0 0 15px rgba(230, 0, 0, 0.2); background: #1a1a1a;}
+  .hero { background: radial-gradient(circle at top right, rgba(42,0,0,0.8), rgba(8,8,8,0.9)); padding: 60px 20px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden;}
   .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 40%, rgba(230,0,0,0.05) 50%, transparent 60%); animation: shine 5s infinite linear; pointer-events: none;}
   @keyframes shine { 0% { transform: translateX(-50%) translateY(-50%); } 100% { transform: translateX(50%) translateY(50%); } }
   .hero h3 { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: var(--red); text-transform: uppercase; margin-bottom: 15px; }
@@ -69,7 +88,7 @@
   .hero-btn { display: inline-block; background: var(--red); color: #fff; padding: 15px 35px; text-decoration: none; font-weight: 800; border-radius: 10px; font-size: 14px; transition: 0.3s; box-shadow: 0 10px 25px rgba(230, 0, 0, 0.4); text-transform: uppercase; letter-spacing: 1px;}
   .hero-btn:hover { background: var(--red-hover); transform: translateY(-2px); box-shadow: 0 15px 30px rgba(230, 0, 0, 0.6); }
   .features { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin: 20px; border-radius: 15px; overflow: hidden; }
-  .feature-item { background: #111; padding: 20px; }
+  .feature-item { background: rgba(17,17,17,0.9); padding: 20px; }
   .feature-item h4 { font-size: 13px; margin-bottom: 5px; color: #fff; display: flex; align-items: center; gap: 8px; }
   .feature-item p { color: var(--text-muted); font-size: 11px; }
   .section-title { text-align: center; padding: 40px 20px 20px; font-size: 24px; color: #fff; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;}
@@ -135,7 +154,7 @@
   .checkout-section input, .checkout-section select, .checkout-section textarea { width: 100%; padding: 12px; margin-bottom: 12px; background: #0a0a0a; border: 1px solid var(--border); color: #fff; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 13px; transition: 0.3s;}
   .checkout-section input:focus, .checkout-section textarea:focus { border-color: var(--red); outline: none;}
   .checkout-section h3 { color: #fff; font-size: 14px; margin-bottom: 15px; font-weight: 700;}
-  .site-footer { background: #050505; padding: 50px 20px 30px; border-top: 1px solid var(--border); margin-top: 60px; text-align: center; }
+  .site-footer { background: rgba(5,5,5,0.95); padding: 50px 20px 30px; border-top: 1px solid var(--border); margin-top: 60px; text-align: center; }
   .site-footer h2 { font-size: 28px; color: #fff; margin-bottom: 10px; font-weight: 900; letter-spacing: -1px;}
   .site-footer h2 span { color: var(--red); }
   .site-footer p { color: var(--text-muted); font-size: 13px; line-height: 1.8; margin-bottom: 20px; }
@@ -143,7 +162,7 @@
   .copyright { border-top: 1px solid var(--border); padding-top: 25px; color: #555; font-size: 11px; margin-top: 30px; font-weight: 600;}
   .admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); z-index: 2000; overflow-y: auto; padding: 20px; opacity: 0; transition: 0.3s;}
   .admin-modal.show { display: block; opacity: 1; }
-  .admin-content { background: #0f0f0f; max-width: 600px; margin: 20px auto; padding: 30px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5);}
+  .admin-content { background: #0f0f0f; max-width: 650px; margin: 20px auto; padding: 30px; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5);}
   .admin-content h2 { color: #fff; margin-bottom: 25px; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 15px;}
   .admin-form-group { margin-bottom: 15px; }
   .admin-form-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px;}
@@ -154,6 +173,16 @@
   .admin-checkbox-group label { margin-bottom: 0; font-size: 13px; color: #fff; cursor: pointer; text-transform: none;}
   .save-btn { background: var(--red); color: #fff; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: 800; cursor: pointer; margin-top: 15px; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; font-size: 13px;}
   .save-btn:hover { background: var(--red-hover); box-shadow: 0 5px 20px rgba(230,0,0,0.4); }
+  
+  .admin-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+  .admin-nav button { background: #1a1a1a; color: #aaa; border: 1px solid var(--border); padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 12px; transition: 0.3s; text-transform: uppercase; letter-spacing: 0.5px;}
+  .admin-nav button.active { background: var(--red); color: #fff; border-color: var(--red); box-shadow: 0 5px 15px rgba(230,0,0,0.3);}
+  .admin-nav button:hover:not(.active) { background: #252525; color: #fff; border-color: #444; }
+  
+  .admin-tab-content { display: none; animation: fadeIn 0.4s ease; }
+  .admin-tab-content.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
   .product-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 3000; overflow-y: auto; animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
   @keyframes slideUp { from { transform: translateY(100%); opacity: 0;} to { transform: translateY(0); opacity: 1;} }
   .product-header { position: sticky; top: 0; background: rgba(10,10,10,0.9); backdrop-filter: blur(10px); padding: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 10; border-bottom: 1px solid var(--border); }
@@ -260,7 +289,9 @@
   <h2 class="section-title" id="products">🔥 Të Gjitha Produktet</h2>
   <div class="products" id="productList">
     <p style="grid-column: span 2; text-align: center; color: var(--text-muted); padding: 20px;">Duke u ngarkuar...</p>
-  </div><div class="product-modal" id="productModal">
+  </div>
+  
+  <div class="product-modal" id="productModal">
     <div class="product-header">
       <h2>Detajet e Produktit</h2>
       <button class="close-btn" onclick="closeProduct()">×</button>
@@ -296,19 +327,7 @@
       <input type="tel" id="cliTelefoni" placeholder="Numri i telefonit">
       
       <select id="cliQyteti" onchange="ndryshoPosten()">
-        <option value="Tiranë" data-posta="300">Tiranë (300 L)</option>
-        <option value="Durrës" data-posta="350">Durrës (350 L)</option>
-        <option value="Vlorë" data-posta="400">Vlorë (400 L)</option>
-        <option value="Shkodër" data-posta="400">Shkodër (400 L)</option>
-        <option value="Elbasan" data-posta="350">Elbasan (350 L)</option>
-        <option value="Fier" data-posta="400">Fier (400 L)</option>
-        <option value="Korçë" data-posta="450">Korçë (450 L)</option>
-        <option value="Berat" data-posta="400">Berat (400 L)</option>
-        <option value="Lushnjë" data-posta="350">Lushnjë (350 L)</option>
-        <option value="Pogradec" data-posta="450">Pogradec (450 L)</option>
-        <option value="Kavajë" data-posta="350">Kavajë (350 L)</option>
-        <option value="Gjirokastër" data-posta="450">Gjirokastër (450 L)</option>
-        <option value="Tjeter" data-posta="400">Qytet tjetër (400 L)</option>
+        <!-- Opsionet e qyteteve mbushen dinamikisht nga Admin Panel -->
       </select>
 
       <input type="text" id="cliAdresa" placeholder="Adresa e saktë (Rruga, Nr, Lagjja)">
@@ -345,7 +364,9 @@
 
   <div class="admin-modal" id="adminModal">
     <div class="admin-content" id="adminContent"></div>
-  </div><footer class="site-footer" id="kontakt">
+  </div>
+
+  <footer class="site-footer" id="kontakt">
     <h2>CAR<span>ZONE</span></h2>
     <p>Aksesorë për makinën • Shqipëri</p>
     <div class="contact-info" id="footerPhone">📞 0683736780</div>
@@ -392,21 +413,64 @@
     { id: 2, emri: "Logo Volkswagen për Dyer", pershkrimi: "Drita LED që projekton logon e Volkswagen në tokë.", cmimi: 1800, discount: 0, kategoria: "ndricim", stoku: 5, fotot: ["https://images.unsplash.com/photo-1542362567-b07e54358753?w=600&q=80"] }
   ];
 
+  // Qytetet default - mund te ndryshohen nga Admin Panel
+  const defaultQytetet = [
+    { emri: "Tiranë", cmimi: 300 },
+    { emri: "Durrës", cmimi: 350 },
+    { emri: "Vlorë", cmimi: 400 },
+    { emri: "Shkodër", cmimi: 400 },
+    { emri: "Elbasan", cmimi: 350 },
+    { emri: "Fier", cmimi: 400 },
+    { emri: "Korçë", cmimi: 450 },
+    { emri: "Berat", cmimi: 400 },
+    { emri: "Lushnjë", cmimi: 350 },
+    { emri: "Pogradec", cmimi: 450 },
+    { emri: "Kavajë", cmimi: 350 },
+    { emri: "Gjirokastër", cmimi: 450 },
+    { emri: "Tjeter", cmimi: 400 }
+  ];
+
   let products = JSON.parse(localStorage.getItem('cz_products_cache')) || defaultProducts;
   let cart = JSON.parse(localStorage.getItem('cz_cart')) || [];
   let favorites = JSON.parse(localStorage.getItem('cz_favs')) || [];
   
   let siteSettings = JSON.parse(localStorage.getItem('cz_settings_cache')) || { 
-    emri: "CARZONE", numri: "0683736780", telFooter: "0683736780", emailFooter: "info@carzone.al", posta: 300, adminPass: "Klevi123", kuponet: [], kartaAktiv: false 
+    emri: "CARZONE", numri: "0683736780", telFooter: "0683736780", emailFooter: "info@carzone.al", posta: 300, adminPass: "Klevi123", kuponet: [], kartaAktiv: false,
+    bgImage: "", bgColor: "#080808",
+    qytetet: defaultQytetet
   };
   
   if(!siteSettings.kuponet) siteSettings.kuponet = [];
   if(siteSettings.kartaAktiv === undefined) siteSettings.kartaAktiv = false; 
+  if(!siteSettings.bgImage) siteSettings.bgImage = "";
+  if(!siteSettings.bgColor) siteSettings.bgColor = "#080808";
+  if(!siteSettings.qytetet || siteSettings.qytetet.length === 0) siteSettings.qytetet = defaultQytetet;
+  
   siteSettings.adminPass = "Klevi123";
   
   let currentCategory = 'all';
   let currentSearch = '';
   const fallbackImage = "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&q=80";
+
+  // MARRE CMIMIN E TRANSPORTIT PER QYTETIN E ZGJEDHUR
+  function getShippingCostForCity(cityName) {
+    const c = siteSettings.qytetet.find(q => q.emri === cityName);
+    return c ? parseInt(c.cmimi) : 0;
+  }
+
+  // MBUSH SELECTIN E QYTETEVE
+  function renderCityOptions() {
+    const sel = document.getElementById('cliQyteti');
+    if(!sel) return;
+    sel.innerHTML = '';
+    siteSettings.qytetet.forEach(q => {
+      const opt = document.createElement('option');
+      opt.value = q.emri;
+      opt.setAttribute('data-posta', q.cmimi);
+      opt.textContent = `${q.emri} (${parseInt(q.cmimi).toLocaleString()} L)`;
+      sel.appendChild(opt);
+    });
+  }
 
   function getFinalPrice(p) {
     if (p.discount && p.discount > 0) return Math.round(p.cmimi - (p.cmimi * p.discount / 100));
@@ -445,15 +509,18 @@
           siteSettings.adminPass = "Klevi123";
           if(!siteSettings.kuponet) siteSettings.kuponet = [];
           if(siteSettings.kartaAktiv === undefined) siteSettings.kartaAktiv = false;
+          if(!siteSettings.bgImage) siteSettings.bgImage = "";
+          if(!siteSettings.bgColor) siteSettings.bgColor = "#080808";
+          if(!siteSettings.qytetet || siteSettings.qytetet.length === 0) siteSettings.qytetet = defaultQytetet;
           localStorage.setItem('cz_settings_cache', JSON.stringify(siteSettings));
         }
       } else {
         await ruajNeFirebase();
       }
-      applySettings(); renderProducts(); renderCart(); renderFavs(); updateBadges();
+      applySettings(); renderProducts(); renderCart(); renderFavs(); updateBadges(); renderCityOptions();
     } catch (e) {
       console.error("Gabim ne Firebase:", e);
-      applySettings(); renderProducts(); renderCart(); renderFavs(); updateBadges();
+      applySettings(); renderProducts(); renderCart(); renderFavs(); updateBadges(); renderCityOptions();
     }
   }
 
@@ -485,17 +552,20 @@
   }
 
   window.addEventListener('firebaseReady', function() { setTimeout(() => { ngarkoProduktetNgaFirebase(); }, 500); });
-  setTimeout(() => { if(window.db && products.length <= 2) ngarkoProduktetNgaFirebase(); }, 2000);function toggleSideMenu() {
+  setTimeout(() => { if(window.db && products.length <= 2) ngarkoProduktetNgaFirebase(); }, 2000);
+
+  function toggleSideMenu() {
     const sideMenu = document.getElementById('sideMenu');
     sideMenu.classList.toggle('open');
     if(sideMenu.classList.contains('open')) document.getElementById('overlay').classList.add('show');
     else document.getElementById('overlay').classList.remove('show');
   }
 
+  // NDRYSHO POSTEN - tani merr cmimin direkt nga qyteti i zgjedhur
   function ndryshoPosten() {
     const select = document.getElementById('cliQyteti');
-    const cmimiPostes = select.options[select.selectedIndex].getAttribute('data-posta');
-    siteSettings.posta = parseInt(cmimiPostes);
+    const qytetiZgjedhur = select.value;
+    siteSettings.posta = getShippingCostForCity(qytetiZgjedhur);
     renderCart(); 
   }
 
@@ -587,7 +657,6 @@
     if (!p) return;
     const container = document.getElementById('productModalContent');
     
-    // Ndryshimi ketu: kontrollojme nese fotoja ekziston dhe nuk eshte e prishur
     let fototHTML = p.fotot.map((f, i) => 
       `<img src="${f}" onerror="this.src='${fallbackImage}'" class="${i===0?'active':''}" onclick="ndryshoFotonMadhe(this, '${f}')">`
     ).join('');
@@ -658,7 +727,9 @@
           </div>`;
       }
     });
-  }function addToCart(id) {
+  }
+
+  function addToCart(id) {
     const p = products.find(prod => prod.id === id);
     if(p && p.stoku !== undefined && p.stoku <= 0) { alert("⚠️ Ky produkt nuk ka në gjendje!"); return; }
     const existing = cart.find(item => item.id === id);
@@ -741,6 +812,7 @@
   function shfaqCheckout() {
     document.getElementById('btnShowCheckout').style.display = 'none';
     document.getElementById('checkoutForm').style.display = 'block';
+    renderCityOptions(); // Rifresko qytetet sa here hapet checkout
     if(siteSettings.kartaAktiv) document.getElementById('paymentSelectionArea').style.display = 'block';
     else document.getElementById('paymentSelectionArea').style.display = 'none';
   }
@@ -772,12 +844,12 @@
     });
 
     const couponDiscount = calcCouponDiscount(subtotal);
-    const shippingCost = parseInt(siteSettings.posta) || 0;
+    const shippingCost = getShippingCostForCity(qyteti); // Ndryshim: merr nga qyteti
     const grandTotal = subtotal - couponDiscount + shippingCost;
 
     msg += `\n📦 *Nëntotali:* ${subtotal.toLocaleString()} L`;
     if (activeCoupon && couponDiscount > 0) msg += `\n🎟️ *Kupon (${activeCoupon.kodi}):* -${couponDiscount.toLocaleString()} L`;
-    msg += `\n🚚 *Transporti:* ${shippingCost === 0 ? 'Falas' : shippingCost.toLocaleString() + ' L'}`;
+    msg += `\n🚚 *Transporti (${qyteti}):* ${shippingCost === 0 ? 'Falas' : shippingCost.toLocaleString() + ' L'}`;
     msg += `\n💰 *TOTALI FINAL:* ${grandTotal.toLocaleString()} L`;
 
     window.open(`https://wa.me/355${siteSettings.numri.substring(1)}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -802,82 +874,241 @@
     const pass = prompt("Shkruaj fjalëkalimin e Adminit:");
     if (pass === "Klevi123") { renderAdminList(); document.getElementById('adminModal').classList.add('show'); } 
     else if (pass !== null) { alert("Fjalëkalim i gabuar!"); }
-  }function closeAdmin() { document.getElementById('adminModal').classList.remove('show'); }
+  }
 
+  function closeAdmin() { document.getElementById('adminModal').classList.remove('show'); }
+
+  // STRUKTURA E ADMIN PANELIT - shtuar tab i ri per qytetet
   function renderAdminList() {
     const container = document.getElementById('adminContent');
     const isKartaChecked = siteSettings.kartaAktiv ? 'checked' : '';
+    const bgImagePreview = siteSettings.bgImage ? `<img src="${siteSettings.bgImage}" style="width:100%; height:80px; object-fit:cover; border-radius:6px; margin-top:5px;">` : '';
+    
     const kuponetHTML = (siteSettings.kuponet || []).map((k, i) => 
       `<div style="display:flex; justify-content:space-between; align-items:center; background:#0a0a0a; padding:8px 12px; border-radius:6px; margin-bottom:6px; border:1px solid var(--border);">
         <span style="font-size:12px; font-weight:700; color:var(--green);">${k.kodi} — ${k.perqindje}%</span>
         <button onclick="fshiKuponin(${i})" style="background:var(--red); color:#fff; border:none; padding:4px 10px; border-radius:5px; cursor:pointer; font-size:10px; font-weight:700;">Fshi</button>
       </div>`).join('') || '<p style="font-size:11px; color:#666;">Nuk ka kuponë.</p>';
 
+    // Lista e qyteteve me butona edit/fshi
+    const qytetetHTML = (siteSettings.qytetet || []).map((q, i) => 
+      `<div style="display:flex; justify-content:space-between; align-items:center; background:#0a0a0a; padding:8px 12px; border-radius:6px; margin-bottom:6px; border:1px solid var(--border);">
+        <span style="font-size:12px; font-weight:700; color:#fff;">${q.emri} — <span style="color:var(--green);">${parseInt(q.cmimi).toLocaleString()} L</span></span>
+        <div style="display:flex; gap:5px;">
+          <button onclick="openEditQytet(${i})" style="background:var(--gold); color:#000; border:none; padding:4px 10px; border-radius:5px; cursor:pointer; font-size:10px; font-weight:700;">Edito</button>
+          <button onclick="fshiQytetin(${i})" style="background:var(--red); color:#fff; border:none; padding:4px 10px; border-radius:5px; cursor:pointer; font-size:10px; font-weight:700;">Fshi</button>
+        </div>
+      </div>`).join('') || '<p style="font-size:11px; color:#666;">Nuk ka qytete.</p>';
+
     container.innerHTML = `
-      <h2>⚙️ Menaxho Faqen</h2>
+      <h2>⚙️ Admin Panel</h2>
       
-      <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
-        <h3 style="color:var(--green); margin-bottom:15px; font-size:14px; font-weight:700;">💳 Opsionet e Pagesës</h3>
-        <div class="admin-checkbox-group">
-          <input type="checkbox" id="adminKartaAktiv" ${isKartaChecked}>
-          <label for="adminKartaAktiv">Aktivizo Pagesën me Kartë (Kërkoj Link)</label>
+      <div class="admin-nav">
+        <button class="active" onclick="switchAdminTab('tab-produktet', this)">📦 Produktet</button>
+        <button onclick="switchAdminTab('tab-cilesimet', this)">⚙️ Cilësimet</button>
+        <button onclick="switchAdminTab('tab-qytetet', this)">🚚 Qytetet</button>
+        <button onclick="switchAdminTab('tab-kuponet', this)">🎟️ Kuponët</button>
+        <button onclick="switchAdminTab('tab-pagesat', this)">💳 Pagesat</button>
+      </div>
+
+      <!-- TAB 1: PRODUKTET -->
+      <div id="tab-produktet" class="admin-tab-content active">
+        <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
+          <h3 style="color:var(--red); margin-bottom:15px; font-size:14px; font-weight:700;">➕ Shto Produkt të Ri</h3>
+          <div class="admin-form-group"><label>Emri</label><input type="text" id="newEmri" placeholder="p.sh. Llamba LED"></div>
+          <div class="admin-form-group"><label>Përshkrimi</label><textarea id="newPershkrimi" rows="2" placeholder="Përshkrimi..."></textarea></div>
+          <div class="admin-form-group"><label>Çmimi (Lek)</label><input type="number" id="newCmimi" placeholder="1500"></div>
+          <div class="admin-form-group"><label>Discount (%) <small style="color:var(--gold);">0 = pa zbritje</small></label><input type="number" id="newDiscount" placeholder="0" min="0" max="90" value="0"></div>
+          <div class="admin-form-group"><label>Sasia në Gjendje</label><input type="number" id="newStoku" placeholder="10"></div>
+          
+          <div class="admin-form-group"><label>Foto 1 (Zgjidh nga Galeria)</label><input type="file" id="newFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+          <div class="admin-form-group"><label>Foto 2 (Opsionale)</label><input type="file" id="newFotoFile2" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+          <div class="admin-form-group"><label>Foto 3 (Opsionale)</label><input type="file" id="newFotoFile3" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+          <div class="admin-form-group"><label>Foto 4 (Opsionale)</label><input type="file" id="newFotoFile4" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+          <div class="admin-form-group"><label>Foto 5 (Opsionale)</label><input type="file" id="newFotoFile5" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+          
+          <div class="admin-form-group"><label>Kategoria (aksesore / elektronike / ndricim)</label><input type="text" id="newKategoria" placeholder="aksesore"></div>
+          <button class="save-btn" onclick="shtoProdukt()">➕ Shto Produktin</button>
         </div>
-        <p style="font-size:11px; color:#888; margin-top:-5px;">Nëse është e çaktivizuar, klientët do të shohin vetëm pagesën në dorëzim.</p>
-        <button class="save-btn" style="background:var(--green);" onclick="ruajCilesimet()">💾 Ruaj Cilësimet</button>
+
+        <h3 style="color:#fff; margin-bottom:15px; font-size:14px; font-weight:700;">📦 Produktet Ekzistuese</h3>
+        <div id="adminProductList"></div>
       </div>
 
-      <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
-        <h3 style="color:var(--red); margin-bottom:15px; font-size:14px; font-weight:700;">⚙️ Cilësimet e Tjera</h3>
-        <div class="admin-form-group"><label>Emri i Dyqanit</label><input type="text" id="adminEmri" value="${siteSettings.emri}"></div>
-        <div class="admin-form-group"><label>Numri WhatsApp (për porosi)</label><input type="text" id="adminNumri" value="${siteSettings.numri}"></div>
-        <div class="admin-form-group"><label>Numri i Telefonit (Fundi i faqes)</label><input type="text" id="adminTelFooter" value="${siteSettings.telFooter}"></div>
-        <div class="admin-form-group"><label>Email (Fundi i faqes)</label><input type="text" id="adminEmailFooter" value="${siteSettings.emailFooter}"></div>
-        <div class="admin-form-group"><label>Tarifa e Transportit / Postës (në Lek)</label><input type="number" id="adminPosta" value="${siteSettings.posta}"></div>
-        <button class="save-btn" style="background:var(--green);" onclick="ruajCilesimet()">💾 Ruaj Cilësimet</button>
-      </div>
+      <!-- TAB 2: CILESIMET -->
+      <div id="tab-cilesimet" class="admin-tab-content">
+        <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
+          <h3 style="color:var(--red); margin-bottom:15px; font-size:14px; font-weight:700;">⚙️ Cilësimet e Përgjithshme</h3>
+          <div class="admin-form-group"><label>Emri i Dyqanit</label><input type="text" id="adminEmri" value="${siteSettings.emri}"></div>
+          <div class="admin-form-group"><label>Numri WhatsApp (për porosi)</label><input type="text" id="adminNumri" value="${siteSettings.numri}"></div>
+          <div class="admin-form-group"><label>Numri i Telefonit (Fundi i faqes)</label><input type="text" id="adminTelFooter" value="${siteSettings.telFooter}"></div>
+          <div class="admin-form-group"><label>Email (Fundi i faqes)</label><input type="text" id="adminEmailFooter" value="${siteSettings.emailFooter}"></div>
+        </div>
 
-      <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
-        <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">🎟️ Kuponët e Zbritjes</h3>
-        <div style="margin-bottom:15px;">${kuponetHTML}</div>
-        <div class="admin-form-group"><label>Kodi i ri (p.sh. ZBRITJE10)</label><input type="text" id="newKuponKodi" placeholder="ZBRITJE10" style="text-transform:uppercase;"></div>
-        <div class="admin-form-group"><label>Përqindja e zbritjes (%)</label><input type="number" id="newKuponPerqindje" placeholder="10" min="1" max="90"></div>
-        <button class="save-btn" style="background:var(--gold); color:#000;" onclick="shtoKupon()">➕ Shto Kuponin</button>
-      </div>
-
-      <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
-        <h3 style="color:var(--red); margin-bottom:15px; font-size:14px; font-weight:700;">➕ Shto Produkt të Ri</h3>
-        <div class="admin-form-group"><label>Emri</label><input type="text" id="newEmri" placeholder="p.sh. Llamba LED"></div>
-        <div class="admin-form-group"><label>Përshkrimi</label><textarea id="newPershkrimi" rows="2" placeholder="Përshkrimi..."></textarea></div>
-        <div class="admin-form-group"><label>Çmimi (Lek)</label><input type="number" id="newCmimi" placeholder="1500"></div>
-        <div class="admin-form-group"><label>Discount (%) <small style="color:var(--gold);">0 = pa zbritje</small></label><input type="number" id="newDiscount" placeholder="0" min="0" max="90" value="0"></div>
-        <div class="admin-form-group"><label>Sasia në Gjendje</label><input type="number" id="newStoku" placeholder="10"></div>
-        
-        <div class="admin-form-group"><label>Foto 1 (Zgjidh nga Galeria)</label><input type="file" id="newFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-        <div class="admin-form-group"><label>Foto 2 (Opsionale)</label><input type="file" id="newFotoFile2" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-        <div class="admin-form-group"><label>Foto 3 (Opsionale)</label><input type="file" id="newFotoFile3" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-        <div class="admin-form-group"><label>Foto 4 (Opsionale)</label><input type="file" id="newFotoFile4" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-        <div class="admin-form-group"><label>Foto 5 (Opsionale)</label><input type="file" id="newFotoFile5" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-        
-        <div class="admin-form-group"><label>Kategoria (aksesore / elektronike / ndricim)</label><input type="text" id="newKategoria" placeholder="aksesore"></div>
-        <button class="save-btn" onclick="shtoProdukt()">➕ Shto Produktin</button>
-      </div>
-
-      <h3 style="color:#fff; margin-bottom:15px; font-size:14px; font-weight:700;">📦 Produktet Ekzistuese</h3>
-      <button class="save-btn" style="background:#333; margin-bottom:20px;" onclick="closeAdmin()">Mbyll Panelin</button>
-      <hr style="border-color:var(--border); margin-bottom:20px;">
-    `;
-    products.forEach(p => {
-      const discText = (p.discount && p.discount > 0) ? `<span style="color:var(--gold); font-size:11px; margin-left:6px;">🎟️ -${p.discount}%</span>` : '';
-      container.innerHTML += `
-        <div style="background:#151515; padding:15px; border-radius:12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; border: 1px solid var(--border);">
-          <span style="font-size:13px; font-weight:600;">${p.emri}${discText} <small style="color:#888;">(${p.stoku !== undefined ? p.stoku : 10} në gjendje)</small></span>
-          <div style="display:flex; gap:5px;">
-            <button class="save-btn" style="width:auto; padding:8px 15px; margin:0; background:var(--red); font-size:11px;" onclick="openEditProduct(${p.id})">Edito</button>
-            <button class="save-btn" style="width:auto; padding:8px 15px; margin:0; background:#ff4444; font-size:11px;" onclick="fshiProduktin(${p.id})">Fshi</button>
+        <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
+          <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">🎨 Background-i i Faqes</h3>
+          
+          <div class="admin-form-group">
+            <label>Ngjyra e Background-it</label>
+            <input type="color" id="adminBgColor" value="${siteSettings.bgColor || '#080808'}" style="width:100%; height:40px; padding:2px; background:#111; border:1px solid #333; border-radius:5px; cursor:pointer;">
           </div>
+
+          <div class="admin-form-group">
+            <label>Foto për Background (Opsionale)</label>
+            <input type="file" id="adminBgImageFile" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;">
+            ${bgImagePreview}
+            <div id="bgImageStatus" style="font-size:11px; color:var(--green); margin-top:5px; display:none;">✅ Foto u ngarkua!</div>
+          </div>
+
+          <div class="admin-checkbox-group">
+            <input type="checkbox" id="adminBgOverlay" ${siteSettings.bgImage ? 'checked' : ''}>
+            <label for="adminBgOverlay">Aktivizo errësimin mbi background</label>
+          </div>
+
+          <button class="save-btn" style="background:var(--gold); color:#000;" onclick="ruajBackground()">🎨 Ruaj Background-in</button>
         </div>
-      `;
+
+        <button class="save-btn" style="background:var(--green);" onclick="ruajCilesimet()">💾 Ruaj të Gjitha Cilësimet</button>
+      </div>
+
+      <!-- TAB 3: QYTETET (I RI) -->
+      <div id="tab-qytetet" class="admin-tab-content">
+        <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
+          <h3 style="color:var(--green); margin-bottom:15px; font-size:14px; font-weight:700;">🚚 Qytetet & Çmimet e Transportit</h3>
+          <p style="font-size:11px; color:#888; margin-bottom:15px;">Vendos vetë qytetet dhe çmimin e transportit për secilin. Këto shfaqen tek klienti në checkout.</p>
+          
+          <h4 style="font-size:12px; color:#fff; margin-bottom:10px;">Qytetet aktuale:</h4>
+          <div style="margin-bottom:15px;">${qytetetHTML}</div>
+
+          <hr style="border-color:var(--border); margin:15px 0;">
+          
+          <h4 style="font-size:12px; color:var(--gold); margin-bottom:10px;">➕ Shto Qytet të Ri</h4>
+          <div class="admin-form-group"><label>Emri i Qytetit</label><input type="text" id="newQytetEmri" placeholder="p.sh. Tiranë"></div>
+          <div class="admin-form-group"><label>Çmimi i Transportit (Lek)</label><input type="number" id="newQytetCmimi" placeholder="300"></div>
+          <button class="save-btn" style="background:var(--green);" onclick="shtoQytet()">➕ Shto Qytetin</button>
+        </div>
+      </div>
+
+      <!-- TAB 4: KUPONET -->
+      <div id="tab-kuponet" class="admin-tab-content">
+        <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
+          <h3 style="color:var(--gold); margin-bottom:15px; font-size:14px; font-weight:700;">🎟️ Kuponët e Zbritjes</h3>
+          <div style="margin-bottom:15px;">${kuponetHTML}</div>
+          <div class="admin-form-group"><label>Kodi i ri (p.sh. ZBRITJE10)</label><input type="text" id="newKuponKodi" placeholder="ZBRITJE10" style="text-transform:uppercase;"></div>
+          <div class="admin-form-group"><label>Përqindja e zbritjes (%)</label><input type="number" id="newKuponPerqindje" placeholder="10" min="1" max="90"></div>
+          <button class="save-btn" style="background:var(--gold); color:#000;" onclick="shtoKupon()">➕ Shto Kuponin</button>
+        </div>
+      </div>
+
+      <!-- TAB 5: PAGESAT -->
+      <div id="tab-pagesat" class="admin-tab-content">
+        <div style="background:#151515; padding:20px; border-radius:12px; margin-bottom:20px; border: 1px solid var(--border);">
+          <h3 style="color:var(--green); margin-bottom:15px; font-size:14px; font-weight:700;">💳 Opsionet e Pagesës</h3>
+          <div class="admin-checkbox-group">
+            <input type="checkbox" id="adminKartaAktiv" ${isKartaChecked}>
+            <label for="adminKartaAktiv">Aktivizo Pagesën me Kartë (Kërkoj Link)</label>
+          </div>
+          <p style="font-size:11px; color:#888; margin-top:-5px; margin-bottom:15px;">Nëse është e çaktivizuar, klientët do të shohin vetëm pagesën në dorëzim.</p>
+          <button class="save-btn" style="background:var(--green);" onclick="ruajCilesimet()">💾 Ruaj Cilësimet</button>
+        </div>
+      </div>
+
+      <button class="save-btn" style="background:#333; margin-top:20px;" onclick="closeAdmin()">Mbyll Panelin</button>
+    `;
+
+    const prodList = document.getElementById('adminProductList');
+    if (prodList) {
+        products.forEach(p => {
+          const discText = (p.discount && p.discount > 0) ? `<span style="color:var(--gold); font-size:11px; margin-left:6px;">🎟️ -${p.discount}%</span>` : '';
+          prodList.innerHTML += `
+            <div style="background:#151515; padding:15px; border-radius:12px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; border: 1px solid var(--border);">
+              <span style="font-size:13px; font-weight:600;">${p.emri}${discText} <small style="color:#888;">(${p.stoku !== undefined ? p.stoku : 10} në gjendje)</small></span>
+              <div style="display:flex; gap:5px;">
+                <button class="save-btn" style="width:auto; padding:8px 15px; margin:0; background:var(--red); font-size:11px;" onclick="openEditProduct(${p.id})">Edito</button>
+                <button class="save-btn" style="width:auto; padding:8px 15px; margin:0; background:#ff4444; font-size:11px;" onclick="fshiProduktin(${p.id})">Fshi</button>
+              </div>
+            </div>
+          `;
+        });
+    }
+  }
+
+  function switchAdminTab(tabId, btn) {
+    document.querySelectorAll('.admin-tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.admin-nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ============ FUNKSIONET E QYTETEVE ============
+  async function shtoQytet() {
+    const emri = document.getElementById('newQytetEmri').value.trim();
+    const cmimi = parseInt(document.getElementById('newQytetCmimi').value);
+    if(!emri || isNaN(cmimi) || cmimi < 0) { alert("⚠️ Plotëso emrin dhe çmimin valid!"); return; }
+    if(siteSettings.qytetet.find(q => q.emri.toLowerCase() === emri.toLowerCase())) { alert("⚠️ Ky qytet ekziston!"); return; }
+    siteSettings.qytetet.push({ emri, cmimi });
+    await ruajNeFirebase();
+    alert("✅ Qyteti u shtua!");
+    renderAdminList();
+    switchAdminTab('tab-qytetet', document.querySelector('.admin-nav button:nth-child(3)'));
+  }
+
+  async function fshiQytetin(index) {
+    if(!confirm("Fshi këtë qytet?")) return;
+    siteSettings.qytetet.splice(index, 1);
+    await ruajNeFirebase();
+    renderAdminList();
+    switchAdminTab('tab-qytetet', document.querySelector('.admin-nav button:nth-child(3)'));
+  }
+
+  function openEditQytet(index) {
+    const q = siteSettings.qytetet[index];
+    if(!q) return;
+    const newEmri = prompt("Emri i qytetit:", q.emri);
+    if(newEmri === null) return;
+    const newCmimi = prompt("Çmimi i transportit (Lek):", q.cmimi);
+    if(newCmimi === null) return;
+    const cmimiNum = parseInt(newCmimi);
+    if(!newEmri.trim() || isNaN(cmimiNum) || cmimiNum < 0) { alert("⚠️ Të dhëna të pavlefshme!"); return; }
+    siteSettings.qytetet[index] = { emri: newEmri.trim(), cmimi: cmimiNum };
+    ruajNeFirebase().then(() => {
+      alert("✅ Qyteti u përditësua!");
+      renderAdminList();
+      switchAdminTab('tab-qytetet', document.querySelector('.admin-nav button:nth-child(3)'));
     });
+  }
+
+  // ============ FUNKSIONET E BACKGROUND ============
+  async function ruajBackground() {
+    const ngjyra = document.getElementById('adminBgColor').value;
+    const file = document.getElementById('adminBgImageFile').files[0];
+    const overlayStatus = document.getElementById('adminBgOverlay').checked;
+
+    siteSettings.bgColor = ngjyra;
+    
+    if(file) {
+      document.getElementById('bgImageStatus').style.display = 'block';
+      document.getElementById('bgImageStatus').innerText = 'Duke ngarkuar foton...';
+      const url = await ngarkoFoton(file);
+      if(url) {
+        siteSettings.bgImage = url;
+        document.getElementById('bgImageStatus').innerText = '✅ Foto u ngarkua me sukses!';
+      } else {
+        document.getElementById('bgImageStatus').innerText = '⚠️ Foto nuk u ngarkua!';
+        document.getElementById('bgImageStatus').style.color = 'var(--red)';
+        return;
+      }
+    }
+
+    if(overlayStatus) {
+        document.documentElement.style.setProperty('--bg-overlay-display', 'block');
+    } else {
+        document.documentElement.style.setProperty('--bg-overlay-display', 'none');
+    }
+
+    await ruajNeFirebase();
+    applySettings();
+    alert("✅ Background-i u ruajt!");
   }
 
   async function shtoKupon() {
@@ -887,11 +1118,13 @@
     if (siteSettings.kuponet.find(k => k.kodi.toUpperCase() === kodi)) { alert("⚠️ Ky kod ekziston!"); return; }
     siteSettings.kuponet.push({ kodi, perqindje });
     await ruajNeFirebase(); alert("✅ Kuponi u shtua!"); renderAdminList();
+    switchAdminTab('tab-kuponet', document.querySelector('.admin-nav button:nth-child(4)'));
   }
 
   async function fshiKuponin(index) {
     if (!confirm("Fshi këtë kupon?")) return;
     siteSettings.kuponet.splice(index, 1); await ruajNeFirebase(); renderAdminList();
+    switchAdminTab('tab-kuponet', document.querySelector('.admin-nav button:nth-child(4)'));
   }
 
   async function fshiProduktin(id) {
@@ -935,30 +1168,40 @@
     for (let i = 1; i <= 5; i++) document.getElementById('newFotoFile' + i).value = '';
     
     renderProducts(); renderAdminList();
+    switchAdminTab('tab-produktet', document.querySelector('.admin-nav button:nth-child(1)'));
   }
 
   async function ruajCilesimet() {
-    const e = document.getElementById('adminEmri').value;
-    const n = document.getElementById('adminNumri').value;
-    const t = document.getElementById('adminTelFooter').value;
-    const em = document.getElementById('adminEmailFooter').value;
-    const p = parseInt(document.getElementById('adminPosta').value);
-    const kartaStatus = document.getElementById('adminKartaAktiv').checked;
+    const e = document.getElementById('adminEmri')?.value;
+    const n = document.getElementById('adminNumri')?.value;
+    const t = document.getElementById('adminTelFooter')?.value;
+    const em = document.getElementById('adminEmailFooter')?.value;
+    
+    const kartaCheckbox = document.getElementById('adminKartaAktiv');
+    let kartaStatus = siteSettings.kartaAktiv;
+    if(kartaCheckbox) kartaStatus = kartaCheckbox.checked;
 
-    if(e && n && t && em && !isNaN(p)) {
-      siteSettings.emri = e; siteSettings.numri = n; siteSettings.telFooter = t; siteSettings.emailFooter = em; siteSettings.posta = p; siteSettings.kartaAktiv = kartaStatus; 
+    if(e && n && t && em) {
+      siteSettings.emri = e; siteSettings.numri = n; siteSettings.telFooter = t; siteSettings.emailFooter = em; siteSettings.kartaAktiv = kartaStatus; 
       await ruajNeFirebase(); applySettings(); alert("✅ Cilësimet u ruajtën në server!"); renderProducts(); renderCart();
-    } else { alert("⚠️ Plotëso të gjitha kutitë saktë!"); }
+    } else { 
+      if(kartaCheckbox) {
+          siteSettings.kartaAktiv = kartaStatus;
+          await ruajNeFirebase();
+          alert("✅ Cilësimet e pagesës u ruajtën!");
+          applySettings();
+      } else {
+          alert("⚠️ Plotëso të gjitha kutitë saktë!"); 
+      }
+    }
   }
 
-  // KETU ESHTE PJESA E EDITIMIT KU JANE SHTUAR BUTONAT PER FSHIRJEN E FOTOVE
   function openEditProduct(id) {
     const p = products.find(prod => prod.id === id);
     if (!p) return;
     document.getElementById('adminModal').classList.add('show');
     const container = document.getElementById('adminContent');
     
-    // Krijojme butonat e fshirjes vetem nese ekziston fotoja
     let fototFshirjeHTML = p.fotot.map((f, i) => `
       <div style="display:flex; justify-content:space-between; background:#111; padding:10px; border-radius:5px; margin-bottom:5px; border:1px solid #333; align-items:center;">
         <img src="${f}" style="height:40px; width:40px; object-fit:cover; border-radius:3px;" onerror="this.style.display='none'">
@@ -975,11 +1218,11 @@
       <div class="admin-form-group"><label>Sasia në Gjendje</label><input type="number" id="editStoku" value="${p.stoku !== undefined ? p.stoku : 10}"></div>
       <div class="admin-form-group"><label>Kategoria</label><input type="text" id="editKategoria" value="${p.kategoria}"></div>
 
-      <h3 style="color:var(--red); margin-top:20px; margin-bottom:10px; font-size:14px;">Fotot aktuale (Fshij nese eshte prishur)</h3>
+      <h3 style="color:var(--red); margin-top:20px; margin-bottom:10px; font-size:14px;">Fotot aktuale</h3>
       <div style="margin-bottom:15px;">${fototFshirjeHTML || '<p style="color:#666; font-size:12px;">Nuk ka foto.</p>'}</div>
       
       <h3 style="color:var(--green); margin-top:20px; margin-bottom:10px; font-size:14px;">Shto Foto te reja</h3>
-      <div class="admin-form-group"><label>Foto e re 1 (Zevendesuese)</label><input type="file" id="editFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+      <div class="admin-form-group"><label>Foto e re 1</label><input type="file" id="editFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
       <div class="admin-form-group"><label>Foto e re 2</label><input type="file" id="editFotoFile2" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
       <div class="admin-form-group"><label>Foto e re 3</label><input type="file" id="editFotoFile3" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
       <div class="admin-form-group"><label>Foto e re 4</label><input type="file" id="editFotoFile4" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
@@ -991,15 +1234,14 @@
     window.scrollTo(0,0);
   }
 
-  // Funksioni i ri qe fshin foton direkt nga produkti
   async function fshiFotonProduktit(id, index) {
     if(!confirm("A jeni i sigurt qe doni ta fshini kete foto?")) return;
     const p = products.find(prod => prod.id === id);
     if(!p) return;
-    p.fotot.splice(index, 1); // Heq foton nga lista
-    await ruajNeFirebase(); // Ruaj ne server
+    p.fotot.splice(index, 1);
+    await ruajNeFirebase();
     alert("✅ Fotoja u fshi!");
-    openEditProduct(id); // Rifresko panelin
+    openEditProduct(id);
   }
 
   async function saveProductEdit(id) {
@@ -1015,14 +1257,12 @@
 
     if(p.discount < 0 || p.discount > 90) { alert("⚠️ Discount duhet 0-90!"); return; }
 
-    // Kontrollojme nese ka foto te reja per te shtuar
     let fototArray = [...p.fotot];
     for (let i = 1; i <= 5; i++) {
         const file = document.getElementById('editFotoFile' + i).files[0];
         if(file) { 
             let url = await ngarkoFoton(file); 
             if(url) {
-                // Nese ka vende bosh i mbushe, nese jo e shtoj ne fund
                 if(fototArray.length >= i) fototArray[i-1] = url;
                 else fototArray.push(url);
             } 
@@ -1039,9 +1279,25 @@
     document.getElementById('siteLogo').innerHTML = `${siteSettings.emri}<span>ZONE</span>`;
     document.getElementById('footerPhone').innerText = `📞 ${siteSettings.telFooter}`;
     document.getElementById('footerEmail').innerText = `📧 ${siteSettings.emailFooter}`;
+    
+    if(siteSettings.bgColor) {
+        document.documentElement.style.setProperty('--site-bg-color', siteSettings.bgColor);
+        document.body.style.backgroundColor = siteSettings.bgColor;
+    }
+    
+    if(siteSettings.bgImage) {
+        document.documentElement.style.setProperty('--site-bg-image', `url(${siteSettings.bgImage})`);
+        document.body.style.backgroundImage = `url(${siteSettings.bgImage})`;
+        document.body.style.backgroundSize = 'cover';
+        document.body.style.backgroundPosition = 'center';
+        document.body.style.backgroundAttachment = 'fixed';
+    } else {
+        document.documentElement.style.setProperty('--site-bg-image', 'none');
+        document.body.style.backgroundImage = 'none';
+    }
   }
 
-  applySettings(); renderProducts(); renderCart(); renderFavs(); updateBadges();
+  applySettings(); renderProducts(); renderCart(); renderFavs(); updateBadges(); renderCityOptions();
 </script>
 </body>
 </html>
