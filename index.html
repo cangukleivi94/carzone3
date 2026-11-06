@@ -365,7 +365,6 @@
      ===================================================== */
   .november-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: hidden; }
   
-  /* Shqiponja qendrore që pulson */
   .eagle-symbol {
     position: absolute;
     top: 50%;
@@ -385,7 +384,6 @@
     50% { opacity: 0.08; transform: translate(-50%, -50%) scale(1.05); }
   }
 
-  /* Flamuj të vegjël kuq e zi që bien */
   .mini-flag {
     position: absolute;
     top: -30px;
@@ -413,7 +411,6 @@
     100% { transform: translateY(110vh) rotate(720deg); opacity: 0.2; }
   }
 
-  /* Yje kuq që shkëlqejnë */
   .al-star {
     position: absolute;
     color: #ff1a1a;
@@ -426,7 +423,6 @@
     50% { opacity: 1; transform: scale(1.4) rotate(180deg); }
   }
 
-  /* Drita kuq e zi që kalon horizontalisht (si valë flamuri) */
   .flag-wave {
     position: absolute;
     height: 3px;
@@ -445,7 +441,6 @@
   .flag-wave:nth-child(2) { top: 45%; animation-delay: 1.5s; }
   .flag-wave:nth-child(3) { top: 75%; animation-delay: 3s; }
 
-  /* Teksti shqip poshtë */
   .november-text {
     position: absolute;
     bottom: 60px;
@@ -1495,6 +1490,7 @@
           <div class="admin-form-group"><label>Foto 3 (Opsionale)</label><input type="file" id="newFotoFile3" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Foto 4 (Opsionale)</label><input type="file" id="newFotoFile4" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Foto 5 (Opsionale)</label><input type="file" id="newFotoFile5" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+          <div class="admin-form-group"><label>Foto 6 (Opsionale)</label><input type="file" id="newFotoFile6" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Kategoria</label><input type="text" id="newKategoria" placeholder="aksesore"></div>
           <button class="save-btn" onclick="shtoProdukt()">➕ Shto Produktin</button>
         </div>
@@ -1755,7 +1751,7 @@
     if(!file1) { alert("⚠️ Zgjidh foton e parë!"); return; }
 
     let fototArray = [];
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 6; i++) {
         const f = document.getElementById('newFotoFile' + i).files[0];
         if(f) { let url = await ngarkoFoton(f); if(url) fototArray.push(url); }
     }
@@ -1768,7 +1764,7 @@
     await ruajNeFirebase(); alert("✅ U shtua!");
     
     document.getElementById('newEmri').value = ''; document.getElementById('newPershkrimi').value = ''; document.getElementById('newCmimi').value = ''; document.getElementById('newDiscount').value = '0'; document.getElementById('newStoku').value = ''; document.getElementById('newKategoria').value = '';
-    for (let i = 1; i <= 5; i++) document.getElementById('newFotoFile' + i).value = '';
+    for (let i = 1; i <= 6; i++) document.getElementById('newFotoFile' + i).value = '';
     
     renderProducts(); renderAdminList(); checkSpecialOffer();
     switchAdminTab('tab-produktet', document.querySelector('.admin-nav button:nth-child(1)'));
@@ -1820,25 +1816,39 @@
       <div class="admin-form-group"><label>Discount (%)</label><input type="number" id="editDiscount" value="${p.discount || 0}" min="0" max="90"></div>
       <div class="admin-form-group"><label>Sasia</label><input type="number" id="editStoku" value="${p.stoku !== undefined ? p.stoku : 10}"></div>
       <div class="admin-form-group"><label>Kategoria</label><input type="text" id="editKategoria" value="${p.kategoria}"></div>
+      
       <h3 style="color:var(--red); margin:20px 0 10px; font-size:14px;">Fotot aktuale</h3>
       <div>${fototFshirjeHTML || '<p style="color:#666; font-size:12px;">Nuk ka foto.</p>'}</div>
-      <h3 style="color:var(--green); margin:20px 0 10px; font-size:14px;">Shto Foto</h3>
-      <div class="admin-form-group"><input type="file" id="editFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-      <div class="admin-form-group"><input type="file" id="editFotoFile2" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
-      <button class="save-btn" onclick="saveProductEdit(${p.id})">💾 Ruaj</button>
+      <button class="save-btn" style="background:var(--gold); color:#000; margin-bottom:20px;" onclick="ruajVetemFotot(${p.id})">💾 Ruaj Ndryshimet e Fotove</button>
+      
+      <h3 style="color:var(--green); margin:20px 0 10px; font-size:14px;">Shto / Zëvendëso Foto</h3>
+      <div class="admin-form-group"><label>Foto 1</label><input type="file" id="editFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+      <div class="admin-form-group"><label>Foto 2</label><input type="file" id="editFotoFile2" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+      <div class="admin-form-group"><label>Foto 3</label><input type="file" id="editFotoFile3" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+      <div class="admin-form-group"><label>Foto 4</label><input type="file" id="editFotoFile4" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+      <div class="admin-form-group"><label>Foto 5</label><input type="file" id="editFotoFile5" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+      <div class="admin-form-group"><label>Foto 6</label><input type="file" id="editFotoFile6" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+      
+      <button class="save-btn" onclick="saveProductEdit(${p.id})">💾 Ruaj të Gjitha</button>
       <button class="save-btn" style="background:#333;" onclick="renderAdminList()">Kthehu</button>
     `;
     window.scrollTo(0,0);
   }
 
   async function fshiFotonProduktit(id, index) {
-    if(!confirm("Fshi këtë foto?")) return;
+    if(!confirm("Fshi këtë foto? (Mos harro të klikosh 'Ruaj Ndryshimet e Fotove' pasi të fshish)")) return;
     const p = products.find(prod => prod.id === id);
     if(!p) return;
     p.fotot.splice(index, 1);
+    openEditProduct(id); // Rifreskon pamjen e editimit
+  }
+
+  async function ruajVetemFotot(id) {
+    const p = products.find(prod => prod.id === id);
+    if(!p) return;
     await ruajNeFirebase();
-    alert("✅ U fshi!");
-    openEditProduct(id);
+    alert("✅ Ndryshimet e fotove u ruajtën!");
+    renderProducts(); renderAdminList();
   }
 
   async function saveProductEdit(id) {
@@ -1853,20 +1863,23 @@
     p.kategoria = document.getElementById('editKategoria').value;
 
     let fototArray = [...p.fotot];
-    for (let i = 1; i <= 5; i++) {
-        const file = document.getElementById('editFotoFile' + i).files[0];
-        if(file) { 
-            let url = await ngarkoFoton(file); 
+    
+    // Kontrollojmë nëse ka foto të reja për t'u ngarkuar
+    for (let i = 1; i <= 6; i++) {
+        const fileInput = document.getElementById('editFotoFile' + i);
+        if(fileInput && fileInput.files[0]) { 
+            let url = await ngarkoFoton(fileInput.files[0]); 
             if(url) {
-                if(fototArray.length >= i) fototArray[i-1] = url;
-                else fototArray.push(url);
+                if(fototArray[i-1]) { fototArray[i-1] = url; } // Zëvendëson foton ekzistuese në këtë pozicion
+                else { fototArray.push(url); } // Shton foto të re nëse nuk ka
             } 
         }
     }
 
-    p.fotot = fototArray.filter(f => f);
+    p.fotot = fototArray.filter(f => f); // Heqim vlerat bosh nëse ka
     
-    await ruajNeFirebase(); alert("✅ U përditësua!"); 
+    await ruajNeFirebase(); 
+    alert("✅ Produkti u përditësua me sukses!"); 
     renderProducts(); renderAdminList(); checkSpecialOffer();
   }
 
