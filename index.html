@@ -64,7 +64,6 @@
   #main-page { opacity: 0; transition: opacity 0.8s ease; }
   #main-page.show { opacity: 1; }
 
-  /* ====== OFERTA SPECIALE BANNER ====== */
   .special-offer-banner {
     display: none;
     background: linear-gradient(90deg, #b30000, #e60000, #ff4d4d, #e60000, #b30000);
@@ -156,7 +155,7 @@
   .btn-add { flex: 1; text-align: center; background: #ffffff; color: #000000; padding: 10px 5px; border-radius: 6px; font-weight: 800; font-size: 10px; border: 1px solid #ffffff; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 0.3px; display: flex; align-items: center; justify-content: center; gap: 4px; }
   .btn-add:hover:not(:disabled) { background: #e0e0e0; border-color: #e0e0e0; transform: translateY(-1px); }
   .btn-add:disabled { background: #555; border-color: #555; color: #888; cursor: not-allowed; }
-  .btn-wa { flex: 1; text-align: center; background: var(--green); color: #fff; padding: 10px 5px; border-radius: 6px; font-weight: 800; font-size: 10px; text-decoration: none; transition: 0.3s; box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3); text-transform: uppercase; letter-spacing: 0.3px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+  .btn-wa { flex: 1; text-align: center; background: var(--green); color: #fff; padding: 10px 5px; border-radius: 6px; font-weight: 800; font-size: 10px; text-decoration: none; transition: 0.3s; box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3); text-transform: uppercase; letter-spacing: 0.3px; display: flex; align-items: center; justify-content: center; gap: 4px; border: none; cursor: pointer;}
   .btn-wa:hover { background: var(--green-hover); transform: translateY(-1px); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.5); }
   .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 1000; opacity: 0; transition: 0.3s; }
   .overlay.show { display: block; opacity: 1; }
@@ -237,18 +236,30 @@
   .thumbnails::-webkit-scrollbar-thumb { background: var(--red); border-radius: 10px; }
   .thumbnails img { width: 75px; height: 75px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid var(--border); transition: 0.3s;}
   .thumbnails img.active { border-color: var(--red); box-shadow: 0 0 15px rgba(230,0,0,0.3);}
+  
+  /* BACKGROUND I BUKUR PER INFORMACIONIN E PRODUKTIT */
+  .product-info { 
+    background: linear-gradient(145deg, #161616 0%, #0a0a0a 100%);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+    margin-bottom: 20px;
+  }
+  
   .product-info h1 { font-size: 26px; margin-bottom: 15px; color: #fff; font-weight: 900; line-height: 1.2;}
   .product-info .price-large { font-size: 32px; font-weight: 900; color: var(--red); margin-bottom: 10px; text-shadow: 0 0 20px rgba(230,0,0,0.2);}
   .product-info .old-price-large { font-size: 18px; color: #777; text-decoration: line-through; font-weight: 600; margin-left: 10px; }
   .product-info .save-badge { display: inline-block; background: rgba(37,211,102,0.15); color: var(--green); padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 800; margin-bottom: 15px; border: 1px solid rgba(37,211,102,0.3); }
-  .product-info .desc-full { font-size: 15px; color: var(--text-muted); line-height: 1.8; margin-bottom: 35px; }
-  .product-actions { display: flex; gap: 12px; margin-bottom: 30px; }
+  .product-info .desc-full { font-size: 14px; color: #ccc; line-height: 1.7; margin-bottom: 25px; }
+  .product-actions { display: flex; gap: 12px; margin-bottom: 20px; }
   .product-actions button, .product-actions a { flex: 1; padding: 18px; border-radius: 10px; font-size: 14px; font-weight: 800; text-align: center; text-decoration: none; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;}
   .btn-add-large { background: #ffffff; color: #000000; border: 2px solid #ffffff !important; }
   .btn-add-large:hover:not(:disabled) { background: #e0e0e0; border-color: #e0e0e0; transform: translateY(-2px);}
   .btn-add-large:disabled { background: #555; border-color: #555; color: #888; cursor: not-allowed; }
   .btn-wa-large { background: var(--green); color: #fff; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);}
   .btn-wa-large:hover { background: var(--green-hover); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5); transform: translateY(-2px);}
+  
   .side-menu { position: fixed; top: 0; left: -100%; width: 80%; max-width: 300px; height: 100%; background: #111; z-index: 2500; padding: 30px 20px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; border-right: 1px solid var(--border); box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
   .side-menu.open { left: 0; }
   .side-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px;}
@@ -257,16 +268,16 @@
   .side-menu a { color: var(--text-muted); text-decoration: none; padding: 15px 0; font-size: 16px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; display: block; cursor: pointer;}
   .side-menu a:hover { color: #fff; padding-left: 10px; border-left: 3px solid var(--red);}
   .side-menu .admin-link { margin-top: auto; color: var(--red); font-weight: 800; border: 1px dashed var(--red); text-align: center; border-radius: 8px; padding: 15px; background: rgba(230,0,0,0.1);}
+  
   @media (min-width: 768px) {
-    .product-content { display: flex; gap: 40px; padding: 40px 20px; }
+    .product-content { display: flex; gap: 40px; padding: 40px 20px; align-items: flex-start; }
     .product-gallery { flex: 1.1; }
-    .product-info { flex: 1; padding-top: 20px;}
+    .product-info { flex: 1; padding: 35px; }
     .main-image-container { height: 450px; }
     .hero h1 { font-size: 48px; }
   }
 
-  /* ===== REVIEWS ===== */
-  .reviews-section { margin-top: 40px; background: #111; padding: 25px; border-radius: 15px; border: 1px solid var(--border); }
+  .reviews-section { margin-top: 0; background: transparent; padding: 0; border: none; }
   .reviews-section h3 { font-size: 18px; color: #fff; margin-bottom: 20px; font-weight: 800; text-transform: uppercase; }
   .reviews-average { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
   .reviews-average .avg-number { font-size: 42px; font-weight: 900; color: var(--gold); }
@@ -287,9 +298,6 @@
   .submit-review-btn { background: var(--gold); color: #000; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; transition: 0.3s; width: 100%; }
   .submit-review-btn:hover { background: #ffc94d; transform: translateY(-1px); }
 
-  /* =====================================================
-     🎄 OPSIONI A: TOPA ULUJSH
-     ===================================================== */
   .festive-balls { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: hidden; }
   .ball-wrapper { position: absolute; top: 0; display: flex; flex-direction: column; align-items: center; animation: swing 3s ease-in-out infinite alternate; transform-origin: top center; }
   .ball-thread { width: 2px; background: linear-gradient(180deg, #ffd700, rgba(255,215,0,0.4)); box-shadow: 0 0 4px rgba(255,215,0,0.6); }
@@ -321,18 +329,12 @@
 
   @keyframes swing { 0% { transform: rotate(-8deg); } 100% { transform: rotate(8deg); } }
 
-  /* =====================================================
-     ❄️ OPSIONI B: TOPA + BORË
-     ===================================================== */
   .snowflakes { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: hidden; }
   .snowflake { position: absolute; top: -20px; color: #ffffff; font-size: 14px; opacity: 0.85; text-shadow: 0 0 6px rgba(255,255,255,0.8); animation: fall linear infinite; user-select: none; }
   @keyframes fall { 0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0.3; } }
   .festive-balls.option-b .ball { width: 50px; height: 50px; }
   .festive-balls.option-b .ball-cap { width: 12px; height: 12px; }
 
-  /* =====================================================
-     🎆 OPSIONI C: VITI I RI 2027
-     ===================================================== */
   .newyear-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: hidden; }
   .star { position: absolute; color: #fff; font-size: 14px; text-shadow: 0 0 10px #fff, 0 0 20px #ffd700, 0 0 30px #ffd700; animation: twinkle 2s ease-in-out infinite; }
   @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.3); } }
@@ -360,117 +362,36 @@
   @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
   @keyframes floatY { 0%, 100% { transform: translate(-50%, -50%) translateY(0); } 50% { transform: translate(-50%, -50%) translateY(-15px); } }
 
-  /* =====================================================
-     🇦🇱 OPSIONI D: 28-29 NËNTOR (Festa e Flamurit)
-     ===================================================== */
   .november-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: hidden; }
-  
-  .eagle-symbol {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 200px;
-    color: #e60000;
-    opacity: 0.05;
-    font-weight: 900;
-    animation: eaglePulse 4s ease-in-out infinite;
-    pointer-events: none;
-    filter: drop-shadow(0 0 40px rgba(230,0,0,0.5));
-    user-select: none;
-  }
-  @keyframes eaglePulse {
-    0%, 100% { opacity: 0.04; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 0.08; transform: translate(-50%, -50%) scale(1.05); }
-  }
-
-  .mini-flag {
-    position: absolute;
-    top: -30px;
-    width: 32px;
-    height: 22px;
-    background: #e60000;
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(230,0,0,0.5), inset 0 0 0 1px rgba(0,0,0,0.2);
-    animation: flagFall linear infinite;
-    overflow: hidden;
-    opacity: 0.9;
-  }
-  .mini-flag::before {
-    content: '🦅';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 14px;
-    color: #000;
-    text-shadow: 0 0 4px rgba(0,0,0,0.5);
-  }
-  @keyframes flagFall {
-    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0.2; }
-  }
-
-  .al-star {
-    position: absolute;
-    color: #ff1a1a;
-    font-size: 16px;
-    text-shadow: 0 0 10px #ff1a1a, 0 0 20px #e60000;
-    animation: alTwinkle 2.5s ease-in-out infinite;
-  }
-  @keyframes alTwinkle {
-    0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1.4) rotate(180deg); }
-  }
-
-  .flag-wave {
-    position: absolute;
-    height: 3px;
-    width: 200px;
-    background: linear-gradient(90deg, transparent, #e60000, #000000, #e60000, transparent);
-    box-shadow: 0 0 15px #e60000;
-    animation: waveMove 6s linear infinite;
-  }
-  @keyframes waveMove {
-    0% { transform: translateX(-250px); opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { transform: translateX(calc(100vw + 50px)); opacity: 0; }
-  }
+  .eagle-symbol { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 200px; color: #e60000; opacity: 0.05; font-weight: 900; animation: eaglePulse 4s ease-in-out infinite; pointer-events: none; filter: drop-shadow(0 0 40px rgba(230,0,0,0.5)); user-select: none; }
+  @keyframes eaglePulse { 0%, 100% { opacity: 0.04; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 0.08; transform: translate(-50%, -50%) scale(1.05); } }
+  .mini-flag { position: absolute; top: -30px; width: 32px; height: 22px; background: #e60000; border-radius: 2px; box-shadow: 0 2px 8px rgba(230,0,0,0.5), inset 0 0 0 1px rgba(0,0,0,0.2); animation: flagFall linear infinite; overflow: hidden; opacity: 0.9; }
+  .mini-flag::before { content: '🦅'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 14px; color: #000; text-shadow: 0 0 4px rgba(0,0,0,0.5); }
+  @keyframes flagFall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0.2; } }
+  .al-star { position: absolute; color: #ff1a1a; font-size: 16px; text-shadow: 0 0 10px #ff1a1a, 0 0 20px #e60000; animation: alTwinkle 2.5s ease-in-out infinite; }
+  @keyframes alTwinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); } 50% { opacity: 1; transform: scale(1.4) rotate(180deg); } }
+  .flag-wave { position: absolute; height: 3px; width: 200px; background: linear-gradient(90deg, transparent, #e60000, #000000, #e60000, transparent); box-shadow: 0 0 15px #e60000; animation: waveMove 6s linear infinite; }
+  @keyframes waveMove { 0% { transform: translateX(-250px); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateX(calc(100vw + 50px)); opacity: 0; } }
   .flag-wave:nth-child(1) { top: 15%; animation-delay: 0s; }
   .flag-wave:nth-child(2) { top: 45%; animation-delay: 1.5s; }
   .flag-wave:nth-child(3) { top: 75%; animation-delay: 3s; }
+  .november-text { position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%); font-size: 28px; font-weight: 900; color: #e60000; letter-spacing: 8px; text-shadow: 0 0 20px rgba(230,0,0,0.8), 0 2px 4px rgba(0,0,0,0.9); white-space: nowrap; animation: textGlow 3s ease-in-out infinite; pointer-events: none; opacity: 0.85; font-family: 'Montserrat', sans-serif; }
+  .november-text small { display: block; font-size: 11px; letter-spacing: 6px; color: #fff; text-shadow: 0 0 10px #e60000; text-align: center; margin-top: 5px; }
+  @keyframes textGlow { 0%, 100% { text-shadow: 0 0 20px rgba(230,0,0,0.8), 0 2px 4px rgba(0,0,0,0.9); } 50% { text-shadow: 0 0 40px rgba(230,0,0,1), 0 0 60px rgba(255,50,50,0.6), 0 2px 4px rgba(0,0,0,0.9); } }
 
-  .november-text {
-    position: absolute;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 28px;
-    font-weight: 900;
-    color: #e60000;
-    letter-spacing: 8px;
-    text-shadow: 0 0 20px rgba(230,0,0,0.8), 0 2px 4px rgba(0,0,0,0.9);
-    white-space: nowrap;
-    animation: textGlow 3s ease-in-out infinite;
-    pointer-events: none;
-    opacity: 0.85;
-    font-family: 'Montserrat', sans-serif;
+  .quick-order-modal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 5000;
+      justify-content: center; align-items: center;
   }
-  .november-text small {
-    display: block;
-    font-size: 11px;
-    letter-spacing: 6px;
-    color: #fff;
-    text-shadow: 0 0 10px #e60000;
-    text-align: center;
-    margin-top: 5px;
+  .quick-order-modal.show { display: flex; }
+  .quick-order-content {
+      background: #121212; border: 1px solid var(--border); border-radius: 15px;
+      padding: 25px; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: fadeIn 0.3s ease;
   }
-  @keyframes textGlow {
-    0%, 100% { text-shadow: 0 0 20px rgba(230,0,0,0.8), 0 2px 4px rgba(0,0,0,0.9); }
-    50% { text-shadow: 0 0 40px rgba(230,0,0,1), 0 0 60px rgba(255,50,50,0.6), 0 2px 4px rgba(0,0,0,0.9); }
-  }
-
+  .quick-order-content h3 { color: #fff; margin-bottom: 15px; font-size: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px;}
+  
   @media (max-width: 600px) {
     .ball { width: 30px; height: 30px; }
     .festive-balls.option-b .ball { width: 34px; height: 34px; }
@@ -490,10 +411,7 @@
 </style>
 </head><body>
 
-<!-- 🎆 FISHEKZJARR I MADH -->
 <div class="mega-firework" id="megaFirework" style="display:none; color:#ffd700;"></div>
-
-<!-- 🎄 OPSIONI A & B -->
 <div class="festive-balls" id="festiveBalls" style="display: none;">
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball red"></div></div>
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball green"></div></div>
@@ -503,11 +421,7 @@
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball silver"></div></div>
   <div class="ball-wrapper"><div class="ball-thread"></div><div class="ball-cap"></div><div class="ball purple"></div></div>
 </div>
-
-<!-- ❄️ OPSIONI B -->
 <div class="snowflakes" id="snowflakesContainer" style="display: none;"></div>
-
-<!-- 🎆 OPSIONI C -->
 <div class="newyear-container" id="newyearContainer" style="display: none;">
   <div class="star" style="top: 8%;  left: 12%; animation-delay: 0s;">★</div>
   <div class="star" style="top: 15%; left: 45%; animation-delay: 0.3s; font-size: 10px;">✦</div>
@@ -519,20 +433,12 @@
   <div class="star" style="top: 5%;  left: 88%; animation-delay: 1s;   font-size: 10px;">✦</div>
   <div class="star" style="top: 32%; left: 55%; animation-delay: 1.5s; font-size: 10px;">✦</div>
   <div class="star" style="top: 65%; left: 5%;  animation-delay: 0.8s;">★</div>
-  <div class="firework"></div>
-  <div class="firework"></div>
-  <div class="firework"></div>
-  <div class="firework"></div>
-  <div class="firework"></div>
+  <div class="firework"></div><div class="firework"></div><div class="firework"></div><div class="firework"></div><div class="firework"></div>
   <div class="newyear-text" id="newyearText">2027<small>GËZUAR VITIN E RI</small></div>
 </div>
-
-<!-- 🇦🇱 OPSIONI D: 28-29 NËNTOR -->
 <div class="november-container" id="novemberContainer" style="display: none;">
   <div class="eagle-symbol">🦅</div>
-  <div class="flag-wave"></div>
-  <div class="flag-wave"></div>
-  <div class="flag-wave"></div>
+  <div class="flag-wave"></div><div class="flag-wave"></div><div class="flag-wave"></div>
   <div class="al-star" style="top: 10%; left: 8%;  animation-delay: 0s;">★</div>
   <div class="al-star" style="top: 20%; left: 85%; animation-delay: 0.5s; font-size: 12px;">✦</div>
   <div class="al-star" style="top: 35%; left: 15%; animation-delay: 1s;   font-size: 10px;">★</div>
@@ -555,8 +461,14 @@
   </div>
 </div>
 
+<!-- MODAL I RI PER POROSI TE SHPEJTE -->
+<div class="quick-order-modal" id="quickOrderModal">
+    <div class="quick-order-content" id="quickOrderContent">
+        <!-- Përmbajtja mbushet me JS -->
+    </div>
+</div>
+
 <div id="main-page">
-  <!-- OFERTA SPECIALE BANNER -->
   <div class="special-offer-banner" id="specialOfferBanner" style="display: none;">
     <span class="offer-emoji">🔥</span>
     <span id="offerText">OFERTA SPECIALE - ZBRITJE DERI 40%!</span>
@@ -715,11 +627,8 @@
   let activeCoupon = null;
   let selectedRating = 0;
   let currentProductForReview = null;
+  let currentQuickOrderProduct = null;
 
-  /* =====================================================
-     KONTROLLI I DEKORIMIT
-     0=fikur, 1=topa, 2=topa+borë, 3=Vit i Ri, 4=28-29 Nëntor
-     ===================================================== */
   let festiveMode = parseInt(localStorage.getItem('cz_festive_mode'));
   if (isNaN(festiveMode)) {
     festiveMode = 3; 
@@ -852,7 +761,6 @@
     setTimeout(() => { checkSpecialOffer(); }, 3500);
   });
 
-  // Kontrollon nëse ka produkte me zbritje për banner
   function checkSpecialOffer() {
     const discounted = products.filter(p => p.discount && p.discount > 0);
     if (discounted.length > 0) {
@@ -866,11 +774,8 @@
 
   applyFestiveMode();
 
-  /* ===================================================== */
-
   const defaultProducts = [
-    { id: 1, emri: "LED Ambient Light", pershkrimi: "Set ndriçimi LED RGB për interierin e makinës.", cmimi: 2500, discount: 0, kategoria: "ndricim", stoku: 10, fotot: ["https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"] },
-    { id: 2, emri: "Logo Volkswagen për Dyer", pershkrimi: "Drita LED që projekton logon e Volkswagen në tokë.", cmimi: 1800, discount: 0, kategoria: "ndricim", stoku: 5, fotot: ["https://images.unsplash.com/photo-1542362567-b07e54358753?w=600&q=80"] }
+    { id: 1, emri: "LED Ambient Light", pershkrimi: "Set ndriçimi LED RGB për interierin e makinës.", cmimi: 2500, discount: 0, kategoria: "ndricim", stoku: 10, fotot: ["https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"], opsionet: [] }
   ];
 
   const defaultQytetet = [
@@ -884,7 +789,6 @@
   let products = JSON.parse(localStorage.getItem('cz_products_cache')) || defaultProducts;
   let cart = JSON.parse(localStorage.getItem('cz_cart')) || [];
   let favorites = JSON.parse(localStorage.getItem('cz_favs')) || [];
-  // Reviews: { productId: [ {name, comment, stars, date} ] }
   let reviews = JSON.parse(localStorage.getItem('cz_reviews')) || {};
   
   let siteSettings = JSON.parse(localStorage.getItem('cz_settings_cache')) || { 
@@ -950,7 +854,13 @@
         const data = docSnap.data();
         if(data.produktet && data.produktet.length > 0) {
           products = data.produktet;
-          products.forEach(p => { if(p.discount === undefined) p.discount = 0; });
+          products.forEach(p => { 
+              if(p.discount === undefined) p.discount = 0; 
+              if(!p.opsionet) p.opsionet = []; 
+              if(p.opsionet.length > 0 && typeof p.opsionet[0] === 'string') {
+                  p.opsionet = p.opsionet.map(o => ({ emri: o, stoku: 1 }));
+              }
+          });
           localStorage.setItem('cz_products_cache', JSON.stringify(products)); 
         }
         if(data.cilesimet) {
@@ -1086,7 +996,6 @@
         ? `<div class="price-wrap"><div class="price price-discounted">${finalPrice.toLocaleString()} <span>L</span></div><div class="old-price">${p.cmimi.toLocaleString()} L</div></div>`
         : `<div class="price-wrap"><div class="price">${finalPrice.toLocaleString()} <span>L</span></div></div>`;
 
-      // Shfaq yjet mesatarisht në kartë
       const productReviews = reviews[p.id] || [];
       const avgRating = productReviews.length > 0 ? (productReviews.reduce((s, r) => s + r.stars, 0) / productReviews.length).toFixed(1) : 0;
       const starsHTML = avgRating > 0 ? `<div style="font-size:11px; color:var(--gold); margin-bottom:6px;">${'★'.repeat(Math.round(avgRating))}${'☆'.repeat(5-Math.round(avgRating))} <span style="color:#888;">(${productReviews.length})</span></div>` : '';
@@ -1105,12 +1014,82 @@
           ${stockHTML}
           <div class="btn-group">
             <button class="btn-add" onclick="event.stopPropagation(); addToCart(${p.id})" ${btnDisabled}>🛒 Shto</button>
-            <a href="https://wa.me/355${siteSettings.numri.substring(1)}?text=Pershendetje,%20dua%20te%20porosit%20${encodeURIComponent(p.emri)}" class="btn-wa" target="_blank" onclick="event.stopPropagation()">Porosit</a>
+            <button class="btn-wa" onclick="event.stopPropagation(); quickOrder(${p.id})">POROSIT</button>
           </div>
         </div>
       `;
       container.appendChild(card);
     });
+  }
+
+  function quickOrder(id) {
+      const p = products.find(prod => prod.id === id);
+      if (!p) return;
+      
+      if (!p.opsionet || p.opsionet.length === 0) {
+          window.open(`https://wa.me/355${siteSettings.numri.substring(1)}?text=Pershendetje,%20dua%20te%20porosit%20${encodeURIComponent(p.emri)}`, '_blank');
+          return;
+      }
+      
+      currentQuickOrderProduct = p;
+      const modal = document.getElementById('quickOrderModal');
+      const content = document.getElementById('quickOrderContent');
+      
+      let opsionetHTML = p.opsionet.map(op => {
+          let hasStock = op.stoku > 0;
+          return `
+            <div onclick="selectQuickVariant(this, '${op.emri}', ${hasStock})" 
+                 style="border: 2px solid #333; padding: 12px; margin-bottom: 10px; border-radius: 8px; cursor: ${hasStock ? 'pointer' : 'not-allowed'}; display: flex; justify-content: space-between; align-items: center; background: ${hasStock ? '#111' : '#1a0000'}; opacity: ${hasStock ? '1' : '0.6'}; transition: 0.3s;">
+                <span style="font-weight: 700; color: ${hasStock ? '#fff' : 'var(--red)'}; font-size: 14px;">${op.emri}</span>
+                <span style="font-size: 11px; font-weight: 800; color: ${hasStock ? 'var(--green)' : 'var(--red)'};">${hasStock ? '✓ Në Gjendje' : '✕ S\'ka'}</span>
+            </div>
+          `;
+      }).join('');
+      
+      content.innerHTML = `
+          <h3>Zgjidh Opsionin: ${p.emri}</h3>
+          <div id="quickOrderOptions">${opsionetHTML}</div>
+          <button onclick="submitQuickOrder()" style="width: 100%; background: var(--green); color: #fff; padding: 15px; border: none; border-radius: 8px; font-weight: 900; font-size: 14px; margin-top: 15px; cursor: pointer; text-transform: uppercase;">Vazhdo në WhatsApp</button>
+          <button onclick="closeQuickOrder()" style="width: 100%; background: #333; color: #fff; padding: 12px; border: none; border-radius: 8px; font-weight: 800; font-size: 12px; margin-top: 8px; cursor: pointer; text-transform: uppercase;">Anulo</button>
+      `;
+      
+      window.quickSelectedVariant = null;
+      modal.classList.add('show');
+  }
+
+  function selectQuickVariant(element, variantName, hasStock) {
+      if (!hasStock) {
+          alert("⚠️ Ky opsion aktualisht nuk ka në gjendje!");
+          return;
+      }
+      
+      const boxes = element.parentElement.querySelectorAll('div');
+      boxes.forEach(box => {
+          box.style.borderColor = '#333';
+          box.style.backgroundColor = '#111';
+      });
+      
+      element.style.borderColor = 'var(--green)';
+      element.style.backgroundColor = 'rgba(37, 211, 102, 0.1)';
+      
+      window.quickSelectedVariant = variantName;
+  }
+
+  function submitQuickOrder() {
+      if (!window.quickSelectedVariant) {
+          alert("⚠️ Ju lutem zgjidhni një opsion!");
+          return;
+      }
+      
+      const p = currentQuickOrderProduct;
+      window.open(`https://wa.me/355${siteSettings.numri.substring(1)}?text=Pershendetje,%20dua%20te%20porosit%20${encodeURIComponent(p.emri)}%20(Opsioni:%20${encodeURIComponent(window.quickSelectedVariant)})`, '_blank');
+      closeQuickOrder();
+  }
+
+  function closeQuickOrder() {
+      document.getElementById('quickOrderModal').classList.remove('show');
+      currentQuickOrderProduct = null;
+      window.quickSelectedVariant = null;
   }
 
   function openProduct(id) {
@@ -1134,6 +1113,26 @@
       ? `<div class="price-large">${finalPrice.toLocaleString()} L <span class="old-price-large">${p.cmimi.toLocaleString()} L</span></div><div class="save-badge">💰 Kurseni ${savings.toLocaleString()} L (-${p.discount}%)</div>`
       : `<div class="price-large">${finalPrice.toLocaleString()} L</div>`;
 
+    // Vendosja e opsioneve SIPER pershkrimit
+    let opsionetHTML = '';
+    if (p.opsionet && p.opsionet.length > 0) {
+        opsionetHTML = `
+        <div style="margin-bottom: 20px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; border: 1px solid #333;">
+            <h3 style="font-size: 13px; color: #fff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Zgjidh Opsionin:</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                ${p.opsionet.map((op) => `
+                    <div class="variant-box" onclick="selectVariant(this, '${op.emri.replace(/'/g, "\\'")}', ${op.stoku > 0})" 
+                         style="border: 2px solid #333; padding: 10px 15px; border-radius: 8px; cursor: ${op.stoku > 0 ? 'pointer' : 'not-allowed'}; font-size: 12px; font-weight: bold; background: ${op.stoku > 0 ? '#111' : '#1a0000'}; transition: 0.3s; color: #fff;">
+                        ${op.emri} <span style="font-size:10px; color:${op.stoku > 0 ? 'var(--green)' : 'var(--red)'}; display:block; margin-top:2px;">${op.stoku > 0 ? 'Në Gjendje' : 'S\'ka'}</span>
+                    </div>
+                `).join('')}
+            </div>
+        </div>`;
+    }
+
+    window.selectedVariantForCart = ""; 
+
+    // Ndërtimi i HTML, opsionet vendosen para përshkrimit
     container.innerHTML = `
       <div class="product-gallery">
         <div class="main-image-container"><img src="${p.fotot[0] || fallbackImage}" id="mainProductImg" onerror="this.src='${fallbackImage}'"></div>
@@ -1143,10 +1142,13 @@
         <h1>${p.emri}</h1>
         ${priceHTML}
         <div class="stock-info" style="margin-bottom: 20px; font-size: 13px;">${stockText}</div>
+        
+        ${opsionetHTML}
+        
         <p class="desc-full">${p.pershkrimi}</p>
         <div class="product-actions">
-          <button class="btn-add-large" onclick="addToCart(${p.id}); closeProduct(); togglePanel('cartPanel');" ${btnDisabled}>🛒 Shto në Shportë</button>
-          <a href="https://wa.me/355${siteSettings.numri.substring(1)}?text=Pershendetje,%20dua%20te%20porosit%20${encodeURIComponent(p.emri)}" class="btn-wa-large" target="_blank">Porosit direkt</a>
+          <button class="btn-add-large" onclick="addToCart(${p.id}, window.selectedVariantForCart, true)" ${btnDisabled}>🛒 Shto në Shportë</button>
+          <a href="#" onclick="porositDirektNgaModal(${p.id}, event)" class="btn-wa-large">Porosit direkt</a>
         </div>
         ${buildReviewsSection(p.id)}
       </div>
@@ -1154,7 +1156,6 @@
     document.getElementById('productModal').style.display = 'block';
     document.body.style.overflow = 'hidden'; 
 
-    // Setup star picker
     setTimeout(() => {
       const starPicker = document.getElementById('starPicker');
       if (starPicker) {
@@ -1170,6 +1171,41 @@
         });
       }
     }, 50);
+  }
+
+  function selectVariant(element, variantName, hasStock) {
+    if (!hasStock) {
+        alert("⚠️ Ky opsion aktualisht nuk ka në gjendje!");
+        return;
+    }
+    
+    const boxes = element.parentElement.querySelectorAll('.variant-box');
+    boxes.forEach(box => {
+        box.style.borderColor = '#333';
+        box.style.backgroundColor = '#111';
+    });
+    
+    element.style.borderColor = 'var(--green)';
+    element.style.backgroundColor = 'rgba(37, 211, 102, 0.1)';
+    
+    window.selectedVariantForCart = variantName;
+  }
+
+  function porositDirektNgaModal(id, event) {
+    event.preventDefault();
+    const p = products.find(prod => prod.id === id);
+    if (!p) return;
+    
+    let variantText = "";
+    if (p.opsionet && p.opsionet.length > 0) {
+        if (!window.selectedVariantForCart) {
+            alert("⚠️ Ju lutem zgjidhni një opsion para se të porositni!");
+            return;
+        }
+        variantText = ` (Opsioni: ${window.selectedVariantForCart})`;
+    }
+    
+    window.open(`https://wa.me/355${siteSettings.numri.substring(1)}?text=Pershendetje,%20dua%20te%20porosit%20${encodeURIComponent(p.emri)}${encodeURIComponent(variantText)}`, '_blank');
   }
 
   function buildReviewsSection(productId) {
@@ -1233,7 +1269,7 @@
     await ruajNeFirebase();
     alert("✅ Faleminderit për vlerësimin tënd!");
     selectedRating = 0;
-    openProduct(productId); // rifresko modal
+    openProduct(productId); 
   }
 
   function ndryshoFotonMadhe(thumb, src) {
@@ -1273,19 +1309,37 @@
     });
   }
 
-  function addToCart(id) {
+  function addToCart(id, variant = "", fromModal = false) {
     const p = products.find(prod => prod.id === id);
-    if(p && p.stoku !== undefined && p.stoku <= 0) { alert("⚠️ Ky produkt nuk ka në gjendje!"); return; }
-    const existing = cart.find(item => item.id === id);
-    if (existing) existing.qty += 1; else cart.push({ id: id, qty: 1 });
+    if(!p) return;
+    if(p.stoku !== undefined && p.stoku <= 0) { alert("⚠️ Ky produkt nuk ka në gjendje!"); return; }
+    
+    if (p.opsionet && p.opsionet.length > 0 && !variant) {
+        alert("⚠️ Ju lutem zgjidhni një opsion!");
+        return;
+    }
+
+    const existing = cart.find(item => item.id === id && item.variant === variant);
+    
+    if (existing) {
+        existing.qty += 1; 
+    } else {
+        cart.push({ id: id, qty: 1, variant: variant || null });
+    }
+    
     saveCartLocally(); updateBadges(); renderCart();
+    
+    if (fromModal) {
+        closeProduct(); 
+        togglePanel('cartPanel');
+    }
   }
 
-  function changeQty(id, delta) {
-    const item = cart.find(i => i.id === id);
+  function changeQty(id, variant, delta) {
+    const item = cart.find(i => i.id === id && i.variant === variant);
     if (item) {
       item.qty += delta;
-      if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+      if (item.qty <= 0) cart = cart.filter(i => !(i.id === id && i.variant === variant));
       saveCartLocally(); updateBadges(); renderCart();
     }
   }
@@ -1309,17 +1363,25 @@
       if (p) {
         const fp = getFinalPrice(p);
         subtotal += fp * item.qty;
+        
+        let variantText = item.variant ? `<br><small style="color:var(--green); font-weight:bold;">Opsioni: ${item.variant}</small>` : "";
+
         const priceLine = (p.discount && p.discount > 0)
           ? `<p>${fp.toLocaleString()} L <small style="color:#777;text-decoration:line-through;">${p.cmimi.toLocaleString()}</small></p>`
           : `<p>${fp.toLocaleString()} L</p>`;
+          
         container.innerHTML += `
           <div class="cart-item">
             <img src="${p.fotot[0] || fallbackImage}" onerror="this.src='${fallbackImage}'">
             <div class="cart-item-info">
-              <h4>${p.emri}</h4>${priceLine}
-              <div class="qty-controls"><button onclick="changeQty(${p.id}, -1)">-</button><span>${item.qty}</span><button onclick="changeQty(${p.id}, 1)">+</button></div>
+              <h4>${p.emri}</h4>${variantText}${priceLine}
+              <div class="qty-controls">
+                <button onclick="changeQty(${p.id}, '${item.variant}', -1)">-</button>
+                <span>${item.qty}</span>
+                <button onclick="changeQty(${p.id}, '${item.variant}', 1)">+</button>
+              </div>
             </div>
-            <button class="remove-item" onclick="changeQty(${p.id}, -${item.qty})">×</button>
+            <button class="remove-item" onclick="changeQty(${p.id}, '${item.variant}', -${item.qty})">×</button>
           </div>`;
       }
     });
@@ -1383,7 +1445,8 @@
       if(p) {
         const fp = getFinalPrice(p);
         const discText = (p.discount && p.discount > 0) ? ` (zbritje -${p.discount}%)` : '';
-        msg += `- ${p.emri}${discText} (x${item.qty}) = ${(fp * item.qty).toLocaleString()} L\n`;
+        const variantText = item.variant ? ` [Opsioni: ${item.variant}]` : '';
+        msg += `- ${p.emri}${variantText}${discText} (x${item.qty}) = ${(fp * item.qty).toLocaleString()} L\n`;
       }
     });
 
@@ -1442,7 +1505,6 @@
         </div>
       </div>`).join('') || '<p style="font-size:11px; color:#666;">Nuk ka qytete.</p>';
 
-    // Lista e reviews
     let allReviewsHTML = '';
     let totalReviewsCount = 0;
     for (const pid in reviews) {
@@ -1484,13 +1546,21 @@
           <div class="admin-form-group"><label>Përshkrimi</label><textarea id="newPershkrimi" rows="2" placeholder="Përshkrimi..."></textarea></div>
           <div class="admin-form-group"><label>Çmimi (Lek)</label><input type="number" id="newCmimi" placeholder="1500"></div>
           <div class="admin-form-group"><label>Discount (%) <small style="color:var(--gold);">0 = pa zbritje</small></label><input type="number" id="newDiscount" placeholder="0" min="0" max="90" value="0"></div>
-          <div class="admin-form-group"><label>Sasia në Gjendje</label><input type="number" id="newStoku" placeholder="10"></div>
+          <div class="admin-form-group"><label>Sasia Totale në Gjendje</label><input type="number" id="newStoku" placeholder="10"></div>
+          
+          <div class="admin-form-group">
+            <label>Opsionet (Emri | Sasia, Ndarë me presje)</label>
+            <input type="text" id="newOpsionet" placeholder="p.sh. OOOOO|5, Audi-OOOO|3, S-line|0">
+            <small style="color:#888; font-size:10px; display:block; margin-top:5px;">Shkruaj emrin, pastaj | (pikë verticale), pastaj sasinë. Shembull: <b>S-line|10, RS|0</b>. Lëre bosh nëse s'ka opsione.</small>
+          </div>
+
           <div class="admin-form-group"><label>Foto 1</label><input type="file" id="newFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Foto 2 (Opsionale)</label><input type="file" id="newFotoFile2" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Foto 3 (Opsionale)</label><input type="file" id="newFotoFile3" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Foto 4 (Opsionale)</label><input type="file" id="newFotoFile4" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Foto 5 (Opsionale)</label><input type="file" id="newFotoFile5" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
           <div class="admin-form-group"><label>Foto 6 (Opsionale)</label><input type="file" id="newFotoFile6" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
+          
           <div class="admin-form-group"><label>Kategoria</label><input type="text" id="newKategoria" placeholder="aksesore"></div>
           <button class="save-btn" onclick="shtoProdukt()">➕ Shto Produktin</button>
         </div>
@@ -1744,6 +1814,18 @@
     const discount = parseInt(document.getElementById('newDiscount').value) || 0;
     const stoku = parseInt(document.getElementById('newStoku').value) || 0;
     const kategoria = document.getElementById('newKategoria').value || 'aksesore';
+    
+    const opsionetInput = document.getElementById('newOpsionet').value;
+    let opsionet = [];
+    if (opsionetInput) {
+        opsionet = opsionetInput.split(',').map(o => {
+            const parts = o.split('|');
+            return {
+                emri: parts[0].trim(),
+                stoku: parts[1] ? parseInt(parts[1].trim()) : 1 
+            };
+        }).filter(o => o.emri !== "");
+    }
 
     if(!emri || !cmimi) { alert("⚠️ Plotëso emrin dhe çmimin!"); return; }
 
@@ -1751,6 +1833,7 @@
     if(!file1) { alert("⚠️ Zgjidh foton e parë!"); return; }
 
     let fototArray = [];
+    // Tani lexon te gjitha 6 fotot
     for (let i = 1; i <= 6; i++) {
         const f = document.getElementById('newFotoFile' + i).files[0];
         if(f) { let url = await ngarkoFoton(f); if(url) fototArray.push(url); }
@@ -1759,11 +1842,11 @@
     if(fototArray.length === 0) { alert("⚠️ Fotot nuk u ngarkuan!"); return; }
 
     const idRi = Date.now();
-    products.push({ id: idRi, emri, pershkrimi, cmimi, discount, kategoria, stoku, fotot: fototArray });
+    products.push({ id: idRi, emri, pershkrimi, cmimi, discount, kategoria, stoku, fotot: fototArray, opsionet: opsionet });
     
     await ruajNeFirebase(); alert("✅ U shtua!");
     
-    document.getElementById('newEmri').value = ''; document.getElementById('newPershkrimi').value = ''; document.getElementById('newCmimi').value = ''; document.getElementById('newDiscount').value = '0'; document.getElementById('newStoku').value = ''; document.getElementById('newKategoria').value = '';
+    document.getElementById('newEmri').value = ''; document.getElementById('newPershkrimi').value = ''; document.getElementById('newCmimi').value = ''; document.getElementById('newDiscount').value = '0'; document.getElementById('newStoku').value = ''; document.getElementById('newKategoria').value = ''; document.getElementById('newOpsionet').value = '';
     for (let i = 1; i <= 6; i++) document.getElementById('newFotoFile' + i).value = '';
     
     renderProducts(); renderAdminList(); checkSpecialOffer();
@@ -1808,20 +1891,28 @@
       </div>
     `).join('');
 
+    let opsionetString = (p.opsionet || []).map(o => `${o.emri}|${o.stoku}`).join(', ');
+
     container.innerHTML = `
       <h2>✏️ Edito Produktin</h2>
       <div class="admin-form-group"><label>Emri</label><input type="text" id="editEmri" value="${p.emri}"></div>
       <div class="admin-form-group"><label>Përshkrimi</label><textarea id="editPershkrimi" rows="3">${p.pershkrimi}</textarea></div>
       <div class="admin-form-group"><label>Çmimi</label><input type="number" id="editCmimi" value="${p.cmimi}"></div>
       <div class="admin-form-group"><label>Discount (%)</label><input type="number" id="editDiscount" value="${p.discount || 0}" min="0" max="90"></div>
-      <div class="admin-form-group"><label>Sasia</label><input type="number" id="editStoku" value="${p.stoku !== undefined ? p.stoku : 10}"></div>
+      <div class="admin-form-group"><label>Sasia Totale</label><input type="number" id="editStoku" value="${p.stoku !== undefined ? p.stoku : 10}"></div>
       <div class="admin-form-group"><label>Kategoria</label><input type="text" id="editKategoria" value="${p.kategoria}"></div>
+      
+      <div class="admin-form-group">
+        <label>Opsionet (Emri | Sasia, Ndarë me presje)</label>
+        <input type="text" id="editOpsionet" value="${opsionetString}">
+        <small style="color:#888; font-size:10px; display:block; margin-top:5px;">Shembull: <b>S-line|10, RS|0</b></small>
+      </div>
       
       <h3 style="color:var(--red); margin:20px 0 10px; font-size:14px;">Fotot aktuale</h3>
       <div>${fototFshirjeHTML || '<p style="color:#666; font-size:12px;">Nuk ka foto.</p>'}</div>
       <button class="save-btn" style="background:var(--gold); color:#000; margin-bottom:20px;" onclick="ruajVetemFotot(${p.id})">💾 Ruaj Ndryshimet e Fotove</button>
       
-      <h3 style="color:var(--green); margin:20px 0 10px; font-size:14px;">Shto / Zëvendëso Foto</h3>
+      <h3 style="color:var(--green); margin:20px 0 10px; font-size:14px;">Shto / Zëvendëso Foto (Deri në 6)</h3>
       <div class="admin-form-group"><label>Foto 1</label><input type="file" id="editFotoFile1" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
       <div class="admin-form-group"><label>Foto 2</label><input type="file" id="editFotoFile2" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
       <div class="admin-form-group"><label>Foto 3</label><input type="file" id="editFotoFile3" accept="image/*" style="width:100%; padding:8px; background:#111; border:1px solid #333; color:#fff; border-radius:5px;"></div>
@@ -1840,7 +1931,7 @@
     const p = products.find(prod => prod.id === id);
     if(!p) return;
     p.fotot.splice(index, 1);
-    openEditProduct(id); // Rifreskon pamjen e editimit
+    openEditProduct(id);
   }
 
   async function ruajVetemFotot(id) {
@@ -1861,22 +1952,35 @@
     p.discount = parseInt(document.getElementById('editDiscount').value) || 0;
     p.stoku = parseInt(document.getElementById('editStoku').value) || 0;
     p.kategoria = document.getElementById('editKategoria').value;
+    
+    const editOpsInput = document.getElementById('editOpsionet').value;
+    if (editOpsInput) {
+        p.opsionet = editOpsInput.split(',').map(o => {
+            const parts = o.split('|');
+            return {
+                emri: parts[0].trim(),
+                stoku: parts[1] ? parseInt(parts[1].trim()) : 1 
+            };
+        }).filter(o => o.emri !== "");
+    } else {
+        p.opsionet = [];
+    }
 
     let fototArray = [...p.fotot];
     
-    // Kontrollojmë nëse ka foto të reja për t'u ngarkuar
+    // Tani lexon dhe ruan deri ne 6 foto gjate editimit
     for (let i = 1; i <= 6; i++) {
         const fileInput = document.getElementById('editFotoFile' + i);
         if(fileInput && fileInput.files[0]) { 
             let url = await ngarkoFoton(fileInput.files[0]); 
             if(url) {
-                if(fototArray[i-1]) { fototArray[i-1] = url; } // Zëvendëson foton ekzistuese në këtë pozicion
-                else { fototArray.push(url); } // Shton foto të re nëse nuk ka
+                if(fototArray[i-1]) { fototArray[i-1] = url; }
+                else { fototArray.push(url); }
             } 
         }
     }
 
-    p.fotot = fototArray.filter(f => f); // Heqim vlerat bosh nëse ka
+    p.fotot = fototArray.filter(f => f); 
     
     await ruajNeFirebase(); 
     alert("✅ Produkti u përditësua me sukses!"); 
