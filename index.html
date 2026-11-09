@@ -237,7 +237,6 @@
   .thumbnails img { width: 75px; height: 75px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid var(--border); transition: 0.3s;}
   .thumbnails img.active { border-color: var(--red); box-shadow: 0 0 15px rgba(230,0,0,0.3);}
   
-  /* BACKGROUND I BUKUR PER INFORMACIONIN E PRODUKTIT */
   .product-info { 
     background: linear-gradient(145deg, #161616 0%, #0a0a0a 100%);
     padding: 25px;
@@ -461,11 +460,8 @@
   </div>
 </div>
 
-<!-- MODAL I RI PER POROSI TE SHPEJTE -->
 <div class="quick-order-modal" id="quickOrderModal">
-    <div class="quick-order-content" id="quickOrderContent">
-        <!-- Përmbajtja mbushet me JS -->
-    </div>
+    <div class="quick-order-content" id="quickOrderContent"></div>
 </div>
 
 <div id="main-page">
@@ -621,13 +617,20 @@
   window.getDoc = getDoc;
   window.setDoc = setDoc;
   window.dispatchEvent(new Event('firebaseReady'));
-</script><script>
+</script>
+
+<script>
   const IMGBB_API_KEY = "07386dda0574256ec0b326a5c4f365cf";
   let lokacioniGps = "";
   let activeCoupon = null;
   let selectedRating = 0;
   let currentProductForReview = null;
   let currentQuickOrderProduct = null;
+
+  window._miniVariantProduct = null;
+  window._miniVariantFromModal = false;
+  window._miniSelectedVariant = null;
+  window._miniMode = null;
 
   let festiveMode = parseInt(localStorage.getItem('cz_festive_mode'));
   if (isNaN(festiveMode)) {
@@ -1031,33 +1034,44 @@
           return;
       }
       
-      currentQuickOrderProduct = p;
+      hapModalOpsione(p, 'whatsapp', false);
+  }
+
+  function hapModalOpsione(p, mode, fromModal) {
       const modal = document.getElementById('quickOrderModal');
       const content = document.getElementById('quickOrderContent');
       
+      window._miniVariantProduct = p;
+      window._miniMode = mode;
+      window._miniVariantFromModal = fromModal;
+      window._miniSelectedVariant = null;
+      
+      const actionText = mode === 'cart' ? '🛒 Shto në Shportë' : '💬 Vazhdo në WhatsApp';
+      const actionColor = mode === 'cart' ? '#fff' : 'var(--green)';
+      const actionTextColor = mode === 'cart' ? '#000' : '#fff';
+      
       let opsionetHTML = p.opsionet.map(op => {
-          let hasStock = op.stoku > 0;
+          const hasStock = op.stoku > 0;
           return `
-            <div onclick="selectQuickVariant(this, '${op.emri}', ${hasStock})" 
+            <div onclick="selectMiniVariant(this, '${op.emri.replace(/'/g, "\\'")}', ${hasStock})" 
                  style="border: 2px solid #333; padding: 12px; margin-bottom: 10px; border-radius: 8px; cursor: ${hasStock ? 'pointer' : 'not-allowed'}; display: flex; justify-content: space-between; align-items: center; background: ${hasStock ? '#111' : '#1a0000'}; opacity: ${hasStock ? '1' : '0.6'}; transition: 0.3s;">
                 <span style="font-weight: 700; color: ${hasStock ? '#fff' : 'var(--red)'}; font-size: 14px;">${op.emri}</span>
-                <span style="font-size: 11px; font-weight: 800; color: ${hasStock ? 'var(--green)' : 'var(--red)'};">${hasStock ? '✓ Në Gjendje' : '✕ S\'ka'}</span>
+                <span style="font-size: 11px; font-weight: 800; color: ${hasStock ? 'var(--green)' : 'var(--red)'};">${hasStock ? '✓ Gjendje (' + op.stoku + ')' : '✕ S\'ka'}</span>
             </div>
           `;
       }).join('');
       
       content.innerHTML = `
           <h3>Zgjidh Opsionin: ${p.emri}</h3>
-          <div id="quickOrderOptions">${opsionetHTML}</div>
-          <button onclick="submitQuickOrder()" style="width: 100%; background: var(--green); color: #fff; padding: 15px; border: none; border-radius: 8px; font-weight: 900; font-size: 14px; margin-top: 15px; cursor: pointer; text-transform: uppercase;">Vazhdo në WhatsApp</button>
+          <div id="miniVariantOptions">${opsionetHTML}</div>
+          <button onclick="submitMiniVariant()" style="width: 100%; background: ${actionColor}; color: ${actionTextColor}; padding: 15px; border: none; border-radius: 8px; font-weight: 900; font-size: 14px; margin-top: 15px; cursor: pointer; text-transform: uppercase;">${actionText}</button>
           <button onclick="closeQuickOrder()" style="width: 100%; background: #333; color: #fff; padding: 12px; border: none; border-radius: 8px; font-weight: 800; font-size: 12px; margin-top: 8px; cursor: pointer; text-transform: uppercase;">Anulo</button>
       `;
       
-      window.quickSelectedVariant = null;
       modal.classList.add('show');
   }
 
-  function selectQuickVariant(element, variantName, hasStock) {
+  function selectMiniVariant(element, variantName, hasStock) {
       if (!hasStock) {
           alert("⚠️ Ky opsion aktualisht nuk ka në gjendje!");
           return;
@@ -1072,22 +1086,49 @@
       element.style.borderColor = 'var(--green)';
       element.style.backgroundColor = 'rgba(37, 211, 102, 0.1)';
       
-      window.quickSelectedVariant = variantName;
+      window._miniSelectedVariant = variantName;
   }
 
-  function submitQuickOrder() {
-      if (!window.quickSelectedVariant) {
+  function submitMiniVariant() {
+      if (!window._miniSelectedVariant) {
           alert("⚠️ Ju lutem zgjidhni një opsion!");
           return;
       }
       
-      const p = currentQuickOrderProduct;
-      window.open(`https://wa.me/355${siteSettings.numri.substring(1)}?text=Pershendetje,%20dua%20te%20porosit%20${encodeURIComponent(p.emri)}%20(Opsioni:%20${encodeURIComponent(window.quickSelectedVariant)})`, '_blank');
+      const p = window._miniVariantProduct;
+      const variant = window._miniSelectedVariant;
+      const mode = window._miniMode;
+      const fromModal = window._miniVariantFromModal;
+      
       closeQuickOrder();
+      
+      if (mode === 'cart') {
+          const existing = cart.find(item => item.id === p.id && item.variant === variant);
+          if (existing) {
+              existing.qty += 1;
+          } else {
+              cart.push({ id: p.id, qty: 1, variant: variant });
+          }
+          
+          saveCartLocally(); updateBadges(); renderCart();
+          
+          if (fromModal) {
+              closeProduct();
+              togglePanel('cartPanel');
+          } else {
+              alert("✅ " + p.emri + " (" + variant + ") u shtua në shportë!");
+          }
+      } else if (mode === 'whatsapp') {
+          window.open(`https://wa.me/355${siteSettings.numri.substring(1)}?text=Pershendetje,%20dua%20te%20porosit%20${encodeURIComponent(p.emri)}%20(Opsioni:%20${encodeURIComponent(variant)})`, '_blank');
+      }
   }
 
   function closeQuickOrder() {
       document.getElementById('quickOrderModal').classList.remove('show');
+      window._miniVariantProduct = null;
+      window._miniSelectedVariant = null;
+      window._miniMode = null;
+      window._miniVariantFromModal = false;
       currentQuickOrderProduct = null;
       window.quickSelectedVariant = null;
   }
@@ -1113,7 +1154,6 @@
       ? `<div class="price-large">${finalPrice.toLocaleString()} L <span class="old-price-large">${p.cmimi.toLocaleString()} L</span></div><div class="save-badge">💰 Kurseni ${savings.toLocaleString()} L (-${p.discount}%)</div>`
       : `<div class="price-large">${finalPrice.toLocaleString()} L</div>`;
 
-    // Vendosja e opsioneve SIPER pershkrimit
     let opsionetHTML = '';
     if (p.opsionet && p.opsionet.length > 0) {
         opsionetHTML = `
@@ -1123,7 +1163,7 @@
                 ${p.opsionet.map((op) => `
                     <div class="variant-box" onclick="selectVariant(this, '${op.emri.replace(/'/g, "\\'")}', ${op.stoku > 0})" 
                          style="border: 2px solid #333; padding: 10px 15px; border-radius: 8px; cursor: ${op.stoku > 0 ? 'pointer' : 'not-allowed'}; font-size: 12px; font-weight: bold; background: ${op.stoku > 0 ? '#111' : '#1a0000'}; transition: 0.3s; color: #fff;">
-                        ${op.emri} <span style="font-size:10px; color:${op.stoku > 0 ? 'var(--green)' : 'var(--red)'}; display:block; margin-top:2px;">${op.stoku > 0 ? 'Në Gjendje' : 'S\'ka'}</span>
+                        ${op.emri} <span style="font-size:10px; color:${op.stoku > 0 ? 'var(--green)' : 'var(--red)'}; display:block; margin-top:2px;">${op.stoku > 0 ? 'Në Gjendje (' + op.stoku + ')' : 'S\'ka'}</span>
                     </div>
                 `).join('')}
             </div>
@@ -1132,7 +1172,6 @@
 
     window.selectedVariantForCart = ""; 
 
-    // Ndërtimi i HTML, opsionet vendosen para përshkrimit
     container.innerHTML = `
       <div class="product-gallery">
         <div class="main-image-container"><img src="${p.fotot[0] || fallbackImage}" id="mainProductImg" onerror="this.src='${fallbackImage}'"></div>
@@ -1312,14 +1351,26 @@
   function addToCart(id, variant = "", fromModal = false) {
     const p = products.find(prod => prod.id === id);
     if(!p) return;
-    if(p.stoku !== undefined && p.stoku <= 0) { alert("⚠️ Ky produkt nuk ka në gjendje!"); return; }
+    
+    if(p.stoku !== undefined && p.stoku <= 0) { 
+        alert("⚠️ Ky produkt nuk ka në gjendje!"); 
+        return; 
+    }
     
     if (p.opsionet && p.opsionet.length > 0 && !variant) {
-        alert("⚠️ Ju lutem zgjidhni një opsion!");
+        hapModalOpsione(p, 'cart', fromModal);
         return;
     }
+    
+    if (variant && p.opsionet) {
+        const op = p.opsionet.find(o => o.emri === variant);
+        if (op && op.stoku <= 0) {
+            alert("⚠️ Ky opsion nuk ka në gjendje!");
+            return;
+        }
+    }
 
-    const existing = cart.find(item => item.id === id && item.variant === variant);
+    const existing = cart.find(item => item.id === id && item.variant === (variant || null));
     
     if (existing) {
         existing.qty += 1; 
@@ -1335,30 +1386,13 @@
     }
   }
 
-  function changeQty(id, variant, delta) {
-    const item = cart.find(i => i.id === id && i.variant === variant);
-    if (item) {
-      item.qty += delta;
-      if (item.qty <= 0) cart = cart.filter(i => !(i.id === id && i.variant === variant));
-      saveCartLocally(); updateBadges(); renderCart();
-    }
-  }
-
-  function aplikoKupon() {
-    const kodi = document.getElementById('couponInput').value.trim().toUpperCase();
-    if (!kodi) { alert("Shkruaj kodin e zbritjes!"); return; }
-    const kupon = siteSettings.kuponet.find(k => k.kodi.toUpperCase() === kodi);
-    if (!kupon) { alert("⚠️ Kod i pavlefshëm!"); return; }
-    activeCoupon = kupon; renderCart();
-  }
-
-  function hiqKupon() { activeCoupon = null; document.getElementById('couponInput').value = ''; renderCart(); }
-
+  // ✅ FUNKSIONI I RREGULLUAR I RENDERIMIT TË SHPORTËS
   function renderCart() {
     const container = document.getElementById('cartItemsList');
     container.innerHTML = cart.length === 0 ? '<p style="color:#666; text-align:center; padding: 20px;">Shporta është bosh.</p>' : '';
     let subtotal = 0;
-    cart.forEach(item => {
+    
+    cart.forEach((item, index) => {
       const p = products.find(prod => prod.id === item.id);
       if (p) {
         const fp = getFinalPrice(p);
@@ -1376,12 +1410,12 @@
             <div class="cart-item-info">
               <h4>${p.emri}</h4>${variantText}${priceLine}
               <div class="qty-controls">
-                <button onclick="changeQty(${p.id}, '${item.variant}', -1)">-</button>
+                <button onclick="changeQtyByIndex(${index}, -1)">-</button>
                 <span>${item.qty}</span>
-                <button onclick="changeQty(${p.id}, '${item.variant}', 1)">+</button>
+                <button onclick="changeQtyByIndex(${index}, 1)">+</button>
               </div>
             </div>
-            <button class="remove-item" onclick="changeQty(${p.id}, '${item.variant}', -${item.qty})">×</button>
+            <button class="remove-item" onclick="removeCartItem(${index})">×</button>
           </div>`;
       }
     });
@@ -1415,6 +1449,37 @@
     }
   }
 
+  // ✅ Funksion i ri: ndryshon sasinë sipas indeksit (punon me të gjitha opsionet)
+  function changeQtyByIndex(index, delta) {
+    if (!cart[index]) return;
+    cart[index].qty += delta;
+    if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+    }
+    saveCartLocally();
+    updateBadges();
+    renderCart();
+  }
+
+  // ✅ Funksion i ri: heq produktin komplet nga shporta
+  function removeCartItem(index) {
+    if (!cart[index]) return;
+    cart.splice(index, 1);
+    saveCartLocally();
+    updateBadges();
+    renderCart();
+  }
+
+  function aplikoKupon() {
+    const kodi = document.getElementById('couponInput').value.trim().toUpperCase();
+    if (!kodi) { alert("Shkruaj kodin e zbritjes!"); return; }
+    const kupon = siteSettings.kuponet.find(k => k.kodi.toUpperCase() === kodi);
+    if (!kupon) { alert("⚠️ Kod i pavlefshëm!"); return; }
+    activeCoupon = kupon; renderCart();
+  }
+
+  function hiqKupon() { activeCoupon = null; document.getElementById('couponInput').value = ''; renderCart(); }
+
   function shfaqCheckout() {
     document.getElementById('btnShowCheckout').style.display = 'none';
     document.getElementById('checkoutForm').style.display = 'block';
@@ -1423,7 +1488,55 @@
     else document.getElementById('paymentSelectionArea').style.display = 'none';
   }
 
-  function dergoPorosine() {
+  function kontrolloStokunParaPorosise() {
+    for (const item of cart) {
+        const p = products.find(prod => prod.id === item.id);
+        if (!p) {
+            alert(`⚠️ Produkti u fshi nga dyqani dhe u hoq nga shporta.`);
+            cart = cart.filter(i => i.id !== item.id);
+            saveCartLocally(); updateBadges(); renderCart();
+            return false;
+        }
+        
+        if (p.stoku !== undefined && p.stoku < item.qty) {
+            alert(`⚠️ "${p.emri}" ka vetëm ${p.stoku} copë në gjendje, por ju kërkoni ${item.qty}!\nJu lutem ulni sasinë.`);
+            return false;
+        }
+        
+        if (item.variant && p.opsionet) {
+            const op = p.opsionet.find(o => o.emri === item.variant);
+            if (op && op.stoku < item.qty) {
+                alert(`⚠️ Opsioni "${item.variant}" i "${p.emri}" ka vetëm ${op.stoku} copë, por ju kërkoni ${item.qty}!\nJu lutem ulni sasinë.`);
+                return false;
+            }
+        }
+    }
+    return true;
+  }
+
+  async function ulStokunPasPorosise() {
+    for (const item of cart) {
+        const p = products.find(prod => prod.id === item.id);
+        if (!p) continue;
+        
+        if (p.stoku !== undefined) {
+            p.stoku = Math.max(0, p.stoku - item.qty);
+        }
+        
+        if (item.variant && p.opsionet) {
+            const op = p.opsionet.find(o => o.emri === item.variant);
+            if (op) {
+                op.stoku = Math.max(0, op.stoku - item.qty);
+            }
+        }
+    }
+    
+    await ruajNeFirebase();
+    renderProducts();
+    checkSpecialOffer();
+  }
+
+  async function dergoPorosine() {
     const emri = document.getElementById('cliEmri').value;
     const telefoni = document.getElementById('cliTelefoni').value;
     const qyteti = document.getElementById('cliQyteti').value;
@@ -1431,7 +1544,14 @@
     const shenime = document.getElementById('cliShenime').value;
     let pagesa = siteSettings.kartaAktiv ? document.getElementById('cliPagesa').value : "Pagesë në Dorëzim (Cash)";
 
-    if(!emri || !telefoni || !adresa) { alert("⚠️ Plotëso Emrin, Telefonin dhe Adresën për të vazhduar!"); return; }
+    if(!emri || !telefoni || !adresa) { 
+        alert("⚠️ Plotëso Emrin, Telefonin dhe Adresën për të vazhduar!"); 
+        return; 
+    }
+
+    if (!kontrolloStokunParaPorosise()) {
+        return;
+    }
 
     let subtotal = calcSubtotal();
     let msg = `*POROSI E RE - CARZONE*\n\n👤 *Klienti:* ${emri}\n📞 *Telefoni:* ${telefoni}\n📍 *Qyteti:* ${qyteti}\n🏠 *Adresa:* ${adresa}\n`;
@@ -1458,6 +1578,8 @@
     if (activeCoupon && couponDiscount > 0) msg += `\n🎟️ *Kupon (${activeCoupon.kodi}):* -${couponDiscount.toLocaleString()} L`;
     msg += `\n🚚 *Transporti (${qyteti}):* ${shippingCost === 0 ? 'Falas' : shippingCost.toLocaleString() + ' L'}`;
     msg += `\n💰 *TOTALI FINAL:* ${grandTotal.toLocaleString()} L`;
+
+    await ulStokunPasPorosise();
 
     window.open(`https://wa.me/355${siteSettings.numri.substring(1)}?text=${encodeURIComponent(msg)}`, '_blank');
     cart = []; activeCoupon = null; saveCartLocally(); updateBadges(); renderCart(); closePanels(); lokacioniGps = ""; 
@@ -1833,7 +1955,6 @@
     if(!file1) { alert("⚠️ Zgjidh foton e parë!"); return; }
 
     let fototArray = [];
-    // Tani lexon te gjitha 6 fotot
     for (let i = 1; i <= 6; i++) {
         const f = document.getElementById('newFotoFile' + i).files[0];
         if(f) { let url = await ngarkoFoton(f); if(url) fototArray.push(url); }
@@ -1968,7 +2089,6 @@
 
     let fototArray = [...p.fotot];
     
-    // Tani lexon dhe ruan deri ne 6 foto gjate editimit
     for (let i = 1; i <= 6; i++) {
         const fileInput = document.getElementById('editFotoFile' + i);
         if(fileInput && fileInput.files[0]) { 
