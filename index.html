@@ -632,10 +632,11 @@
   window._miniSelectedVariant = null;
   window._miniMode = null;
 
+  // NDRYSHIMI 1: Vlera e paracaktuar u kthye ne 0 (Fikur) ne vend te 3 (Viti i Ri)
   let festiveMode = parseInt(localStorage.getItem('cz_festive_mode'));
   if (isNaN(festiveMode)) {
-    festiveMode = 3; 
-    localStorage.setItem('cz_festive_mode', 3);
+    festiveMode = 0; 
+    localStorage.setItem('cz_festive_mode', 0);
   }
 
   let newyearTextTimer = null;
@@ -758,7 +759,7 @@
       document.getElementById('preloader').classList.add('hide');
       document.getElementById('main-page').classList.add('show');
       setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 800);
-      if (festiveMode === 3) shfaqMegaFishekzjarr();
+      // NDRYSHIMI 2: U hoq linja qe shfaqte mega fishekzjarrin automatikisht ketu
     }, 3000);
     
     setTimeout(() => { checkSpecialOffer(); }, 3500);
@@ -1386,7 +1387,6 @@
     }
   }
 
-  // ✅ FUNKSIONI I RREGULLUAR I RENDERIMIT TË SHPORTËS
   function renderCart() {
     const container = document.getElementById('cartItemsList');
     container.innerHTML = cart.length === 0 ? '<p style="color:#666; text-align:center; padding: 20px;">Shporta është bosh.</p>' : '';
@@ -1449,7 +1449,6 @@
     }
   }
 
-  // ✅ Funksion i ri: ndryshon sasinë sipas indeksit (punon me të gjitha opsionet)
   function changeQtyByIndex(index, delta) {
     if (!cart[index]) return;
     cart[index].qty += delta;
@@ -1461,7 +1460,6 @@
     renderCart();
   }
 
-  // ✅ Funksion i ri: heq produktin komplet nga shporta
   function removeCartItem(index) {
     if (!cart[index]) return;
     cart.splice(index, 1);
